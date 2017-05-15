@@ -11,6 +11,7 @@ SRCS += main.c
 SRCS += ft_printf.c
 SRCS += parsing.c
 SRCS += utils.c
+SRCS += itoa_base.c
 
 INC += ./inc/ft_printf.h
 INC += ./inc/libft.h

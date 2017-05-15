@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/16 14:59:53 by jprevota          #+#    #+#             */
-/*   Updated: 2017/04/24 18:02:45 by admin            ###   ########.fr       */
+/*   Created: 2016/11/21 16:43:04 by jprevota          #+#    #+#             */
+/*   Updated: 2016/11/22 13:57:44 by jprevota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-char 	*str_memcat(char *mem1, const char *mem2, size_t size)
-{
-	char *tmp;
-
-	if (!(tmp = (char *)malloc(ft_strlen(mem1) + size + 1)))
-		return (NULL);
-	ft_memset(tmp, '\0', (size_t)(ft_strlen(mem1) + size + 1));
-	ft_memcpy(tmp, mem1, ft_strlen(mem1));
-	ft_memcpy(tmp + ft_strlen(mem1), mem2, size);
-	tmp[ft_strlen(mem1) + size] = '\0';
-	free(mem1);
-	return (tmp);
-}
-/*
-static int	ft_nb_len(int n)
+static int	ft_nb_len(int n, int base)
 {
 	unsigned int	nb;
 	int				nb_len;
@@ -39,36 +25,37 @@ static int	ft_nb_len(int n)
 		nb = -n;
 		nb_len++;
 	}
-	while (nb / 10 > 0)
+	while (nb / base > 0)
 	{
 		nb_len++;
-		nb = nb / 10;
+		nb = nb / base;
 	}
 	return (nb_len);
 }
 
-char		*ft_itoa_base(int n, int base)
+char		*itoa_base(int n, int base)
 {
 	char			*str;
 	int				nb_len;
 	unsigned int	nb;
 
-	nb_len = ft_nb_len(n);
+	nb_len = ft_nb_len(n / base, base);
 	nb = n;
 	if (n < 0)
 		nb = -n;
-	str = (char *)malloc((nb_len + 1) * sizeof(char));
-	if (!str)
+	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
 		return (NULL);
-	str[nb_len] = '\0';
-	nb_len--;
+  ft_memset(str, '\0', nb_len + 1);
 	while (nb_len >= 0)
 	{
-		str[nb_len] = nb % 10 + '0';
-		nb = nb / 10;
+    if (nb % base >= 10)
+      str[nb_len] = 'A' + ((nb % base) - 10);
+    else
+      str[nb_len] = nb % base + '0';
+		nb = nb / base;
 		nb_len--;
 	}
 	if (n < 0)
 		str[0] = '-';
 	return (str);
-}*/
+}

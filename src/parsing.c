@@ -108,8 +108,9 @@ void  assign_va_arg(int type, va_list ap, char *str)
     if (type == 1)
     {
       x = va_arg(ap, int);
-      ft_putstr(str);
-      ft_putnbr(x);
+      //ft_putstr(str);
+      //ft_putnbr(x);
+      str = str_memcat(str, itoa_base(x, 10), ft_strlen(itoa_base(x, 10)));
     }
     else if (type == 2)
     {

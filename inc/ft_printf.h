@@ -27,4 +27,7 @@ void  assign_va_arg(int type, va_list ap, char *str);
 //Utils.c
 char 	*str_memcat(char *mem1, const char *mem2, size_t size);
 
+//Itoa_base.c
+char		*itoa_base(int n, int base);
+
 #endif
