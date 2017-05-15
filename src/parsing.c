@@ -21,14 +21,17 @@ void parsing(const char *format, va_list ap)
      size_t    i;
      void      *type;
 
-     (void)ap;
      type = NULL;
      init_list(conv_list);
      i = 0;
      while (i < ft_strlen(format))
      {
           if (format[i] == '%')
+          {
                check_existing_conv(format[i + 1], conv_list, type);
+               type = va_arg(ap, typeof(type));
+               ft_putstr(type);
+          }
           i++;
      }
      return ;
