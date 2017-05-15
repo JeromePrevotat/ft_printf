@@ -1,4 +1,3 @@
-
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 IFLAGS = -I inc
@@ -11,6 +10,7 @@ DIR_OBJ = ./obj/
 SRCS += main.c
 SRCS += ft_printf.c
 SRCS += parsing.c
+SRCS += utils.c
 
 INC += ./inc/ft_printf.h
 INC += ./inc/libft.h

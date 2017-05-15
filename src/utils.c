@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,21 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF
-# define FT_PRINTF
-# define TRUE 1
-# define FALSE 0
+#include "libft.h"
 
-int  ft_printf(const char *format, ...);
+char 	*str_memcat(char *mem1, const char *mem2, size_t size)
+{
+	char *tmp;
 
-//Parsing.c
-void parsing(const char *format, va_list ap);
-void init_list(char *conv_list);
-int check_existing_conv(char c, char *conv_list);
-int select_type(char c);
-void  assign_va_arg(int type, va_list ap, char *str);
-
-//Utils.c
-char 	*str_memcat(char *mem1, const char *mem2, size_t size);
-
-#endif
+	if (!(tmp = (char *)malloc(ft_strlen(mem1) + size + 1)))
+		return (NULL);
+	ft_memset(tmp, '\0', (size_t)(ft_strlen(mem1) + size + 1));
+	ft_memcpy(tmp, mem1, ft_strlen(mem1));
+	ft_memcpy(tmp + ft_strlen(mem1), mem2, size);
+	tmp[ft_strlen(mem1) + size] = '\0';
+	free(mem1);
+	return (tmp);
+}

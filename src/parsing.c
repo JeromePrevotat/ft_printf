@@ -19,21 +19,28 @@ void parsing(const char *format, va_list ap)
 {
      char      conv_list[15];
      size_t    i;
-     void      *type;
+     int       type;
+     char      *str;
 
-     type = NULL;
      init_list(conv_list);
      i = 0;
+     if (!(str = (char *)malloc(1 * sizeof(char))))
+          return ;
+     ft_memset(str, '\0', 1);
      while (i < ft_strlen(format))
      {
           if (format[i] == '%')
           {
-               check_existing_conv(format[i + 1], conv_list, type);
-               type = va_arg(ap, typeof(type));
-               ft_putstr(type);
+               type = check_existing_conv(format[i + 1], conv_list);
+               assign_va_arg(type, ap, str);
+          }
+          else
+          {
+            str = str_memcat(str, &format[i], 1);
           }
           i++;
      }
+     free(str);
      return ;
 }
 
@@ -57,29 +64,70 @@ void init_list(char *conv_list)
      return ;
 }
 
-void  check_existing_conv(char c, char *conv_list, void *type)
+int  check_existing_conv(char c, char *conv_list)
 {
      int  i;
+     int type;
 
+     type = 0;
      i = 0;
      while (conv_list[i] != '\0')
      {
           if (c == conv_list[i])
-               select_type(c, type);
+               type = select_type(c);
           i++;
      }
-     return ;
+     return (type);
 }
 
-void  select_type(char c, void *type)
+int  select_type(char c)
 {
-     if (c == 'D' || c == 'd' || c == 'i' || c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x' || c == 'X')
-          type = (int *)type;
+     if (c == 'D' || c == 'd' || c == 'i' || c == 'o' || c == 'O'
+     || c == 'u' || c == 'U' || c == 'x' || c == 'X')
+          return (1);
      else if (c == 's' || c == 'S')
-          type = (char *)type;
+          return (3);
      else if (c == 'c' || c == 'C')
-          type = (char *)type;
+          return (2);
      else if (c == 'p')
-          type = (void *)type;
-     return ;
+          return (4);
+     return (0);
+}
+
+void  assign_va_arg(int type, va_list ap, char *str)
+{
+    int x;
+    char c;
+    char *s;
+    void *p;
+
+    x = 0;
+    c = 0;
+    s = NULL;
+    p = NULL;
+    if (type == 1)
+    {
+      x = va_arg(ap, int);
+      ft_putstr(str);
+      ft_putnbr(x);
+    }
+    else if (type == 2)
+    {
+      c = va_arg(ap, int);
+      ft_putstr(str);
+      ft_putchar(c);
+    }
+    else if (type == 3)
+    {
+      s = va_arg(ap, char *);
+      ft_putstr(str);
+      ft_putstr(s);
+    }
+    else if (type == 4)
+    {
+      p = va_arg(ap, void *);
+      ft_putstr(str);
+      ft_putnbr((int)p);
+    }
+    return ;
 }

@@ -15,11 +15,20 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-int  main(void)
+int main(void)
 {
-     char *y = "Yolo";
-
-     ft_printf("%s", y);
+     /*char y = 'Y';
+     int  x = 42;
+     char *s = "Yolo";*/
+     char *s2 = "I'm CEO Bitch !";
+/*
+     ft_printf("%d", x);
+     ft_putchar('\n');
+     ft_printf("%c", y);
+     ft_putchar('\n');
+     ft_printf("%s", s);
+     ft_putchar('\n');*/
+     ft_printf("Yolo ! %s", s2);
      ft_putchar('\n');
      return (0);
 }
