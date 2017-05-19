@@ -25,7 +25,10 @@ int main(void)
      //char *s = "Yolo";
      char *s2 = "I'm CEO Bitch !";
 
-     ft_printf("Yolo ! %s %d%c pointer adress %p error %q", s2, x, y, p);
+     ft_putendl("My Ft_printf result :");
+     ft_printf("Yolo ! %s %d - %u - %o - %x - %c pointer adress %p", s2, x, x, x, x, y, p);
+     ft_putendl("Real Printf result :");
+     printf("Yolo ! %s %d - %u - %o - %x - %c pointer adress %p", s2, x, x, x, x, y, p);
      free(p);
      return (0);
 }

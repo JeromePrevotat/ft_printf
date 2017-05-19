@@ -10,6 +10,7 @@ DIR_OBJ = ./obj/
 SRCS += main.c
 SRCS += ft_printf.c
 SRCS += parsing.c
+SRCS += select_type.c
 SRCS += utils.c
 SRCS += itoa_base.c
 
