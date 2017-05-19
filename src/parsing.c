@@ -32,7 +32,13 @@ void parsing(const char *format, va_list ap)
           if (format[i] == '%')
           {
                type = check_existing_conv(format[i + 1], conv_list);
-               assign_va_arg(type, ap, str);
+               if (type == 0)
+                str = str_memcat(str, &format[i], 1);
+              else
+              {
+                str = assign_va_arg(type, ap, str);
+                i++;
+             }
           }
           else
           {
@@ -40,6 +46,7 @@ void parsing(const char *format, va_list ap)
           }
           i++;
      }
+     ft_putendl(str);
      free(str);
      return ;
 }
@@ -94,7 +101,7 @@ int  select_type(char c)
      return (0);
 }
 
-void  assign_va_arg(int type, va_list ap, char *str)
+char  *assign_va_arg(int type, va_list ap, char *str)
 {
     int x;
     char c;
@@ -108,27 +115,22 @@ void  assign_va_arg(int type, va_list ap, char *str)
     if (type == 1)
     {
       x = va_arg(ap, int);
-      //ft_putstr(str);
-      //ft_putnbr(x);
       str = str_memcat(str, itoa_base(x, 10), ft_strlen(itoa_base(x, 10)));
     }
     else if (type == 2)
     {
       c = va_arg(ap, int);
-      ft_putstr(str);
-      ft_putchar(c);
+      str = str_memcat(str, &c, 1);
     }
     else if (type == 3)
     {
       s = va_arg(ap, char *);
-      ft_putstr(str);
-      ft_putstr(s);
+      str = str_memcat(str, s, ft_strlen(s));
     }
     else if (type == 4)
     {
       p = va_arg(ap, void *);
-      ft_putstr(str);
-      ft_putnbr((int)p);
+      str = str_memcat(str, itoa_base((int)p, 16), ft_strlen(itoa_base((int)p, 16)));
     }
-    return ;
+    return (str);
 }

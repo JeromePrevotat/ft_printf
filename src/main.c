@@ -17,18 +17,15 @@
 
 int main(void)
 {
-     /*char y = 'Y';
+     char y = '$';
      int  x = 42;
-     char *s = "Yolo";*/
+     void *p = NULL;
+     if (!(p = malloc(1)))
+      return (-1);
+     //char *s = "Yolo";
      char *s2 = "I'm CEO Bitch !";
-/*
-     ft_printf("%d", x);
-     ft_putchar('\n');
-     ft_printf("%c", y);
-     ft_putchar('\n');
-     ft_printf("%s", s);
-     ft_putchar('\n');*/
-     ft_printf("Yolo ! %s", s2);
-     ft_putchar('\n');
+
+     ft_printf("Yolo ! %s %d%c pointer adress %p error %q", s2, x, y, p);
+     free(p);
      return (0);
 }

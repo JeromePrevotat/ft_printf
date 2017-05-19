@@ -14,6 +14,7 @@
 # define FT_PRINTF
 # define TRUE 1
 # define FALSE 0
+# include <stdarg.h>
 
 int  ft_printf(const char *format, ...);
 
@@ -22,7 +23,7 @@ void parsing(const char *format, va_list ap);
 void init_list(char *conv_list);
 int check_existing_conv(char c, char *conv_list);
 int select_type(char c);
-void  assign_va_arg(int type, va_list ap, char *str);
+char  *assign_va_arg(int type, va_list ap, char *str);
 
 //Utils.c
 char 	*str_memcat(char *mem1, const char *mem2, size_t size);
