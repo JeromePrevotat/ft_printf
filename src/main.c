@@ -15,20 +15,20 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-int main(void)
+int	main(void)
 {
-     char y = '$';
-     int  x = 42;
-     void *p = NULL;
-     if (!(p = malloc(1)))
-      return (-1);
-     //char *s = "Yolo";
-     char *s2 = "I'm CEO Bitch !";
+	char	y = '$';
+	int 	x = -42;
+	void	*p = NULL;
+	char	*s2 = NULL;
 
-     ft_putendl("My Ft_printf result :");
-     ft_printf("Yolo ! %s %d - %u - %o - %x - %c pointer adress %p", s2, x, x, x, x, y, p);
-     ft_putendl("Real Printf result :");
-     printf("Yolo ! %s %d - %u - %o - %x - %c pointer adress %p", s2, x, x, x, x, y, p);
-     free(p);
-     return (0);
+	if (!(p = malloc(1)))
+		return (-1);
+
+	ft_putendl("My Ft_printf result :");
+	ft_printf("Yolo ! %s %d - %u - %o - %x - %X - %c pointer adress %p", s2, x, x, x, x, x, y, p);
+	ft_putendl("Real Printf result :");
+	printf("Yolo ! %s %d - %u - %o - %x - %X - %c pointer adress %p", s2, x, x, x, x, x, y, p);
+	free(p);
+	return (0);
 }

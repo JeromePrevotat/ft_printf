@@ -15,16 +15,12 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-int  ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-     va_list ap;
+	va_list	ap;
 
-     va_start(ap, format);
-     parsing(format, ap);
-
-     //     test = va_arg(ap, char *);
-     //     ft_putstr(test);
-
-     va_end(ap);
-     return (0);
+	va_start(ap, format);
+	parsing(format, ap);
+	va_end(ap);
+	return (0);
 }
