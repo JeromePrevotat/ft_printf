@@ -15,8 +15,9 @@
 #include <stdio.h>
 #include "../inc/ft_printf.h"
 
-int  ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
+<<<<<<< HEAD
 	int ret;
      va_list ap;
 
@@ -28,4 +29,12 @@ int  ft_printf(const char *format, ...)
 
      va_end(ap);
      return (ret);
+=======
+	va_list	ap;
+
+	va_start(ap, format);
+	parsing(format, ap);
+	va_end(ap);
+	return (0);
+>>>>>>> 7d1059df80994d3b0bd1e3352e5f04b26ae17231
 }

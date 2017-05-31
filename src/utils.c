@@ -13,9 +13,9 @@
 #include "../inc/libft.h"
 #include "../inc/ft_printf.h"
 
-char 	*str_memcat(char *mem1, const char *mem2, size_t size)
+char	*str_memcat(char *mem1, const char *mem2, size_t size)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (!(tmp = (char *)malloc(ft_strlen(mem1) + size + 1)))
 		return (NULL);

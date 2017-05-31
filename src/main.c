@@ -16,8 +16,9 @@
 #include "../inc/ft_printf.h"
 #include <wchar.h>
 
-int main(void)
+int	main(void)
 {
+<<<<<<< HEAD
 	int ft;
 	int pr;
      char y = '$';
@@ -40,4 +41,20 @@ int main(void)
 	 ft_putendl("Real Printf result :");
      free(p);
      return (0);
+=======
+	char	y = '$';
+	int 	x = -42;
+	void	*p = NULL;
+	char	*s2 = NULL;
+
+	if (!(p = malloc(1)))
+		return (-1);
+
+	ft_putendl("My Ft_printf result :");
+	ft_printf("Yolo ! %s %d - %u - %o - %x - %X - %c pointer adress %p", s2, x, x, x, x, x, y, p);
+	ft_putendl("Real Printf result :");
+	printf("Yolo ! %s %d - %u - %o - %x - %X - %c pointer adress %p", s2, x, x, x, x, x, y, p);
+	free(p);
+	return (0);
+>>>>>>> 7d1059df80994d3b0bd1e3352e5f04b26ae17231
 }
