@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   flag.c	                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,28 +16,37 @@
 #include "../inc/ft_printf.h"
 #include <wchar.h>
 
-int	main(void)
+char *init_flag_list(void)
 {
-	int ft;
-	int pr;
-     char y = '$';
-     int  x = 42;
-     void *p = NULL;
-	 wchar_t wchar = L'\x82';
-	 wchar_t *wstr = L"J\130rome";
-     if (!(p = malloc(1)))
-      return (-1);
-     //char *s = "Yolo";
-     char *s2 = "I'm CEO Bitch !";
+	char	*flag_list;
 
-     ft_putendl("My Ft_printf result :");
-     ft = ft_printf("Yolo ! %s %d - %u - %#o - %x - %c pointer adress %p - %% - %C - %S", s2, x, x, x, x, y, p, wchar, wstr);
-	 pr = printf("Yolo ! %s %d - %u - %#o - %x - %c pointer adress %p - %% - %C - %S", s2, x, x, x, x, y, p, wchar, wstr);
-	 ft_putnbr(ft);
-	 ft_putchar('-');
-	 ft_putnbr(pr);
-	 ft_putchar('\n');
-	 ft_putendl("Real Printf result :");
-     free(p);
-     return (0);
+	if (!(flag_list = (char *)malloc(10 * sizeof(char))))
+		return (NULL);
+	flag_list[0] = '#';
+	flag_list[1] = '0';
+	flag_list[2] = '-';
+	flag_list[3] = '+';
+	flag_list[4] = ' ';
+	flag_list[5] = 'h';
+	flag_list[6] = 'l';
+	flag_list[7] = 'j';
+	flag_list[8] = 'z';
+	flag_list[9] = '\0';
+	return (flag_list);
+}
+
+int	check_flag(const char c)
+{
+	char	*flag_list;
+	size_t	i;
+
+	flag_list = init_flag_list();
+	i = 0;
+	while (i < ft_strlen(flag_list))
+	{
+		if (c == flag_list[i])
+			return (c);
+		i++;
+	}
+	return (0);
 }

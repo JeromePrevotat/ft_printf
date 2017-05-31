@@ -23,6 +23,15 @@ int		parsing(const char *format, va_list ap);
 int		check_existing_conv(char c, char *conv_list);
 char	*assign_va_arg(int type, va_list ap, char *str);
 
+char	*parse_conv(const char *format, int start);
+int		check_conv(char c);
+char	*parse_arg(char *conv, va_list ap);
+
+
+//Flag.c
+char	*init_flag_list(void);
+int		check_flag(char c);
+
 //Select_type.c
 void	init_list(char *conv_list);
 int		select_type(char c);

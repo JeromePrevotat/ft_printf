@@ -17,12 +17,11 @@
 
 int	parsing(const char *format, va_list ap)
 {
-	char      conv_list[16];
-	size_t    i;
-	int       type;
-	char      *str;
+	size_t	i;
+	char	*str;
+	char	*conv;
+	char	*s_conv;
 
-	init_list(conv_list);
 	i = 0;
 	if (!(str = (char *)malloc(1 * sizeof(char))))
 		return (-1);
@@ -31,6 +30,26 @@ int	parsing(const char *format, va_list ap)
 	{
 		if (format[i] == '%')
 		{
+			conv = parse_conv(format, i);
+			s_conv = parse_arg(conv, ap);
+			str = str_memcat(str, s_conv, ft_strlen(s_conv));
+			i++;
+		}
+		else
+			str = str_memcat(str, &format[i], 1);
+		i++;
+	}
+	/*while (i < ft_strlen(format))
+	{
+		if (format[i] == '%')
+		{
+			flag = check_flag(format[i + 1]);
+			if (flag == 'h' && format[i + 2] == 'h')
+				flag = 'H';
+			else if (flag == 'l' && format[i + 2] == 'l')
+				flag = 'L';
+			if (flag != 0)
+				i++;
 			if (!(type = check_existing_conv(format[i + 1], conv_list)))
 			{
 				ft_putendl("Incomplete format specifier");
@@ -41,16 +60,75 @@ int	parsing(const char *format, va_list ap)
 				if (type == '%')
 					str = str_memcat(str, "%", 1);
 				else
-					str = assign_va_arg(type, ap, str);
+					str = assign_va_arg(type, ap, str, flag);
 				i++;
 			}
 		}
 		else
 			str = str_memcat(str, &format[i], 1);
 		i++;
-	}
+	}*/
 	ft_putendl(str);
 	return (ft_strlen(str));
+}
+
+char	*parse_conv(const char *format, int start)
+{
+	char	*conv;
+	size_t	i;
+
+	if (!(conv = (char *)malloc(1 * sizeof(char))))
+		return (NULL);
+	ft_memset(conv, '\0', 1);
+	i = 1;
+	while ((i + start < ft_strlen(format)) && (check_flag(*(format + start + i)) != 0))
+	{
+		conv = str_memcat(conv, &format[start + i], 1);
+		i++;
+	}
+	if ((i + start < ft_strlen(format)) && (check_conv((char)format[start + i]) != 0))
+	{
+		if (check_conv((char)format[start + i]) == '%')
+		{
+			conv = str_memcat(conv, format + start + i, 1);
+			i++;
+			return (conv);
+		}
+		conv = str_memcat(conv, format + start + i, 1);
+		i++;
+		return (conv);
+	}
+	ft_putendl("Incomplete format specifier");
+	exit (-1);
+	return (NULL);
+}
+
+int		check_conv(char c)
+{
+	int		i;
+	char	conv_list[16];
+
+	init_list(conv_list);
+	i = 0;
+	while (conv_list[i] != '\0')
+	{
+		if (c == conv_list[i])
+			return (c);
+		i++;
+	}
+	return (0);
+}
+
+char	*parse_arg(char *conv, va_list ap)
+{
+	char	*s_conv;
+	int		type;
+
+	if (!(s_conv = (char *)malloc(1 * sizeof(char))))
+		return (NULL);
+	type = select_type(conv[ft_strlen(conv) - 1]);
+	s_conv = assign_va_arg(type, ap, s_conv);
+	return (s_conv);
 }
 
 int		check_existing_conv(char c, char *conv_list)

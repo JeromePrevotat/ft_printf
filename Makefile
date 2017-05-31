@@ -13,6 +13,7 @@ SRCS += ./src/select_type.c
 SRCS += ./src/cat.c
 SRCS += ./src/utils.c
 SRCS += ./src/itoa_base.c
+SRCS += ./src/flag.c
 
 INC += ./inc/ft_printf.h
 INC += ./inc/libft.h
