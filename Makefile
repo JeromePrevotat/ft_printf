@@ -1,33 +1,30 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-IFLAGS = -I inc
-CLIB = -L. -lft
+LIB = -L. -lft
 NAME = print
 
 DIR_SRC = ./src/
 DIR_OBJ = ./obj/
 
-SRCS += main.c
-SRCS += ft_printf.c
-SRCS += parsing.c
-SRCS += select_type.c
-SRCS += utils.c
-SRCS += itoa_base.c
+SRCS += ./src/main.c
+SRCS += ./src/ft_printf.c
+SRCS += ./src/parsing.c
+SRCS += ./src/select_type.c
+SRCS += ./src/cat.c
+SRCS += ./src/utils.c
+SRCS += ./src/itoa_base.c
 
 INC += ./inc/ft_printf.h
 INC += ./inc/libft.h
 
-SRC = $(addprefix $(DIR_SRC),$(SRCS))
-OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(subst .c,.o,$(SRC)))
+OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) -o $@ $(CFLAGS) $(IFLAGS) $(CLIB) $(OBJ)
+$(NAME): $(OBJ) $(INC)
+	$(CC) $(CFLAGS) $(LIB) $(MLXFLAGS) $(SRCS) -o $@
 
-$(DIR_OBJ)%.o: $(DIR_SRC)%.c $(DIR_OBJ) $(INC)
-	$(CC) -o $@ $(CFLAGS) $(IFLAGS) -c $<
-
+.PHONY: clean
 clean:
 	rm -rf $(OBJ)
 
@@ -35,9 +32,3 @@ fclean: clean
 	rm -rf $(NAME)
 
 re:	fclean all
-
-$(DIR_OBJ):
-	mkdir -p $@
-	mkdir -p $@/libft
-
-.PHONY: clean

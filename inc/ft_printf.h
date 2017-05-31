@@ -16,23 +16,32 @@
 # define FALSE 0
 # include <stdarg.h>
 
-int  ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 
 //Parsing.c
-void parsing(const char *format, va_list ap);
-int check_existing_conv(char c, char *conv_list);
-char  *assign_va_arg(int type, va_list ap, char *str);
+int		parsing(const char *format, va_list ap);
+int		check_existing_conv(char c, char *conv_list);
+char	*assign_va_arg(int type, va_list ap, char *str);
 
 //Select_type.c
-void init_list(char *conv_list);
-int select_type(char c);
-char *convert(int x, int type);
+void	init_list(char *conv_list);
+int		select_type(char c);
+char	*convert(int x, int type);
+
+//Cat.c
+char	*cat_int(char *str, va_list ap, int type);
+char	*cat_char(char *str, va_list ap);
+char	*cat_wchar(char *str, va_list ap);
+char	*cat_str(char *str, va_list ap);
+char	*cat_wstr(char *str, va_list ap);
+char	*cat_ptr(char *str, va_list ap);
 
 //Utils.c
-char 	*str_memcat(char *mem1, const char *mem2, size_t size);
+char	*str_memcat(char *mem1, const char *mem2, size_t size);
+char 	*str_wmemcat(char *mem1, const wchar_t *mem2, size_t size);
 
 //Itoa_base.c
-char		*itoa_base(int n, int base);
-char		*itoa_base_unsigned(unsigned int n, int base);
+char	*itoa_base(long n, int base);
+char	*itoa_base_unsigned(unsigned long n, int base);
 
 #endif

@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "ft_printf.h"
+#include "../inc/libft.h"
+#include "../inc/ft_printf.h"
 
-static int	ft_nb_len(int n, int base)
+static int	ft_nb_len(long n, int base)
 {
-	unsigned int	nb;
+	unsigned long	nb;
 	int				nb_len;
 
 	nb = n;
@@ -33,11 +33,11 @@ static int	ft_nb_len(int n, int base)
 	return (nb_len);
 }
 
-char		*itoa_base(int n, int base)
+char		*itoa_base(long n, int base)
 {
 	char			*str;
 	int				nb_len;
-	unsigned int	nb;
+	unsigned long	nb;
 
 	nb_len = ft_nb_len(n / base, base);
 	nb = n;
@@ -60,9 +60,9 @@ char		*itoa_base(int n, int base)
 	return (str);
 }
 
-static int	ft_nb_len_unsigned(unsigned int n, int base)
+static int	ft_nb_len_unsigned(unsigned long n, int base)
 {
-	unsigned int	nb;
+	unsigned long	nb;
 	int			nb_len;
 
 	nb = n;
@@ -77,11 +77,11 @@ static int	ft_nb_len_unsigned(unsigned int n, int base)
 	return (nb_len);
 }
 
-char		*itoa_base_unsigned(unsigned int n, int base)
+char		*itoa_base_unsigned(unsigned long n, int base)
 {
 	char			*str;
 	int			nb_len;
-	unsigned int	nb;
+	unsigned long	nb;
 	char 		hex;
 
 	hex = 'a';

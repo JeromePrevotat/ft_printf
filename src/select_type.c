@@ -11,31 +11,32 @@
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "libft.h"
+#include "../inc/libft.h"
 #include <stdio.h>
-#include "ft_printf.h"
+#include "../inc/ft_printf.h"
 
-void init_list(char *conv_list)
+void	init_list(char *conv_list)
 {
-     conv_list[0] = 's';
-     conv_list[1] = 'S';
-     conv_list[2] = 'p';
-     conv_list[3] = 'd';
-     conv_list[4] = 'D';
-     conv_list[5] = 'i';
-     conv_list[6] = 'o';
-     conv_list[7] = 'O';
-     conv_list[8] = 'u';
-     conv_list[9] = 'U';
-     conv_list[10] = 'x';
-     conv_list[11] = 'X';
-     conv_list[12] = 'c';
-     conv_list[13] = 'C';
-     conv_list[14] = '\0';
-     return ;
+	conv_list[0] = 's';
+	conv_list[1] = 'S';
+	conv_list[2] = 'p';
+	conv_list[3] = 'd';
+	conv_list[4] = 'D';
+	conv_list[5] = 'i';
+	conv_list[6] = 'o';
+	conv_list[7] = 'O';
+	conv_list[8] = 'u';
+	conv_list[9] = 'U';
+	conv_list[10] = 'x';
+	conv_list[11] = 'X';
+	conv_list[12] = 'c';
+	conv_list[13] = 'C';
+	conv_list[14] = '%';
+	conv_list[15] = '\0';
+	return ;
 }
 
-int  select_type(char c)
+int		select_type(char c)
 {
      if (c == 'd' || c == 'i')
           return (-10);
@@ -63,6 +64,8 @@ int  select_type(char c)
           return (30);
      if (c == 'p')
           return (4);
+	if (c == '%')
+		return ('%');
      return (0);
 }
 

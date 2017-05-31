@@ -11,20 +11,21 @@
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "libft.h"
+#include "../inc/libft.h"
 #include <stdio.h>
-#include "ft_printf.h"
+#include "../inc/ft_printf.h"
 
 int  ft_printf(const char *format, ...)
 {
+	int ret;
      va_list ap;
 
      va_start(ap, format);
-     parsing(format, ap);
+     ret = parsing(format, ap);
 
      //     test = va_arg(ap, char *);
      //     ft_putstr(test);
 
      va_end(ap);
-     return (0);
+     return (ret);
 }
