@@ -16,15 +16,19 @@
 #include "../inc/ft_printf.h"
 #include <wchar.h>
 
-char	*cat_int(char *str, va_list ap, int type)
+char	*cat_int(char *str, va_list ap, int type, char *conv)
 {
 	int		x;
 	char	*s;
+	char	*f;
 
+	if (!(f = (char *)malloc(1 * sizeof(char))))
+		return (NULL);
 	x = va_arg(ap, int);
-	ft_memset(str, '\0', ft_strlen(str));
+	f = cat_flag(conv, type, f, x);
 	s = convert(x, type);
-	str = str_memcat(str, s, ft_strlen(s));
+	f = str_memcat(f, s, ft_strlen(s));
+	str = str_memcat(str, f, ft_strlen(f));
 	return (str);
 }
 

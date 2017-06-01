@@ -78,9 +78,9 @@ static int	ft_nb_len_unsigned(unsigned long n, int base)
 char		*itoa_base_unsigned(unsigned long n, int base)
 {
 	char			*str;
-	int			nb_len;
+	int				nb_len;
 	unsigned long	nb;
-	char 		hex;
+	char 			hex;
 
 	hex = 'a';
 	if (base == 160)

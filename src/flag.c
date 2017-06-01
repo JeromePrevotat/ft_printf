@@ -50,3 +50,37 @@ int	check_flag(const char c)
 	}
 	return (0);
 }
+
+char	*cat_flag(char *conv, int type, char *s_conv, int x)
+{
+	int	i;
+
+	i = 0;
+	while (conv[i] != '\0')
+	{
+		if (conv[i] == '#')
+			s_conv = alt_form(s_conv, type);
+		if (conv[i] == '+')
+			s_conv = plus_flag(s_conv, type, x);
+		i++;
+	}
+	return (s_conv);
+}
+
+char	*alt_form(char *s_conv, int type)
+{
+	if (type == 16)
+		s_conv = str_memcat(s_conv, "0x", 2);
+	if (type == 160)
+		s_conv = str_memcat(s_conv, "0X", 2);
+	if (type == 8 || type == 80)
+		s_conv = str_memcat(s_conv, "0", 1);
+	return (s_conv);
+}
+
+char	*plus_flag(char *s_conv, int type, int x)
+{
+	if (type == -10 && x >= 0)
+		s_conv = str_memcat(s_conv, "+", 1);
+	return (s_conv);
+}

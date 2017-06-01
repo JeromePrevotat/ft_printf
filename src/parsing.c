@@ -33,41 +33,12 @@ int	parsing(const char *format, va_list ap)
 			conv = parse_conv(format, i);
 			s_conv = parse_arg(conv, ap);
 			str = str_memcat(str, s_conv, ft_strlen(s_conv));
-			i++;
+			i = i + ft_strlen(conv);
 		}
 		else
 			str = str_memcat(str, &format[i], 1);
 		i++;
 	}
-	/*while (i < ft_strlen(format))
-	{
-		if (format[i] == '%')
-		{
-			flag = check_flag(format[i + 1]);
-			if (flag == 'h' && format[i + 2] == 'h')
-				flag = 'H';
-			else if (flag == 'l' && format[i + 2] == 'l')
-				flag = 'L';
-			if (flag != 0)
-				i++;
-			if (!(type = check_existing_conv(format[i + 1], conv_list)))
-			{
-				ft_putendl("Incomplete format specifier");
-				exit (-1);
-			}
-			else
-			{
-				if (type == '%')
-					str = str_memcat(str, "%", 1);
-				else
-					str = assign_va_arg(type, ap, str, flag);
-				i++;
-			}
-		}
-		else
-			str = str_memcat(str, &format[i], 1);
-		i++;
-	}*/
 	ft_putendl(str);
 	return (ft_strlen(str));
 }
@@ -87,19 +58,12 @@ char	*parse_conv(const char *format, int start)
 		i++;
 	}
 	if ((i + start < ft_strlen(format)) && (check_conv((char)format[start + i]) != 0))
+		return (conv = str_memcat(conv, format + start + i, 1));
+	else
 	{
-		if (check_conv((char)format[start + i]) == '%')
-		{
-			conv = str_memcat(conv, format + start + i, 1);
-			i++;
-			return (conv);
-		}
-		conv = str_memcat(conv, format + start + i, 1);
-		i++;
-		return (conv);
+		ft_putendl("Incomplete format specifier");
+		exit (-1);
 	}
-	ft_putendl("Incomplete format specifier");
-	exit (-1);
 	return (NULL);
 }
 
@@ -126,8 +90,9 @@ char	*parse_arg(char *conv, va_list ap)
 
 	if (!(s_conv = (char *)malloc(1 * sizeof(char))))
 		return (NULL);
+	ft_memset(s_conv, '\0', 1);
 	type = select_type(conv[ft_strlen(conv) - 1]);
-	s_conv = assign_va_arg(type, ap, s_conv);
+	s_conv = assign_va_arg(type, ap, s_conv, conv);
 	return (s_conv);
 }
 
@@ -147,11 +112,11 @@ int		check_existing_conv(char c, char *conv_list)
 	return (type);
 }
 
-char	*assign_va_arg(int type, va_list ap, char *str)
+char	*assign_va_arg(int type, va_list ap, char *str, char *conv)
 {
 	if (type == -10 || type == -100 || type == 8 || type == 80 || type == 10
-		|| type == 100 || type == 16)
-		str = cat_int(str, ap, type);
+		|| type == 100 || type == 16 || type == 160)
+		str = cat_int(str, ap, type, conv);
 	else if (type == 2)
 		str = cat_char(str, ap);
 	else if (type == 20)
