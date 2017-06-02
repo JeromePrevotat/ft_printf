@@ -53,7 +53,8 @@ char	*str_memcat(char *mem1, const char *mem2, size_t size);
 char 	*str_wmemcat(char *mem1, const wchar_t *mem2, size_t size);
 
 //Itoa_base.c
-char	*itoa_base(long n, int base);
-char	*itoa_base_unsigned(unsigned long n, int base);
+char	*itoa_base(int n, int base);
+char	*itoa_base_unsigned(unsigned int n, int base);
+char	*itoa_base_long(unsigned long n, int base);
 
 #endif

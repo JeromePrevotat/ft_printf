@@ -21,20 +21,21 @@ int	main(void)
 	int ft;
 	int pr;
 	//char y = '$';
-	int  x = 42;
-	//void *p = NULL;
+	int  x = -1;
+	void *p = NULL;
 	//wchar_t wchar = L'\x82';
 	//wchar_t *wstr = L"J\130rome";
-	//if (!(p = malloc(1)))
-		//return (-1);
+	if (!(p = malloc(1)))
+		return (-1);
 	//char *s = "Yolo";
 	//char *s2 = "I'm CEO Bitch !";
 
 	ft_putendl("My Ft_printf result :");
-	ft = ft_printf("%d // %+d // %o // %#o // %x // %X // %#x // %#X", x, x, x, x, x, x, x, x);
-	pr = printf("%d // %+d // %o // %#o // %x // %X // %#x // %#X", x, x, x, x, x, x, x ,x);
+	ft = ft_printf("%d // %d // %o // %o // %x // %X // %x // %X, %p", x, x, x, x, x, x, x, x, p);
+	pr = printf("%d // %d // %o // %o // %x // %X // %x // %X, %p", x, x, x, x, x, x, x, x, p);
 	//ft = ft_printf("Yolo ! %s %d - %u - %#o - %x - %c pointer adress %p - %% - %C - %S", s2, x, x, x, x, y, p, wchar, wstr);
 	//pr = printf("Yolo ! %s %d - %u - %#o - %x - %c pointer adress %p - %% - %C - %S", s2, x, x, x, x, y, p, wchar, wstr);
+	//pr = printf("%-d", x);
 	ft_putnbr(ft);
 	ft_putchar('-');
 	ft_putnbr(pr);

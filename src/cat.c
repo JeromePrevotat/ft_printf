@@ -24,6 +24,7 @@ char	*cat_int(char *str, va_list ap, int type, char *conv)
 
 	if (!(f = (char *)malloc(1 * sizeof(char))))
 		return (NULL);
+	ft_memset(f, '\0', 1);
 	x = va_arg(ap, int);
 	f = cat_flag(conv, type, f, x);
 	s = convert(x, type);
@@ -82,7 +83,7 @@ char	*cat_ptr(char *str, va_list ap)
 
 	p = va_arg(ap, void *);
 	str = str_memcat(str, "0x", 2);
-	str = str_memcat(str, itoa_base_unsigned((long)p, 16),
-		ft_strlen(itoa_base_unsigned((long)p, 16)));
+	str = str_memcat(str, itoa_base_long((long)p, 16),
+		ft_strlen(itoa_base_long((long)p, 16)));
 	return (str);
 }

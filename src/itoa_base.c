@@ -13,13 +13,13 @@
 #include "../inc/libft.h"
 #include "../inc/ft_printf.h"
 
-static int	ft_nb_len(long n, int base)
+static int	ft_nb_len(int n, int base)
 {
-	unsigned long	nb;
+	unsigned int	nb;
 	int				nb_len;
 
 	nb = n;
-	nb_len = 1;
+	nb_len = 0;
 	if (n < 0)
 	{
 		nb = -n;
@@ -33,13 +33,13 @@ static int	ft_nb_len(long n, int base)
 	return (nb_len);
 }
 
-char		*itoa_base(long n, int base)
+char		*itoa_base(int n, int base)
 {
 	char			*str;
 	int				nb_len;
-	unsigned long	nb;
+	unsigned int	nb;
 
-	nb_len = ft_nb_len(n / base, base);
+	nb_len = ft_nb_len(n, base);
 	nb = n;
 	if (n < 0)
 		nb = -n;
@@ -49,7 +49,7 @@ char		*itoa_base(long n, int base)
 	while (nb_len >= 0)
 	{
 		if (nb % base >= 10)
-		str[nb_len] = 'a' + ((nb % base) - 10);
+			str[nb_len] = 'a' + ((nb % base) - 10);
 		else
 			str[nb_len] = nb % base + '0';
 		nb = nb / base;
@@ -60,13 +60,13 @@ char		*itoa_base(long n, int base)
 	return (str);
 }
 
-static int	ft_nb_len_unsigned(unsigned long n, int base)
+static int	ft_nb_len_unsigned(unsigned int n, int base)
 {
-	unsigned long	nb;
+	unsigned int	nb;
 	int			nb_len;
 
 	nb = n;
-	nb_len = 1;
+	nb_len = 0;
 	while (nb / base > 0)
 	{
 		nb_len++;
@@ -75,7 +75,52 @@ static int	ft_nb_len_unsigned(unsigned long n, int base)
 	return (nb_len);
 }
 
-char		*itoa_base_unsigned(unsigned long n, int base)
+char		*itoa_base_unsigned(unsigned int n, int base)
+{
+	char			*str;
+	int				nb_len;
+	unsigned int	nb;
+	char 			hex;
+
+	hex = 'a';
+	if (base == 160)
+	{
+		base = 16;
+		hex = 'A';
+	}
+	nb_len = ft_nb_len_unsigned(n, base);
+	nb = n;
+	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
+		return (NULL);
+	ft_memset(str, '\0', nb_len + 1);
+	while (nb_len >= 0)
+	{
+		if (nb % base >= 10)
+			str[nb_len] = hex + ((nb % base) - 10);
+		else
+			str[nb_len] = nb % base + '0';
+		nb = nb / base;
+		nb_len--;
+	}
+	return (str);
+}
+
+static int	ft_nb_len_long(unsigned long n, int base)
+{
+	unsigned long	nb;
+	int			nb_len;
+
+	nb = n;
+	nb_len = 0;
+	while (nb / base > 0)
+	{
+		nb_len++;
+		nb = nb / base;
+	}
+	return (nb_len);
+}
+
+char		*itoa_base_long(unsigned long n, int base)
 {
 	char			*str;
 	int				nb_len;
@@ -88,7 +133,7 @@ char		*itoa_base_unsigned(unsigned long n, int base)
 		base = 16;
 		hex = 'A';
 	}
-	nb_len = ft_nb_len_unsigned(n / base, base);
+	nb_len = ft_nb_len_long(n, base);
 	nb = n;
 	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
 		return (NULL);

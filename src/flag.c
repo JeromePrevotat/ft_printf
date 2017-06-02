@@ -80,7 +80,7 @@ char	*alt_form(char *s_conv, int type)
 
 char	*plus_flag(char *s_conv, int type, int x)
 {
-	if (type == -10 && x >= 0)
+	if (type == -10 && x > 0)
 		s_conv = str_memcat(s_conv, "+", 1);
 	return (s_conv);
 }
