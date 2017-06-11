@@ -19,7 +19,6 @@ int	parsing(const char *format, va_list ap)
 	t_arg	*arg;
 	size_t	i;
 
-	(void)ap;
 	if(!(str = (char *)malloc(2 * sizeof(char))))
 		return (-1);
 	ft_memset(str, '\0', 2);
@@ -31,9 +30,9 @@ int	parsing(const char *format, va_list ap)
 		init_arg(arg);
 		if (format[i] == '%')
 		{
-			parse_format_arg(format + i + 1, arg);
+			parse_format_arg(format + i + 1, arg, ap);
 			i = i + ft_strlen(arg->str_form) + 1;
-			str = str_memcat(str, arg->str_form, ft_strlen(arg->str_form));
+			str = str_memcat(str, arg->converted_form, ft_strlen(arg->converted_form));
 		}
 		else
 		{
@@ -45,7 +44,7 @@ int	parsing(const char *format, va_list ap)
 	return (ft_strlen(str));
 }
 
-int		parse_format_arg(const char *format, t_arg *arg)
+int		parse_format_arg(const char *format, t_arg *arg, va_list ap)
 {
 	char	*str;
 	size_t	i;
@@ -59,8 +58,9 @@ int		parse_format_arg(const char *format, t_arg *arg)
 		str = str_memcat(str, &format[i], 1);
 		i++;
 	}
+	str = str_memcat(str, &format[i], 1);
 	arg->str_form = str_memcat(arg->str_form, str, ft_strlen(str));
-	if (fill_arg(arg) == FALSE)
+	if (fill_arg(arg, ap) == FALSE)
 		return (-1);
 	return (1);
 }

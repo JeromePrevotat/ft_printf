@@ -30,13 +30,17 @@ int	init_arg(t_arg *arg)
 	else
 	{
 		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
-		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));	
+		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
 	}
 	return (1);
 }
 
-int	fill_arg(t_arg *arg)
+int	fill_arg(t_arg *arg, va_list ap)
 {
-	(void)arg;
+	init_flags_arg(arg);
+	init_type_arg(arg);
+	init_conv_arg(arg);
+	parse_flags(arg);
+	convert_argv(arg, ap);
 	return (1);
 }

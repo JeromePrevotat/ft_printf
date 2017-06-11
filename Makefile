@@ -10,6 +10,9 @@ SRCS += ./src/ft_printf.c
 SRCS += ./src/parsing.c
 SRCS += ./src/conversion.c
 SRCS += ./src/argument.c
+SRCS += ./src/arg_functions.c
+SRCS += ./src/flags.c
+SRCS += ./src/flags_functions.c
 SRCS += ./src/utils.c
 SRCS += ./src/itoa_base.c
 

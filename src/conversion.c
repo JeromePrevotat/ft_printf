@@ -52,3 +52,87 @@ char	*init_conv_tab(void)
 	conv_tab[14] = 'C';
 	return (conv_tab);
 }
+
+int		int_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.i_arg = va_arg(ap, int);
+	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8 || arg->conv == 80 || arg->conv == 10
+		|| arg->conv == 100 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = str_memcat(arg->converted_form,
+			convert(arg->argv.i_arg, arg->conv), ft_strlen(convert(arg->argv.i_arg, arg->conv)));
+	return (1);
+}
+
+int		long_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.l_arg = va_arg(ap, long);
+	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8 || arg->conv == 80 || arg->conv == 10
+		|| arg->conv == 100 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = str_memcat(arg->converted_form,
+			convert(arg->argv.l_arg, arg->conv), ft_strlen(convert(arg->argv.l_arg, arg->conv)));
+	return (1);
+}
+
+int		llong_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.ll_arg = va_arg(ap, long long);
+	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8 || arg->conv == 80 || arg->conv == 10
+		|| arg->conv == 100 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = str_memcat(arg->converted_form,
+			convert(arg->argv.ll_arg, arg->conv), ft_strlen(convert(arg->argv.ll_arg, arg->conv)));
+	return (1);
+}
+
+int		char_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.c_arg = va_arg(ap, int);
+	arg->converted_form = str_memcat(arg->converted_form, &arg->argv.c_arg, 1);
+	return (1);
+}
+
+int		str_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.str_arg = va_arg(ap, char *);
+	arg->converted_form = str_memcat(arg->converted_form, arg->argv.str_arg, ft_strlen(arg->argv.str_arg));
+	return (1);
+}
+
+int		wchar_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.wchar_arg = va_arg(ap, wchar_t);
+	return (1);
+}
+
+int		wstr_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.wstr_arg = va_arg(ap, wchar_t *);
+	return (1);
+}
+
+char	*convert(int x, int type)
+{
+	//Signed Decimal
+	if (type == -10)
+		return (itoa_base(x, 10));
+	//Long Signed Decimal
+	if (type == -100)
+		return (itoa_base(x, 10));
+	//Unsigned Octal
+	if (type == 8)
+		return (itoa_base_unsigned(x, 8));
+	//Long Unsigned Octal
+	if (type == 80)
+		return (itoa_base_unsigned(x, 8));
+	//Unsigned Decimal
+	if (type == 10)
+		return (itoa_base_unsigned(x, 10));
+	//Long Unsigned Decimal
+	if (type == 100)
+		return (itoa_base_unsigned(x, 10));
+	//Unsigned Hex
+	if (type == 16)
+		return (itoa_base_unsigned(x, 16));
+	if (type == 160)
+		return (itoa_base_unsigned(x, 160));
+	return (NULL);
+}

@@ -27,8 +27,8 @@ int	main(void)
 	ft_putendl("My Ft_printf result :");
 	ft_printf("%d - %#o - %0d - %-d - % d - %+d - %hd - %hhd - %ld - %lld - %jd - %zd", x,x,x,x,x,x,s,c,l,ll,imax,x);
 	ft_putchar('\n');
+	ft_putendl("Real Printf result :");
+	printf("%d - %#o - %0d - %-d - % d - %+d - %hd - %hhd - %ld - %lld - %jd - %zd", x,x,x,x,x,x,s,c,l,ll,imax,x);
 	ft_putendl("d - #o - 0d - -d -  d - +d - hd - hhd - ld - lld - jd - zd");
-	//ft_putendl("Real Printf result :");
-	//printf("%d - %#o - %0d - %-d - % d - %+d - %hd - %hhd - %ld - %lld - %jd - %zd", x,x,x,x,x,x,s,c,l,ll,imax,x);
 	return (0);
 }

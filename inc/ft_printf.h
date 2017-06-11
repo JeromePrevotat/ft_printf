@@ -14,11 +14,12 @@
 # define FT_PRINTF
 # define TRUE 1
 # define FALSE 0
+# define OVERRIDE 3
 # include <stdarg.h>
 
 typedef struct		s_flags
 {
-	int				hashtag;
+	int				alt_form;
 	int				zero;
 	int				minus;
 	int				plus;
@@ -35,7 +36,6 @@ typedef struct		s_argument
 {
 	union
 	{
-		short		s_arg;
 		int			i_arg;
 		long		l_arg;
 		long long	ll_arg;
@@ -46,6 +46,7 @@ typedef struct		s_argument
 	}				argv;
 	t_flags			flags;
 	int				type;
+	int				conv;
 	char			*str_form;
 	char			*converted_form;
 }					t_arg;
@@ -59,15 +60,52 @@ int		ft_printf(const char *format, ...);
 
 //Parsing.c
 int		parsing(const char *format, va_list ap);
-int		parse_format_arg(const char *format, t_arg *arg);
+int		parse_format_arg(const char *format, t_arg *arg, va_list ap);
 
 //Conversion.c
 int		is_conversion(char c);
 char	*init_conv_tab();
+char	*convert(int x, int type);
+
 
 //Argument.c
-int	init_arg(t_arg *arg);
-int	fill_arg(t_arg *arg);
+int		init_arg(t_arg *arg);
+int		fill_arg(t_arg *arg, va_list ap);
+int		convert_argv(t_arg *arg, va_list ap);
+
+//Arg_functions.c
+int		init_flags_arg(t_arg *arg);
+int		init_type_arg(t_arg *arg);
+int		init_conv_arg(t_arg *arg);
+int		parse_flags(t_arg *arg);
+
+int		int_conv(t_arg *arg, va_list ap);
+int		long_conv(t_arg *arg, va_list ap);
+int		llong_conv(t_arg *arg, va_list ap);
+int		char_conv(t_arg *arg, va_list ap);
+int		str_conv(t_arg *arg, va_list ap);
+int		wchar_conv(t_arg *arg, va_list ap);
+int		wstr_conv(t_arg *arg, va_list ap);
+
+//Flags.c
+int		is_flag(t_arg *arg, size_t i);
+char	*init_flags_tab();
+int		set_flag(t_arg *arg, char c);
+
+//Flags_functions.c
+int		set_alt_form_flag(t_arg *arg);
+int		set_zero_flag(t_arg *arg);
+int		set_minus_flag(t_arg *arg);
+int		set_plus_flag(t_arg *arg);
+int		set_space_flag(t_arg *arg);
+
+int		set_h_flag(t_arg *arg);
+int		set_l_flag(t_arg *arg);
+int		set_j_flag(t_arg *arg);
+int		set_z_flag(t_arg *arg);
+int		set_hh_flag(t_arg *arg);
+
+int		set_ll_flag(t_arg *arg);
 
 //Utils.c
 char	*str_memcat(char *mem1, const char *mem2, size_t size);
