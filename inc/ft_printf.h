@@ -16,37 +16,58 @@
 # define FALSE 0
 # include <stdarg.h>
 
+typedef struct		s_flags
+{
+	int				hashtag;
+	int				zero;
+	int				minus;
+	int				plus;
+	int				space;
+	int				h;
+	int				hh;
+	int				l;
+	int				ll;
+	int				j;
+	int				z;
+}					t_flags;
+
+typedef struct		s_argument
+{
+	union
+	{
+		short		s_arg;
+		int			i_arg;
+		long		l_arg;
+		long long	ll_arg;
+		char		c_arg;
+		char		*str_arg;
+		wchar_t		wchar_arg;
+		wchar_t		*wstr_arg;
+	}				argv;
+	t_flags			flags;
+	int				type;
+	char			*str_form;
+	char			*converted_form;
+}					t_arg;
+
+enum
+{
+	T_SHORT, T_INT, T_LONG, T_LLONG, T_CHAR, T_STR, T_WCHAR, T_WSTR
+};
+
 int		ft_printf(const char *format, ...);
 
 //Parsing.c
 int		parsing(const char *format, va_list ap);
-int		check_existing_conv(char c, char *conv_list);
-char	*assign_va_arg(int type, va_list ap, char *str, char *conv);
+int		parse_format_arg(const char *format, t_arg *arg);
 
-char	*parse_conv(const char *format, int start);
-int		check_conv(char c);
-char	*parse_arg(char *conv, va_list ap);
+//Conversion.c
+int		is_conversion(char c);
+char	*init_conv_tab();
 
-
-//Flag.c
-char	*init_flag_list(void);
-int		check_flag(char c);
-char	*cat_flag(char *conv, int type, char *s_conv, int x);
-char	*alt_form(char *s_conv, int type);
-char	*plus_flag(char *s_conv, int type, int x);
-
-//Select_type.c
-void	init_list(char *conv_list);
-int		select_type(char c);
-char	*convert(int x, int type);
-
-//Cat.c
-char	*cat_int(char *str, va_list ap, int type, char *conv);
-char	*cat_char(char *str, va_list ap);
-char	*cat_wchar(char *str, va_list ap);
-char	*cat_str(char *str, va_list ap);
-char	*cat_wstr(char *str, va_list ap);
-char	*cat_ptr(char *str, va_list ap);
+//Argument.c
+int	init_arg(t_arg *arg);
+int	fill_arg(t_arg *arg);
 
 //Utils.c
 char	*str_memcat(char *mem1, const char *mem2, size_t size);

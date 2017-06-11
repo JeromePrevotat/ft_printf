@@ -17,15 +17,11 @@
 
 int	ft_printf(const char *format, ...)
 {
-	int ret;
-     va_list ap;
+	int		ret;
+	va_list	ap;
 
-     va_start(ap, format);
-     ret = parsing(format, ap);
-
-     //     test = va_arg(ap, char *);
-     //     ft_putstr(test);
-
-     va_end(ap);
-     return (ret);
+	va_start(ap, format);
+	ret = parsing(format, ap);
+	va_end(ap);
+	return (ret);
 }

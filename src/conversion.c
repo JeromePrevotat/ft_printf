@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,25 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "../inc/libft.h"
-#include <stdio.h>
 #include "../inc/ft_printf.h"
-#include <wchar.h>
 
-int	main(void)
+int		is_conversion(char c)
 {
-	int x = 42;
-	short s = 42;
-	char c = 42;
-	long l = 42;
-	long long ll = 42;
-	intmax_t imax = 42;
-	ft_putendl("My Ft_printf result :");
-	ft_printf("%d - %#o - %0d - %-d - % d - %+d - %hd - %hhd - %ld - %lld - %jd - %zd", x,x,x,x,x,x,s,c,l,ll,imax,x);
-	ft_putchar('\n');
-	ft_putendl("d - #o - 0d - -d -  d - +d - hd - hhd - ld - lld - jd - zd");
-	//ft_putendl("Real Printf result :");
-	//printf("%d - %#o - %0d - %-d - % d - %+d - %hd - %hhd - %ld - %lld - %jd - %zd", x,x,x,x,x,x,s,c,l,ll,imax,x);
-	return (0);
+	char	*conv_tab;
+	int		i;
+
+	conv_tab = init_conv_tab();
+	i = 0;
+	while (i < 15)
+	{
+		if (c == conv_tab[i])
+			return (TRUE);
+		i++;
+	}
+	return (FALSE);
+}
+
+char	*init_conv_tab(void)
+{
+	char *conv_tab;
+
+	if (!(conv_tab = (char *)malloc(15 * sizeof(char))))
+		return (NULL);
+	conv_tab[0] = '%';
+	conv_tab[1] = 's';
+	conv_tab[2] = 'S';
+	conv_tab[3] = 'p';
+	conv_tab[4] = 'd';
+	conv_tab[5] = 'D';
+	conv_tab[6] = 'i';
+	conv_tab[7] = 'o';
+	conv_tab[8] = 'O';
+	conv_tab[9] = 'u';
+	conv_tab[10] = 'U';
+	conv_tab[11] = 'x';
+	conv_tab[12] = 'X';
+	conv_tab[13] = 'c';
+	conv_tab[14] = 'C';
+	return (conv_tab);
 }

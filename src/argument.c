@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   argument.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,25 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "../inc/libft.h"
-#include <stdio.h>
 #include "../inc/ft_printf.h"
-#include <wchar.h>
 
-int	main(void)
+int	init_arg(t_arg *arg)
 {
-	int x = 42;
-	short s = 42;
-	char c = 42;
-	long l = 42;
-	long long ll = 42;
-	intmax_t imax = 42;
-	ft_putendl("My Ft_printf result :");
-	ft_printf("%d - %#o - %0d - %-d - % d - %+d - %hd - %hhd - %ld - %lld - %jd - %zd", x,x,x,x,x,x,s,c,l,ll,imax,x);
-	ft_putchar('\n');
-	ft_putendl("d - #o - 0d - -d -  d - +d - hd - hhd - ld - lld - jd - zd");
-	//ft_putendl("Real Printf result :");
-	//printf("%d - %#o - %0d - %-d - % d - %+d - %hd - %hhd - %ld - %lld - %jd - %zd", x,x,x,x,x,x,s,c,l,ll,imax,x);
-	return (0);
+	if (arg->str_form == NULL)
+	{
+		if (!(arg->str_form = (char *)malloc(1 * sizeof(char))))
+			return (-1);
+		ft_memset(arg->str_form, '\0', 1);
+	}
+	if (arg->converted_form == NULL)
+	{
+		if (!(arg->converted_form = (char *)malloc(1 * sizeof(char))))
+			return (-1);
+		ft_memset(arg->converted_form, '\0', 1);
+	}
+	else
+	{
+		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
+		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));	
+	}
+	return (1);
+}
+
+int	fill_arg(t_arg *arg)
+{
+	(void)arg;
+	return (1);
 }
