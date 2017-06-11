@@ -93,3 +93,30 @@ int		set_flag(t_arg *arg, char c)
 		return (set_ll_flag(arg));
 	return (0);
 }
+
+int		apply_flag(t_arg *arg)
+{
+	if (arg->flags.alt_form == TRUE)
+		apply_alt_form(arg);
+	if (arg->flags.zero == TRUE)
+		apply_zero(arg);
+	if (arg->flags.minus == TRUE)
+		apply_minus(arg);
+	if (arg->flags.plus == TRUE)
+		apply_plus(arg);
+	if (arg->flags.space == TRUE)
+		apply_space(arg);
+	if (arg->flags.h == TRUE)
+		apply_h(arg);
+	if (arg->flags.hh == TRUE)
+		apply_hh(arg);
+	if (arg->flags.l == TRUE)
+		apply_l(arg);
+	if (arg->flags.ll == TRUE)
+		apply_ll(arg);
+	if (arg->flags.j == TRUE)
+		apply_j(arg);
+	if (arg->flags.z == TRUE)
+		apply_z(arg);
+	return (0);
+}

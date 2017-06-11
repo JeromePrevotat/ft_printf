@@ -36,6 +36,7 @@ typedef struct		s_argument
 {
 	union
 	{
+		void		*ptr;
 		int			i_arg;
 		long		l_arg;
 		long long	ll_arg;
@@ -53,7 +54,7 @@ typedef struct		s_argument
 
 enum
 {
-	T_SHORT, T_INT, T_LONG, T_LLONG, T_CHAR, T_STR, T_WCHAR, T_WSTR
+	T_SHORT, T_INT, T_LONG, T_LLONG, T_CHAR, T_STR, T_WCHAR, T_WSTR, T_PTR
 };
 
 int		ft_printf(const char *format, ...);
@@ -86,11 +87,13 @@ int		char_conv(t_arg *arg, va_list ap);
 int		str_conv(t_arg *arg, va_list ap);
 int		wchar_conv(t_arg *arg, va_list ap);
 int		wstr_conv(t_arg *arg, va_list ap);
+int		ptr_conv(t_arg *arg, va_list ap);
 
 //Flags.c
 int		is_flag(t_arg *arg, size_t i);
 char	*init_flags_tab();
 int		set_flag(t_arg *arg, char c);
+int		apply_flag(t_arg *arg);
 
 //Flags_functions.c
 int		set_alt_form_flag(t_arg *arg);
@@ -106,6 +109,21 @@ int		set_z_flag(t_arg *arg);
 int		set_hh_flag(t_arg *arg);
 
 int		set_ll_flag(t_arg *arg);
+
+
+int		apply_alt_form(t_arg *arg);
+int		apply_zero(t_arg *arg);
+int		apply_minus(t_arg *arg);
+int		apply_plus(t_arg *arg);
+int		apply_space(t_arg *arg);
+
+int		apply_h(t_arg *arg);
+int		apply_hh(t_arg *arg);
+int		apply_l(t_arg *arg);
+int		apply_ll(t_arg *arg);
+int		apply_j(t_arg *arg);
+
+int		apply_z(t_arg *arg);
 
 //Utils.c
 char	*str_memcat(char *mem1, const char *mem2, size_t size);

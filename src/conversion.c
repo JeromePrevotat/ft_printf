@@ -85,8 +85,13 @@ int		llong_conv(t_arg *arg, va_list ap)
 
 int		char_conv(t_arg *arg, va_list ap)
 {
-	arg->argv.c_arg = va_arg(ap, int);
-	arg->converted_form = str_memcat(arg->converted_form, &arg->argv.c_arg, 1);
+	if (arg->conv == '%')
+		arg->converted_form = str_memcat(arg->converted_form, "%", 1);
+	else
+	{
+		arg->argv.c_arg = va_arg(ap, int);
+		arg->converted_form = str_memcat(arg->converted_form, &arg->argv.c_arg, 1);
+	}
 	return (1);
 }
 
@@ -106,6 +111,17 @@ int		wchar_conv(t_arg *arg, va_list ap)
 int		wstr_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.wstr_arg = va_arg(ap, wchar_t *);
+	return (1);
+}
+
+int		ptr_conv(t_arg *arg, va_list ap)
+{
+	void	*p;
+
+	p = va_arg(ap, void *);
+	arg->converted_form = str_memcat(arg->converted_form, "0x", 2);
+	arg->converted_form = str_memcat(arg->converted_form, itoa_base_long((long)p, 16),
+		ft_strlen(itoa_base_long((long)p, 16)));
 	return (1);
 }
 

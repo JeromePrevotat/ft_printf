@@ -119,3 +119,101 @@ int	set_ll_flag(t_arg *arg)
 		return (FALSE);
 	return (TRUE);
 }
+
+int	apply_alt_form(t_arg *arg)
+{
+	char *tmp;
+
+	if (!(tmp = (char *)malloc(1 * sizeof(char))))
+		return (-1);
+	ft_memset(tmp, '\0', 1);
+	if (arg->conv == 16)
+	{
+		tmp = str_memcat(tmp, "0x", 2);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		arg->converted_form = tmp;
+	}
+	if (arg->conv == 160)
+	{
+		tmp = str_memcat(tmp, "0X", 2);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		arg->converted_form = tmp;
+	}
+	if (arg->conv == 8 || arg->conv == 80)
+	{
+		tmp = str_memcat(tmp, "0", 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		arg->converted_form = tmp;
+	}
+	return (1);
+}
+
+int	apply_zero(t_arg *arg)
+{
+	(void)arg;
+	return (1);
+}
+
+int	apply_minus(t_arg *arg)
+{
+	(void)arg;
+	return (1);
+}
+
+int	apply_plus(t_arg *arg)
+{
+	char *tmp;
+
+	if (!(tmp = (char *)malloc(1 * sizeof(char))))
+		return (-1);
+	ft_memset(tmp, '\0', 1);
+	if (arg->conv == -10 && arg->argv.i_arg > 0)
+	{
+		tmp = str_memcat(tmp, "+", 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		arg->converted_form = tmp;
+	}
+	return (1);
+}
+
+int	apply_space(t_arg *arg)
+{
+	(void)arg;
+	return (1);
+}
+
+int	apply_h(t_arg *arg)
+{
+	(void)arg;
+	return (1);
+}
+
+int	apply_hh(t_arg *arg)
+{
+	(void)arg;
+	return (1);
+}
+
+int	apply_l(t_arg *arg)
+{
+	(void)arg;
+	return (1);
+}
+
+int	apply_ll(t_arg *arg)
+{
+	(void)arg;
+	return (1);
+}
+
+int	apply_j(t_arg *arg)
+{
+	(void)arg;
+	return (1);
+}
+
+int	apply_z(t_arg *arg)
+{
+	(void)arg;
+	return (1);
+}

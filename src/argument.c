@@ -42,5 +42,6 @@ int	fill_arg(t_arg *arg, va_list ap)
 	init_conv_arg(arg);
 	parse_flags(arg);
 	convert_argv(arg, ap);
+	apply_flag(arg);
 	return (1);
 }
