@@ -42,3 +42,16 @@ char 	*str_wmemcat(char *mem1, const wchar_t *mem2, size_t size)
 		free(mem1);
 	return (tmp);
 }
+
+int		get_width(char *str);
+{
+	int	j;
+
+	j = 1;
+	while (j < ft_strlen(str) - 1 && ft_is_digit(str[j]))
+	{
+
+		j++;
+	}
+	return
+}

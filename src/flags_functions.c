@@ -178,7 +178,17 @@ int	apply_plus(t_arg *arg)
 
 int	apply_space(t_arg *arg)
 {
-	(void)arg;
+	char *tmp;
+
+	if (!(tmp = (char *)malloc(1 * sizeof(char))))
+		return (-1);
+	ft_memset(tmp, '\0', 1);
+	if (arg->conv == -10 && arg->argv.i_arg > 0)
+	{
+		tmp = str_memcat(tmp, " ", 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		arg->converted_form = tmp;
+	}
 	return (1);
 }
 

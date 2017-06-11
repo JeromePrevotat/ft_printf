@@ -128,6 +128,7 @@ int		apply_z(t_arg *arg);
 //Utils.c
 char	*str_memcat(char *mem1, const char *mem2, size_t size);
 char 	*str_wmemcat(char *mem1, const wchar_t *mem2, size_t size);
+int		get_width(char *str);
 
 //Itoa_base.c
 char	*itoa_base(int n, int base);

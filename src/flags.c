@@ -40,6 +40,12 @@ int		is_flag(t_arg *arg, size_t i)
 					else
 						return (2);
 				}
+			if (arg->str_form[i] == '-' || arg->str_form[i] == '0')
+			{
+				if (set_flag(arg, arg->str_form[i]) == FALSE)
+					return (FALSE);
+				return (get_width(arg->str_form + i));
+			}
 			else
 				if (set_flag(arg, arg->str_form[i]) == FALSE)
 					return (FALSE);

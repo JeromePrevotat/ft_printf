@@ -37,8 +37,8 @@ int	main(void)
 	char *s2 = "I'm CEO Bitch !";
 
 	ft_putendl("My Ft_printf result :");
-	ft = ft_printf("Yolo ! %s %+d - %u - %#o - %#x - %c pointer adress %p - %% - %C - %S", s2, x2, x2, x2, x2, y, p, wchar, wstr);
-	pr = printf("Yolo ! %s %+d - %u - %#o - %#x - %c pointer adress %p - %% - %C - %S", s2, x2, x2, x2, x2, y, p, wchar, wstr);
+	ft = ft_printf("Yolo ! %s % d - %u - %#o - %#x - %c pointer adress %p - %% - %C - %S", s2, x2, x2, x2, x2, y, p, wchar, wstr);
+	pr = printf("Yolo ! %s %-10d - %u - %#o - %#x - %c pointer adress %p - %% - %C - %S", s2, x2, x2, x2, x2, y, p, wchar, wstr);
 
 	//ft_putendl("My Ft_printf result :");
 	//ft_printf("%d - %#o - %0d - %-d - % d - %+d - %hd - %hhd - %ld - %lld - %jd - %zd", x,x,x,x,x,x,s,c,l,ll,imax,x);
