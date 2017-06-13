@@ -30,7 +30,7 @@ int		is_flag(t_arg *arg, size_t i)
 					if (set_flag(arg, 'H') == FALSE)
 						return (FALSE);
 					else
-						return (2);
+						return (-1);
 				}
 			if (i + 1 < ft_strlen(arg->str_form)
 				&& arg->str_form[i] == 'l' && arg->str_form[i + 1] == 'l')
@@ -38,13 +38,13 @@ int		is_flag(t_arg *arg, size_t i)
 					if (set_flag(arg, 'L') == FALSE)
 						return (FALSE);
 					else
-						return (2);
+						return (-1);
 				}
 			if (arg->str_form[i] == '-' || arg->str_form[i] == '0')
 			{
 				if (set_flag(arg, arg->str_form[i]) == FALSE)
 					return (FALSE);
-				return (get_width(arg->str_form + i));
+				return (get_width(arg->str_form + i, arg));
 			}
 			else
 				if (set_flag(arg, arg->str_form[i]) == FALSE)

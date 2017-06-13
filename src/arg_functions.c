@@ -97,8 +97,10 @@ int		parse_flags(t_arg *arg)
 	{
 		if (is_flag(arg, i) == FALSE)
 			return (FALSE);
-		if (is_flag(arg, i) == 2)
+		if (is_flag(arg, i) == -1)
 			i++;
+		if (is_flag(arg, i) > 0)
+			i = i + is_flag(arg, i);
 		i++;
 	}
 	return (TRUE);

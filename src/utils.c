@@ -43,15 +43,24 @@ char 	*str_wmemcat(char *mem1, const wchar_t *mem2, size_t size)
 	return (tmp);
 }
 
-int		get_width(char *str);
+int		get_width(char *str, t_arg *arg)
 {
-	int	j;
+	size_t	j;
+	size_t	i;
+	char	*tmp;
 
 	j = 1;
-	while (j < ft_strlen(str) - 1 && ft_is_digit(str[j]))
-	{
-
+	while (j < ft_strlen(str) - 1 && ft_isdigit(str[j]))
 		j++;
+	if (!(tmp = (char *)malloc((j + 1) * sizeof(char))))
+		return (-1);
+	ft_memset(tmp, '\0', j + 1);
+	i = 0;
+	while (i < j)
+	{
+		tmp[i] = str[i + 1];
+		i++;
 	}
-	return
+	arg->width = ft_atoi(tmp);
+	return (j);
 }

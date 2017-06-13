@@ -156,7 +156,22 @@ int	apply_zero(t_arg *arg)
 
 int	apply_minus(t_arg *arg)
 {
-	(void)arg;
+	char	*tmp;
+	size_t	i;
+	int		real_width;
+
+	if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
+		return (-1);
+	ft_memset(tmp, '\0', (arg->width + 1));
+	i = 0;
+	real_width = arg->width - ft_strlen(arg->converted_form);
+	while (i < arg->width - ft_strlen(arg->converted_form) && real_width >= 0)
+	{
+		tmp[i] = ' ';
+		i++;
+	}
+	tmp = str_memcat(arg->converted_form, tmp, ft_strlen(tmp));
+	arg->converted_form = tmp;
 	return (1);
 }
 

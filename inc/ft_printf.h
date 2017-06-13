@@ -48,6 +48,7 @@ typedef struct		s_argument
 	t_flags			flags;
 	int				type;
 	int				conv;
+	int				width;
 	char			*str_form;
 	char			*converted_form;
 }					t_arg;
@@ -128,7 +129,7 @@ int		apply_z(t_arg *arg);
 //Utils.c
 char	*str_memcat(char *mem1, const char *mem2, size_t size);
 char 	*str_wmemcat(char *mem1, const wchar_t *mem2, size_t size);
-int		get_width(char *str);
+int		get_width(char *str, t_arg *arg);
 
 //Itoa_base.c
 char	*itoa_base(int n, int base);
