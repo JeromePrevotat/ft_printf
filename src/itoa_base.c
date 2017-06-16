@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
 #include "../inc/ft_printf.h"
 
 static int	ft_nb_len(int n, int base)
@@ -120,7 +119,7 @@ static int	ft_nb_len_long(unsigned long n, int base)
 	return (nb_len);
 }
 
-char		*itoa_base_long(unsigned long n, int base)
+char		*itoa_base_long(long n, int base)
 {
 	char			*str;
 	int				nb_len;

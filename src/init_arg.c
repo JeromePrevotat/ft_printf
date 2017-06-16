@@ -1,17 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_functions.c                                    :+:      :+:    :+:   */
+/*   init_arg.c  	                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jprevota <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/16 14:59:53 by jprevota          #+#    #+#             */
-/*   Updated: 2017/04/24 18:02:45 by admin            ###   ########.fr       */
+/*   Created: 2017/06/16 22:50:50 by jprevota          #+#    #+#             */
+/*   Updated: 2017/06/16 22:50:50 by jprevota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
 #include "../inc/ft_printf.h"
+
+
+int	init_arg(t_arg *arg)
+{
+	if (arg->str_form == NULL)
+	{
+		if (!(arg->str_form = (char *)malloc(1 * sizeof(char))))
+			return (-1);
+		ft_memset(arg->str_form, '\0', 1);
+	}
+	if (arg->converted_form == NULL)
+	{
+		if (!(arg->converted_form = (char *)malloc(1 * sizeof(char))))
+			return (-1);
+		ft_memset(arg->converted_form, '\0', 1);
+	}
+	if (arg->wconverted_form == NULL)
+	{
+		if (!(arg->wconverted_form = (wchar_t *)malloc(1 * sizeof(wchar_t))))
+			return (-1);
+		ft_memset(arg->wconverted_form, '\0', 1);
+	}
+	else
+	{
+		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
+		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
+		ft_memset(arg->wconverted_form, '\0', 1);
+	}
+	return (1);
+}
+
+int	fill_arg(t_arg *arg, va_list ap)
+{
+	arg->wchar_form = 0;
+	init_flags_arg(arg);
+	init_type_arg(arg);
+	init_conv_arg(arg);
+	parse_flags(arg);
+	apply_size_flag(arg);
+	convert_argv(arg, ap);
+	apply_form_flag(arg);
+	return (1);
+}
 
 int	init_flags_arg(t_arg *arg)
 {
@@ -85,44 +127,5 @@ int	init_conv_arg(t_arg *arg)
 		arg->conv = 4;
 	if (c == '%')
 		arg->conv = '%';
-	return (1);
-}
-
-int		parse_flags(t_arg *arg)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < ft_strlen(arg->str_form))
-	{
-		if (is_flag(arg, i) == FALSE)
-			return (FALSE);
-		if (is_flag(arg, i) == -1)
-			i++;
-		if (is_flag(arg, i) > 0)
-			i = i + is_flag(arg, i);
-		i++;
-	}
-	return (TRUE);
-}
-
-int		convert_argv(t_arg *arg, va_list ap)
-{
-	if (arg->type == T_INT)
-		int_conv(arg, ap);
-	if (arg->type == T_LONG)
-		long_conv(arg, ap);
-	if (arg->type == T_LLONG)
-		llong_conv(arg, ap);
-	if (arg->type == T_CHAR)
-		char_conv(arg, ap);
-	if (arg->type == T_STR)
-		str_conv(arg, ap);
-	if (arg->type == T_WCHAR)
-		wchar_conv(arg, ap);
-	if (arg->type == T_WSTR)
-		wstr_conv(arg, ap);
-	if (arg->type == T_PTR)
-		ptr_conv(arg, ap);
 	return (1);
 }

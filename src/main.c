@@ -1,20 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main.c  		                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jprevota <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/16 14:59:53 by jprevota          #+#    #+#             */
-/*   Updated: 2017/04/24 18:02:45 by admin            ###   ########.fr       */
+/*   Created: 2017/06/16 22:50:50 by jprevota          #+#    #+#             */
+/*   Updated: 2017/06/16 22:50:50 by jprevota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "../inc/libft.h"
 #include <stdio.h>
 #include "../inc/ft_printf.h"
-#include <wchar.h>
 
 int	main(void)
 {
@@ -29,6 +26,7 @@ int	main(void)
 	int pr;
 	char y = '$';
 	int  x2 = 42;
+	long l = 10000000000;
 	void *p = NULL;
 	wchar_t wchar = L'\x82';
 	wchar_t *wstr = L"J\130rome";
@@ -37,8 +35,8 @@ int	main(void)
 	char *s2 = "I'm CEO Bitch !";
 
 	ft_putendl("My Ft_printf result :");
-	ft = ft_printf("Yolo ! %-20s %-10d - %u - %#o - %#x - %c pointer adress %p - %% - %C - %S", s2, x2, x2, x2, x2, y, p, wchar, wstr);
-	pr = printf("Yolo ! %-20s %-10d - %u - %#o - %#x - %c pointer adress %p - %% - %C - %S", s2, x2, x2, x2, x2, y, p, wchar, wstr);
+	ft = ft_printf("Yolo ! %-20s %ld - %u - %#o - %#x - %c pointer adress %p - %% - %C - %S", s2, l, x2, x2, x2, y, p, wchar, wstr);
+	pr = printf("Yolo ! %-20s %ld - %u - %#o - %#x - %c pointer adress %p - %% - %C - %S", s2, l, x2, x2, x2, y, p, wchar, wstr);
 
 	//ft_putendl("My Ft_printf result :");
 	//ft_printf("%d - %#o - %0d - %-d - % d - %+d - %hd - %hhd - %ld - %lld - %jd - %zd", x,x,x,x,x,x,s,c,l,ll,imax,x);
