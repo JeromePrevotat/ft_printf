@@ -33,9 +33,9 @@ int	parsing(const char *format, va_list ap)
 	if(!(str = (char *)malloc(2 * sizeof(char))))
 		return (-1);
 	ft_memset(str, '\0', 2);
-	if(!(wstr = (wchar_t *)malloc(2 * sizeof(wchar_t))))
+	if(!(wstr = (wchar_t *)malloc(1 * sizeof(wchar_t))))
 		return (-1);
-	ft_memset(wstr, '\0', 2);
+	ft_memset(wstr, '\0', 1);
 	if (!(arg = (t_arg *)malloc(1 * sizeof(t_arg))))
 		return (-1);
 	i = 0;
@@ -50,15 +50,18 @@ int	parsing(const char *format, va_list ap)
 				str = str_memcat(str, arg->converted_form, ft_strlen(arg->converted_form));
 			else
 			{
-				wstr = str_to_wstr(str);
-				ft_memset(str, '\0', ft_strlen(str));
-				wstr = wstr_memcat(wstr, arg->wconverted_form, ft_wstrlen(arg->wconverted_form));
+				if (ft_wstrlen(wstr) == 0)
+					wstr = str_to_wstr(str);
+				if (arg->wchar_form == 1)
+					wstr = wstr_memcat(wstr, arg->wconverted_form, ft_wstrlen(arg->wconverted_form));
+				if (arg->wchar_form == 0)
+					wstr = wstr_memcat(wstr, str_to_wstr(arg->converted_form), ft_wstrlen(str_to_wstr(arg->converted_form)));
 			}
 		}
 		else
 		{
 			if (ft_wstrlen(wstr) != 0)
-				wstr = wstr_memcat(wstr, (wchar_t *)&format[i], 1);
+				wstr = wstr_memcat(wstr, str_to_wstr(&format[i]), 1);
 			else
 				str = str_memcat(str, &format[i], 1);
 			i++;
@@ -68,9 +71,6 @@ int	parsing(const char *format, va_list ap)
 	{
 		ft_putwstr(wstr);
 		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putchar('\n');
-		ft_putendl(str);
 	}
 	else
 		ft_putendl(str);

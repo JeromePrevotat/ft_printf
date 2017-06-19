@@ -148,8 +148,8 @@ char				*str_memcat(char *mem1, const char *mem2, size_t size);
 int					get_width(char *str, t_arg *arg);
 
 //Wchar_functions.c
-wchar_t				*str_to_wstr(char *str);
-wchar_t				*wstr_memcat(wchar_t *mem1, wchar_t *mem2, size_t size);
+wchar_t				*str_to_wstr(const char *str);
+wchar_t				*wstr_memcat(wchar_t *mem1, const wchar_t *mem2, size_t size);
 size_t				ft_wstrlen(const wchar_t *str);
 void				ft_putwchar(wchar_t c);
 void				ft_putwstr(wchar_t *wstr);

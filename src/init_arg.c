@@ -37,7 +37,7 @@ int	init_arg(t_arg *arg)
 	{
 		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
 		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
-		ft_memset(arg->wconverted_form, '\0', 1);
+		ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
 	}
 	return (1);
 }

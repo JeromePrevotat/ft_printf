@@ -14,14 +14,14 @@
 
 int	apply_l(t_arg *arg)
 {
-	if (arg->type == T_CHAR || arg->type == T_STR
-		|| arg->type == T_WCHAR || arg->type == T_WSTR
+	if (arg->type == T_CHAR || arg->type == T_WCHAR || arg->type == T_WSTR
 		|| arg->type == T_PTR)
 		return (0);
-		else
-		if (arg->type == T_INT || arg->type == T_SHORT)
+	else if (arg->type == T_INT || arg->type == T_SHORT)
 		arg->type = T_LONG;
-		return (1);
+	else if (arg->type == T_STR)
+		arg->type = T_WSTR;
+	return (1);
 }
 
 int	apply_ll(t_arg *arg)
