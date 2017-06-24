@@ -2,9 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 LIB = -L. -lft
 NAME = print
-
-DIR_SRC = ./src/
-
+#NAME = libftprintf.a
 
 SRCS += ./src/main.c
 
@@ -28,6 +26,15 @@ SRCS += ./src/utils.c
 
 SRCS += ./src/wchar_functions.c
 
+SRCS += ./src/ft_atoi.c
+SRCS += ./src/ft_isdigit.c
+SRCS += ./src/ft_memcpy.c
+SRCS += ./src/ft_memset.c
+SRCS += ./src/ft_putchar.c
+SRCS += ./src/ft_putendl.c
+SRCS += ./src/ft_strlen.c
+
+
 INC += ./inc/ft_printf.h
 INC += ./inc/libft.h
 
@@ -37,6 +44,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
 	$(CC) $(CFLAGS) $(LIB) $(SRCS) -o $@
+	#ar -rc $(NAME) $(OBJ)
+	#ranlib $(NAME)
 	$(MAKE) clean
 
 .PHONY: clean

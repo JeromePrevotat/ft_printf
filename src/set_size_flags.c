@@ -15,19 +15,19 @@
 int	set_l_flag(t_arg *arg)
 {
 	if (arg->flags.l == FALSE && arg->flags.ll == FALSE)
-	arg->flags.l = TRUE;
+		arg->flags.l = TRUE;
 	else
-	return (FALSE);
+		return (FALSE);
 	return (TRUE);
 }
 
 int	set_ll_flag(t_arg *arg)
 {
 	if (arg->flags.ll == FALSE && arg->flags.l == FALSE)
-	arg->flags.ll = TRUE;
+		arg->flags.ll = TRUE;
 	else
-	return (FALSE);
-	return (TRUE);
+		return (FALSE);
+	return (2);
 }
 
 int	set_h_flag(t_arg *arg)
@@ -45,5 +45,5 @@ int	set_hh_flag(t_arg *arg)
 		arg->flags.hh = TRUE;
 	else
 		return (FALSE);
-	return (TRUE);
+	return (2);
 }

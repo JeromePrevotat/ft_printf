@@ -14,6 +14,10 @@
 
 int		convert_argv(t_arg *arg, va_list ap)
 {
+	if (arg->type == T_SIZET)
+		st_conv(arg, ap);
+	if (arg->type == T_SHORT)
+		short_conv(arg, ap);
 	if (arg->type == T_INT)
 		int_conv(arg, ap);
 	if (arg->type == T_LONG)
@@ -35,15 +39,16 @@ int		convert_argv(t_arg *arg, va_list ap)
 
 char	*convert(t_arg *arg)
 {
+	//Size_t
+	if ((arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+		&& (arg->type == T_SIZET))
+		return (itoa_base_unsigned(arg->argv.st_arg, arg->conv));
 	//Signed Decimal
 	if (arg->conv == -10 && (arg->type == T_INT))
 		return (itoa_base(arg->argv.i_arg, 10));
 	//LONG SIGNED DECIMAL
-	if (arg->conv == -10 && (arg->type == T_LONG))
+	if (arg->conv == -10 && ((arg->type == T_LONG) || (arg->type == T_LLONG)))
 		return (itoa_base_long(arg->argv.l_arg, 10));
-	/*//Long Signed Decimal
-	if (conv == -100)
-		return (itoa_base(x, 10));*/
 	//Unsigned Octal
 	if (arg->conv == 8)
 		return (itoa_base_unsigned(arg->argv.i_arg, 8));

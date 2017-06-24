@@ -37,7 +37,7 @@ int		get_width(char *str, t_arg *arg)
 	while (j < ft_strlen(str) - 1 && ft_isdigit(str[j]))
 		j++;
 	if (!(tmp = (char *)malloc((j + 1) * sizeof(char))))
-		return (-1);
+		return (ERROR);
 	ft_memset(tmp, '\0', j + 1);
 	i = 0;
 	while (i < j)
@@ -47,4 +47,15 @@ int		get_width(char *str, t_arg *arg)
 	}
 	arg->width = ft_atoi(tmp);
 	return (j);
+}
+
+int		argv_sign(t_arg *arg)
+{
+	if (arg->argv.sh_arg > 0 || arg->argv.i_arg > 0 || arg->argv.l_arg > 0
+		|| arg->argv.ll_arg > 0)
+		return (1);
+	if (arg->argv.sh_arg < 0 || arg->argv.i_arg < 0 || arg->argv.l_arg < 0
+		|| arg->argv.ll_arg < 0)
+		return (-1);
+	return (0);
 }

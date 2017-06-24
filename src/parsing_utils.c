@@ -65,20 +65,10 @@ int		is_flag(t_arg *arg, size_t i)
 		{
 			if (i + 1 < ft_strlen(arg->str_form)
 				&& arg->str_form[i] == 'h' && arg->str_form[i + 1] == 'h')
-				{
-					if (set_flag(arg, 'H') == FALSE)
-						return (FALSE);
-					else
-						return (-1);
-				}
+				return (set_flag(arg, 'H'));
 			if (i + 1 < ft_strlen(arg->str_form)
 				&& arg->str_form[i] == 'l' && arg->str_form[i + 1] == 'l')
-				{
-					if (set_flag(arg, 'L') == FALSE)
-						return (FALSE);
-					else
-						return (-1);
-				}
+				return (set_flag(arg, 'L'));
 			if (arg->str_form[i] == '-' || arg->str_form[i] == '0')
 			{
 				if (set_flag(arg, arg->str_form[i]) == FALSE)
@@ -86,8 +76,7 @@ int		is_flag(t_arg *arg, size_t i)
 				return (get_width(arg->str_form + i, arg));
 			}
 			else
-				if (set_flag(arg, arg->str_form[i]) == FALSE)
-					return (FALSE);
+				return (set_flag(arg, arg->str_form[i]));
 		}
 		f++;
 	}
@@ -111,6 +100,7 @@ char	*init_flags_tab(void)
 	flags_tab[8] = 'z';
 	return (flags_tab);
 }
+
 int		set_flag(t_arg *arg, char c)
 {
 	if (c == '#')
@@ -135,5 +125,5 @@ int		set_flag(t_arg *arg, char c)
 		return (set_hh_flag(arg));
 	if (c == 'L')
 		return (set_ll_flag(arg));
-	return (0);
+	return (FALSE);
 }

@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c  		                                    :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jprevota <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/16 22:50:50 by jprevota          #+#    #+#             */
-/*   Updated: 2017/06/16 22:50:50 by jprevota         ###   ########.fr       */
+/*   Created: 2016/11/08 13:18:44 by jprevota          #+#    #+#             */
+/*   Updated: 2016/11/09 16:29:45 by jprevota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../inc/ft_printf.h"
+#include "../inc/libft.h"
 
-int	main(void)
+int		ft_isdigit(int c)
 {
-	long long ll = 42;
-
-	ft_printf("%llx", ll);
-	ft_putchar('\n');
-	ft_putendl("My Ft_printf result :");
-	ft_printf("%#x", 0);
-	ft_putchar('\n');
-	ft_putendl("Real Printf result :");
-	printf("%#x", 0);
+	if (c >= '0' && c <= '9')
+		return (1);
 	return (0);
 }

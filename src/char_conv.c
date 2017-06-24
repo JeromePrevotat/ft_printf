@@ -27,7 +27,10 @@ int		char_conv(t_arg *arg, va_list ap)
 int		str_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.str_arg = va_arg(ap, char *);
-	arg->converted_form = str_memcat(arg->converted_form, arg->argv.str_arg, ft_strlen(arg->argv.str_arg));
+	if (arg->argv.str_arg == NULL)
+		arg->converted_form = str_memcat(arg->converted_form, "(null)", 6);
+	else
+		arg->converted_form = str_memcat(arg->converted_form, arg->argv.str_arg, ft_strlen(arg->argv.str_arg));
 	return (1);
 }
 

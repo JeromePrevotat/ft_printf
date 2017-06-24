@@ -18,19 +18,19 @@ int	init_arg(t_arg *arg)
 	if (arg->str_form == NULL)
 	{
 		if (!(arg->str_form = (char *)malloc(1 * sizeof(char))))
-			return (-1);
+			return (ERROR);
 		ft_memset(arg->str_form, '\0', 1);
 	}
 	if (arg->converted_form == NULL)
 	{
 		if (!(arg->converted_form = (char *)malloc(1 * sizeof(char))))
-			return (-1);
+			return (ERROR);
 		ft_memset(arg->converted_form, '\0', 1);
 	}
 	if (arg->wconverted_form == NULL)
 	{
 		if (!(arg->wconverted_form = (wchar_t *)malloc(1 * sizeof(wchar_t))))
-			return (-1);
+			return (ERROR);
 		ft_memset(arg->wconverted_form, '\0', 1);
 	}
 	else
@@ -39,12 +39,12 @@ int	init_arg(t_arg *arg)
 		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
 		ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
 	}
-	return (1);
+	return (TRUE);
 }
 
 int	fill_arg(t_arg *arg, va_list ap)
 {
-	arg->wchar_form = 0;
+	arg->wchar_form = FALSE;
 	init_flags_arg(arg);
 	init_type_arg(arg);
 	init_conv_arg(arg);
@@ -55,7 +55,7 @@ int	fill_arg(t_arg *arg, va_list ap)
 	return (1);
 }
 
-int	init_flags_arg(t_arg *arg)
+void	init_flags_arg(t_arg *arg)
 {
 	arg->flags.alt_form = FALSE;
 	arg->flags.zero = FALSE;
@@ -68,10 +68,9 @@ int	init_flags_arg(t_arg *arg)
 	arg->flags.ll = FALSE;
 	arg->flags.j = FALSE;
 	arg->flags.z = FALSE;
-	return (1);
 }
 
-int	init_type_arg(t_arg *arg)
+void	init_type_arg(t_arg *arg)
 {
 	char	c;
 
@@ -91,10 +90,9 @@ int	init_type_arg(t_arg *arg)
 		arg->type = T_CHAR;
 	if (c == 'p')
 		arg->type = T_PTR;
-	return (1);
 }
 
-int	init_conv_arg(t_arg *arg)
+void	init_conv_arg(t_arg *arg)
 {
 	char	c;
 
@@ -127,5 +125,4 @@ int	init_conv_arg(t_arg *arg)
 		arg->conv = 4;
 	if (c == '%')
 		arg->conv = '%';
-	return (1);
 }

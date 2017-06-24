@@ -13,6 +13,7 @@
 
 #ifndef FT_PRINTF
 # define FT_PRINTF
+# define ERROR -1
 # define TRUE 1
 # define FALSE 0
 # define OVERRIDE 3
@@ -39,6 +40,8 @@ typedef struct		s_flags
 typedef union		u_argv
 {
 	void			*ptr;
+	size_t			st_arg;
+	short			sh_arg;
 	int				i_arg;
 	long			l_arg;
 	long long		ll_arg;
@@ -63,7 +66,7 @@ typedef struct		s_argument
 
 enum
 {
-	T_SHORT, T_INT, T_LONG, T_LLONG, T_CHAR, T_STR, T_WCHAR, T_WSTR, T_PTR
+	T_SIZET, T_SHORT, T_INT, T_LONG, T_LLONG, T_CHAR, T_STR, T_WCHAR, T_WSTR, T_PTR
 };
 
 
@@ -73,6 +76,7 @@ int					ft_printf(const char *format, ...);
 int					parsing(const char *format, va_list ap);
 int					parse_format_arg(const char *format, t_arg *arg, va_list ap);
 int					parse_flags(t_arg *arg);
+int					init_parsing_var(wchar_t **wstr, t_arg **arg);
 
 //Parsing_utils.c
 int					is_conversion(char c);
@@ -84,9 +88,9 @@ int					set_flag(t_arg *arg, char c);
 //Init_arg.c
 int					init_arg(t_arg *arg);
 int					fill_arg(t_arg *arg, va_list ap);
-int					init_flags_arg(t_arg *arg);
-int					init_type_arg(t_arg *arg);
-int					init_conv_arg(t_arg *arg);
+void				init_flags_arg(t_arg *arg);
+void				init_type_arg(t_arg *arg); //USELESS ?
+void				init_conv_arg(t_arg *arg);
 
 //Convert.c
 int					convert_argv(t_arg *arg, va_list ap);
@@ -127,6 +131,8 @@ int					apply_plus(t_arg *arg);
 int					apply_space(t_arg *arg);
 
 //Nbr_conv.c
+int					st_conv(t_arg *arg, va_list ap);
+int					short_conv(t_arg *arg, va_list ap);
 int					int_conv(t_arg *arg, va_list ap);
 int					long_conv(t_arg *arg, va_list ap);
 int					llong_conv(t_arg *arg, va_list ap);
@@ -146,6 +152,7 @@ char				*itoa_base_long(long n, int base);
 //Utils.c
 char				*str_memcat(char *mem1, const char *mem2, size_t size);
 int					get_width(char *str, t_arg *arg);
+int					argv_sign(t_arg *arg);
 
 //Wchar_functions.c
 wchar_t				*str_to_wstr(const char *str);

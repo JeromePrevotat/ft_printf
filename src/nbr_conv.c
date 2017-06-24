@@ -12,6 +12,24 @@
 
 #include "../inc/ft_printf.h"
 
+int		st_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.st_arg = va_arg(ap, size_t);
+	if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = str_memcat(arg->converted_form,
+			convert(arg), ft_strlen(convert(arg)));
+	return (1);
+}
+
+int		short_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.sh_arg = va_arg(ap, int);
+	if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = str_memcat(arg->converted_form,
+			convert(arg), ft_strlen(convert(arg)));
+	return (1);
+}
+
 int		int_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.i_arg = va_arg(ap, int);
@@ -24,7 +42,6 @@ int		int_conv(t_arg *arg, va_list ap)
 
 int		long_conv(t_arg *arg, va_list ap)
 {
-	arg->argv.ll_arg = 0;
 	arg->argv.l_arg = va_arg(ap, long);
 	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8 || arg->conv == 80 || arg->conv == 10
 		|| arg->conv == 100 || arg->conv == 16 || arg->conv == 160)
