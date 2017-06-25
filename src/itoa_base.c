@@ -148,3 +148,138 @@ char		*itoa_base_long(long n, int base)
 	}
 	return (str);
 }
+
+static int	ft_nb_len_unsigned_long(unsigned long n, int base)
+{
+	unsigned long	nb;
+	int			nb_len;
+
+	nb = n;
+	nb_len = 0;
+	while (nb / base > 0)
+	{
+		nb_len++;
+		nb = nb / base;
+	}
+	return (nb_len);
+}
+
+char		*itoa_base_unsigned_long(unsigned long n, int base)
+{
+	char			*str;
+	int				nb_len;
+	unsigned long	nb;
+	char 			hex;
+
+	hex = 'a';
+	if (base == 160)
+	{
+		base = 16;
+		hex = 'A';
+	}
+	nb_len = ft_nb_len_unsigned_long(n, base);
+	nb = n;
+	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
+		return (NULL);
+	ft_memset(str, '\0', nb_len + 1);
+	while (nb_len >= 0)
+	{
+		if (nb % base >= 10)
+			str[nb_len] = hex + ((nb % base) - 10);
+		else
+			str[nb_len] = nb % base + '0';
+		nb = nb / base;
+		nb_len--;
+	}
+	return (str);
+}
+
+static int	ft_nb_len_llong(long long n, int base)
+{
+	long long	nb;
+	int			nb_len;
+
+	nb = n;
+	nb_len = 0;
+	while (nb / base > 0)
+	{
+		nb_len++;
+		nb = nb / base;
+	}
+	return (nb_len);
+}
+
+char		*itoa_base_llong(long long n, int base)
+{
+	char				*str;
+	int					nb_len;
+	unsigned long long	nb;
+	char 				hex;
+
+	hex = 'a';
+	if (base == 160)
+	{
+		base = 16;
+		hex = 'A';
+	}
+	nb_len = ft_nb_len_llong(n, base);
+	nb = n;
+	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
+		return (NULL);
+	ft_memset(str, '\0', nb_len + 1);
+	while (nb_len >= 0)
+	{
+		if (nb % base >= 10)
+			str[nb_len] = hex + ((nb % base) - 10);
+		else
+			str[nb_len] = nb % base + '0';
+		nb = nb / base;
+		nb_len--;
+	}
+	return (str);
+}
+
+static int	ft_nb_len_unsigned_llong(unsigned long long n, int base)
+{
+	unsigned long long	nb;
+	int					nb_len;
+
+	nb = n;
+	nb_len = 0;
+	while (nb / base > 0)
+	{
+		nb_len++;
+		nb = nb / base;
+	}
+	return (nb_len);
+}
+
+char		*itoa_base_unsigned_llong(unsigned long long n, int base)
+{
+	char				*str;
+	int					nb_len;
+	unsigned long long	nb;
+	char 				hex;
+
+	hex = 'a';
+	if (base == 160)
+	{
+		base = 16;
+		hex = 'A';
+	}
+	nb_len = ft_nb_len_unsigned_llong(n, base);
+	nb = n;
+	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
+		return (NULL);
+	ft_memset(str, '\0', nb_len + 1);
+	while (nb_len >= 0)
+	{
+		if (nb % base >= 10)
+			str[nb_len] = hex + ((nb % base) - 10);
+		else
+			str[nb_len] = nb % base + '0';
+		nb = nb / base;
+		nb_len--;
+	}
+	return (str);
+}

@@ -39,33 +39,39 @@ int		convert_argv(t_arg *arg, va_list ap)
 
 char	*convert(t_arg *arg)
 {
-	//Size_t
-	if ((arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
-		&& (arg->type == T_SIZET))
-		return (itoa_base_unsigned(arg->argv.st_arg, arg->conv));
-	//Signed Decimal
-	if (arg->conv == -10 && (arg->type == T_INT))
-		return (itoa_base(arg->argv.i_arg, 10));
-	//LONG SIGNED DECIMAL
-	if (arg->conv == -10 && ((arg->type == T_LONG) || (arg->type == T_LLONG)))
-		return (itoa_base_long(arg->argv.l_arg, 10));
-	//Unsigned Octal
-	if (arg->conv == 8)
-		return (itoa_base_unsigned(arg->argv.i_arg, 8));
-	//Long Unsigned Octal
-	if (arg->conv == 80)
-		return (itoa_base_unsigned(arg->argv.i_arg, 8));
-	//Unsigned Decimal
-	if (arg->conv == 10)
-		return (itoa_base_unsigned(arg->argv.i_arg, 10));
-	//Long Unsigned Decimal
-	if (arg->conv == 100)
-		return (itoa_base_unsigned(arg->argv.i_arg, 10));
-	//Unsigned Hex
-	if (arg->conv == 16)
-		return (itoa_base_unsigned(arg->argv.i_arg, 16));
-	if (arg->conv == 160)
-		return (itoa_base_unsigned(arg->argv.i_arg, 160));
+	int base;
+
+	base = arg->conv;
+	if (base < 0)
+		base = -base;
+	if (base > 16 && base != 160)
+		base = base / 10;
+	//SIGNED CONV
+	if (arg->conv < 0)
+	{
+		if (arg->type == T_SHORT)
+			return (itoa_base(arg->argv.sh_arg, base));
+		if (arg->type == T_INT)
+			return (itoa_base(arg->argv.i_arg, base));
+		if (arg->type == T_LONG)
+			return (itoa_base_long(arg->argv.l_arg, base));
+		if (arg->type == T_LLONG)
+			return (itoa_base_llong(arg->argv.ll_arg, base));
+	}
+	//UNSIGNED CONV
+	else
+	{
+		if (arg->type == T_SHORT)
+			return (itoa_base_unsigned(arg->argv.sh_arg, base));
+		if (arg->type == T_INT)
+			return (itoa_base_unsigned(arg->argv.i_arg, base));
+		if (arg->type == T_SIZET)
+			return (itoa_base_unsigned(arg->argv.st_arg, base));
+		if (arg->type == T_LONG)
+			return (itoa_base_unsigned_long(arg->argv.l_arg, base));
+		if (arg->type == T_LLONG)
+			return (itoa_base_unsigned_llong(arg->argv.ll_arg, base));
+	}
 	return (NULL);
 }
 
@@ -81,7 +87,7 @@ int		apply_form_flag(t_arg *arg)
 		apply_plus(arg);
 	if (arg->flags.space == TRUE)
 		apply_space(arg);
-	return (0);
+	return (FALSE);
 }
 
 int		apply_size_flag(t_arg *arg)
@@ -98,5 +104,5 @@ int		apply_size_flag(t_arg *arg)
 		apply_j(arg);
 	if (arg->flags.z == TRUE)
 		apply_z(arg);
-	return (0);
+	return (FALSE);
 }

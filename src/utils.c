@@ -22,8 +22,8 @@ char	*str_memcat(char *mem1, const char *mem2, size_t size)
 	ft_memcpy(tmp, mem1, ft_strlen(mem1));
 	ft_memcpy(tmp + ft_strlen(mem1), mem2, size);
 	tmp[ft_strlen(mem1) + size] = '\0';
-	if (mem1 != NULL)
-		free(mem1);
+	//if (mem1 != NULL)
+		//free(mem1);
 	return (tmp);
 }
 
@@ -51,11 +51,13 @@ int		get_width(char *str, t_arg *arg)
 
 int		argv_sign(t_arg *arg)
 {
-	if (arg->argv.sh_arg > 0 || arg->argv.i_arg > 0 || arg->argv.l_arg > 0
-		|| arg->argv.ll_arg > 0)
-		return (1);
-	if (arg->argv.sh_arg < 0 || arg->argv.i_arg < 0 || arg->argv.l_arg < 0
-		|| arg->argv.ll_arg < 0)
+	if ((arg->type == T_SHORT || arg->type == T_INT) && (arg->argv.sh_arg < 0 || arg->argv.i_arg < 0))
 		return (-1);
+	if ((arg->type == T_LONG || arg->type == T_LLONG) && (arg->argv.l_arg < 0 || arg->argv.ll_arg < 0))
+		return (-1);
+	if ((arg->type == T_SHORT || arg->type == T_INT) && (arg->argv.sh_arg > 0 || arg->argv.i_arg > 0))
+		return (1);
+	if ((arg->type == T_LONG || arg->type == T_LLONG) && (arg->argv.l_arg > 0 || arg->argv.ll_arg > 0))
+		return (1);
 	return (0);
 }

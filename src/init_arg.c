@@ -39,6 +39,7 @@ int	init_arg(t_arg *arg)
 		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
 		ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
 	}
+	ft_memset(&arg->argv, '\0', 1 * sizeof(t_argv));
 	return (TRUE);
 }
 

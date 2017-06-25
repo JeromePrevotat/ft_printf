@@ -148,6 +148,9 @@ int					wstr_conv(t_arg *arg, va_list ap);
 char				*itoa_base(int n, int base);
 char				*itoa_base_unsigned(unsigned int n, int base);
 char				*itoa_base_long(long n, int base);
+char				*itoa_base_unsigned_long(unsigned long n, int base);
+char				*itoa_base_llong(long long n, int base);
+char				*itoa_base_unsigned_llong(unsigned long long n, int base);
 
 //Utils.c
 char				*str_memcat(char *mem1, const char *mem2, size_t size);

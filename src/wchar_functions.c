@@ -18,8 +18,7 @@ wchar_t	*str_to_wstr(const char *str)
 	size_t	i;
 
 	i = 0;
-	if (!(wstr = (wchar_t *)malloc(
-		(ft_strlen(str) + 1) * sizeof(wchar_t))))
+	if (!(wstr = (wchar_t *)malloc((ft_strlen(str) + 1) * sizeof(wchar_t))))
 		return (NULL);
 	ft_memset(wstr, '\0', (ft_strlen(str) + 1));
 	while (str[i] != '\0')
@@ -51,11 +50,9 @@ wchar_t	*wstr_memcat(wchar_t *mem1, const wchar_t *mem2, size_t size)
 		tmp[ft_wstrlen(mem1) + i] = mem2[i];
 		i++;
 	}
-	//ft_memcpy(tmp, mem1, ft_wstrlen(mem1));
-	//ft_memcpy(tmp + ft_wstrlen(mem1), mem2, size);
 	tmp[ft_wstrlen(mem1) + size] = '\0';
-	/*if (mem1 != NULL)
-		free(mem1);*/
+	//if (mem1 != NULL)
+		//free(mem1);
 	return (tmp);
 }
 

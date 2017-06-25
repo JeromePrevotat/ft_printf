@@ -15,14 +15,8 @@
 
 int	main(void)
 {
-	long long ll = 42;
-
-	ft_printf("%llx", ll);
+	ft_printf("%+d", -1);
+	ft_printf("%  +d", 42);
 	ft_putchar('\n');
-	ft_putendl("My Ft_printf result :");
-	ft_printf("%#x", 0);
-	ft_putchar('\n');
-	ft_putendl("Real Printf result :");
-	printf("%#x", 0);
 	return (0);
 }

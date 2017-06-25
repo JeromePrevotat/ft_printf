@@ -20,7 +20,7 @@ int	apply_l(t_arg *arg)
 	else if (arg->conv == -10)
 		arg->type = T_LONG;
 	else if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
-		arg->type = T_LLONG;
+		arg->type = T_LONG;
 	else if (arg->type == T_STR)
 		arg->type = T_WSTR;
 	return (1);
