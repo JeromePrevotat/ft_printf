@@ -15,8 +15,7 @@
 
 int	main(void)
 {
-	ft_printf("%+d", -1);
-	ft_printf("%  +d", 42);
+	ft_printf("this is a %s", "string");
 	ft_putchar('\n');
 	return (0);
 }

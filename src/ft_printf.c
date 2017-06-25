@@ -16,9 +16,20 @@ int	ft_printf(const char *format, ...)
 {
 	int		ret;
 	va_list	ap;
+	char	*f;
+	size_t	i;
 
+	i = 0;
+	if (!(f = (char *)malloc((ft_strlen(format) + 1 ) * sizeof(char))))
+		return (ERROR);
+	ft_memset(f, '\0', ft_strlen(format) + 1);
+	while (i < ft_strlen(format))
+	{
+		f[i] = format[i];
+		i++;
+	}
 	va_start(ap, format);
-	ret = parsing(format, ap);
+	ret = parsing(f, ap);
 	va_end(ap);
 	return (ret);
 }
