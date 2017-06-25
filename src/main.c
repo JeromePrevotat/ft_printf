@@ -17,5 +17,9 @@ int	main(void)
 {
 	ft_printf("this is a %s", "string");
 	ft_putchar('\n');
+	ft_printf("null %c and text", 0);
+	ft_putchar('\n');
+	ft_printf("%5%");
+	ft_putchar('\n');
 	return (0);
 }

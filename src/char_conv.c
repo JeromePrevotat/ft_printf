@@ -19,6 +19,8 @@ int		char_conv(t_arg *arg, va_list ap)
 	else
 	{
 		arg->argv.c_arg = va_arg(ap, int);
+		if (arg->argv.c_arg == 0)
+			return (1);
 		arg->converted_form = str_memcat(arg->converted_form, &arg->argv.c_arg, 1);
 	}
 	return (1);

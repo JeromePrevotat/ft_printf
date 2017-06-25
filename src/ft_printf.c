@@ -86,6 +86,7 @@ int		parse_flags(t_arg *arg)
 	size_t	i;
 
 	i = 0;
+	//i = get_width(arg->str_form, arg);
 	while (i < ft_strlen(arg->str_form))
 	{
 		if (i < ft_strlen(arg->str_form) && is_flag(arg, i) == FALSE)
