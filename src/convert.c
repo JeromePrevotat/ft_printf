@@ -24,6 +24,10 @@ int		convert_argv(t_arg *arg, va_list ap)
 		long_conv(arg, ap);
 	if (arg->type == T_LLONG)
 		llong_conv(arg, ap);
+	if (arg->type == T_IMAX)
+		imax_conv(arg, ap);
+	if (arg->type == T_UIMAX)
+		uimax_conv(arg, ap);
 	if (arg->type == T_CHAR)
 		char_conv(arg, ap);
 	if (arg->type == T_STR)
@@ -53,10 +57,14 @@ char	*convert(t_arg *arg)
 			return (itoa_base(arg->argv.sh_arg, base));
 		if (arg->type == T_INT)
 			return (itoa_base(arg->argv.i_arg, base));
+		if (arg->type == T_SIZET)
+			return (itoa_base_st(arg->argv.st_arg, base));
 		if (arg->type == T_LONG)
 			return (itoa_base_long(arg->argv.l_arg, base));
 		if (arg->type == T_LLONG)
 			return (itoa_base_llong(arg->argv.ll_arg, base));
+		if (arg->type == T_IMAX)
+			return (itoa_base_imax(arg->argv.imax_arg, base));
 	}
 	//UNSIGNED CONV
 	else
@@ -66,11 +74,13 @@ char	*convert(t_arg *arg)
 		if (arg->type == T_INT)
 			return (itoa_base_unsigned(arg->argv.i_arg, base));
 		if (arg->type == T_SIZET)
-			return (itoa_base_unsigned(arg->argv.st_arg, base));
+			return (itoa_base_st(arg->argv.st_arg, base));
 		if (arg->type == T_LONG)
 			return (itoa_base_unsigned_long(arg->argv.l_arg, base));
 		if (arg->type == T_LLONG)
 			return (itoa_base_unsigned_llong(arg->argv.ll_arg, base));
+		if (arg->type == T_UIMAX)
+			return (itoa_base_uimax(arg->argv.uimax_arg, base));
 	}
 	return (NULL);
 }

@@ -45,6 +45,8 @@ int	init_arg(t_arg *arg)
 
 int	fill_arg(t_arg *arg, va_list ap)
 {
+	arg->width = 0;
+	arg->precision = 0;
 	arg->wchar_form = FALSE;
 	init_flags_arg(arg);
 	init_type_arg(arg);

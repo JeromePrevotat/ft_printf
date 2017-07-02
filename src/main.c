@@ -15,11 +15,11 @@
 
 int	main(void)
 {
-	ft_printf("this is a %s", "string");
+	ft_putendl("My printf result :\n");
+	ft_printf("This is a string.");
 	ft_putchar('\n');
-	ft_printf("null %c and text", 0);
-	ft_putchar('\n');
-	ft_printf("%5%");
-	ft_putchar('\n');
+	ft_putendl("Real printf result :\n");
+	printf("This is a string.");
+
 	return (0);
 }

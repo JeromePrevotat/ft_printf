@@ -21,6 +21,7 @@
 # include "./libft.h"
 # include <stdarg.h>
 # include <wchar.h>
+# include <inttypes.h>
 
 typedef struct		s_flags
 {
@@ -45,6 +46,8 @@ typedef union		u_argv
 	int				i_arg;
 	long			l_arg;
 	long long		ll_arg;
+	intmax_t		imax_arg;
+	uintmax_t		uimax_arg;
 	char			c_arg;
 	char			*str_arg;
 	wchar_t			wchar_arg;
@@ -58,6 +61,7 @@ typedef struct		s_argument
 	int				type;
 	int				conv;
 	int				width;
+	int				precision;
 	char			*str_form;
 	char			*converted_form;
 	wchar_t			*wconverted_form;
@@ -66,7 +70,7 @@ typedef struct		s_argument
 
 enum
 {
-	T_SIZET, T_SHORT, T_INT, T_LONG, T_LLONG, T_CHAR, T_STR, T_WCHAR, T_WSTR, T_PTR
+	T_SIZET, T_SHORT, T_INT, T_LONG, T_LLONG, T_IMAX, T_UIMAX, T_CHAR, T_STR, T_WCHAR, T_WSTR, T_PTR
 };
 
 
@@ -122,6 +126,7 @@ int					apply_l(t_arg *arg);
 int					apply_ll(t_arg *arg);
 int					apply_h(t_arg *arg);
 int					apply_hh(t_arg *arg);
+wchar_t				*apply_width(t_arg *arg);
 
 //Apply_form_flags.c
 int					apply_alt_form(t_arg *arg);
@@ -136,6 +141,8 @@ int					short_conv(t_arg *arg, va_list ap);
 int					int_conv(t_arg *arg, va_list ap);
 int					long_conv(t_arg *arg, va_list ap);
 int					llong_conv(t_arg *arg, va_list ap);
+int					imax_conv(t_arg *arg, va_list ap);
+int					uimax_conv(t_arg *arg, va_list ap);
 int					ptr_conv(t_arg *arg, va_list ap);
 
 //Char_conv.c
@@ -151,6 +158,9 @@ char				*itoa_base_long(long n, int base);
 char				*itoa_base_unsigned_long(unsigned long n, int base);
 char				*itoa_base_llong(long long n, int base);
 char				*itoa_base_unsigned_llong(unsigned long long n, int base);
+char				*itoa_base_uimax(uintmax_t n, int base);
+char				*itoa_base_imax(intmax_t n, int base);
+char				*itoa_base_st(size_t n, int base);
 
 //Utils.c
 char				*str_memcat(char *mem1, const char *mem2, size_t size);
