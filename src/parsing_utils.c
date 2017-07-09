@@ -59,7 +59,9 @@ int		is_flag(t_arg *arg, size_t i)
 
 	flags_tab = init_flags_tab();
 	f = 0;
-	while (f < 9)
+	if (ft_isdigit(arg->str_form[i]) == 1)
+		return (set_width(arg, arg->str_form + i));
+	while (f < 10)
 	{
 		if (arg->str_form[i] == flags_tab[f])
 		{
@@ -72,22 +74,24 @@ int		is_flag(t_arg *arg, size_t i)
 			if (arg->str_form[i] == '-' || arg->str_form[i] == '0')
 			{
 				if (set_flag(arg, arg->str_form[i]) == FALSE)
-					return (FALSE);
+					return (ERROR);
 				return (get_width(arg->str_form + i, arg));
 			}
+			if (arg->str_form[i] == '.')
+				return (set_precision(arg, arg->str_form + i + 1));
 			else
 				return (set_flag(arg, arg->str_form[i]));
 		}
 		f++;
 	}
-	return (TRUE);
+	return (ERROR);
 }
 
 char	*init_flags_tab(void)
 {
 	char *flags_tab;
 
-	if (!(flags_tab = (char *)malloc(9 * sizeof(char))))
+	if (!(flags_tab = (char *)malloc(10 * sizeof(char))))
 		return (NULL);
 	flags_tab[0] = '#';
 	flags_tab[1] = '0';
@@ -98,6 +102,7 @@ char	*init_flags_tab(void)
 	flags_tab[6] = 'l';
 	flags_tab[7] = 'j';
 	flags_tab[8] = 'z';
+	flags_tab[9] = '.';
 	return (flags_tab);
 }
 

@@ -58,8 +58,10 @@ wchar_t	*wstr_memcat(wchar_t *mem1, const wchar_t *mem2, size_t size)
 
 size_t	ft_wstrlen(const wchar_t *str)
 {
-	int len;
+	int	len;
 
+	if (!str)
+		return (ERROR);
 	len = 0;
 	while (str[len] != '\0')
 		len++;

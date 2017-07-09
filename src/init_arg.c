@@ -55,6 +55,7 @@ int	fill_arg(t_arg *arg, va_list ap)
 	apply_size_flag(arg);
 	convert_argv(arg, ap);
 	apply_form_flag(arg);
+	apply_num_flags(arg);
 	return (1);
 }
 
@@ -71,6 +72,8 @@ void	init_flags_arg(t_arg *arg)
 	arg->flags.ll = FALSE;
 	arg->flags.j = FALSE;
 	arg->flags.z = FALSE;
+	arg->flags.precision = FALSE;
+	arg->flags.width = FALSE;
 }
 
 void	init_type_arg(t_arg *arg)

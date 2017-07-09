@@ -16,10 +16,10 @@
 int	main(void)
 {
 	ft_putendl("My printf result :\n");
-	ft_printf("This is a string.");
+	ft_printf("%5%");
 	ft_putchar('\n');
 	ft_putendl("Real printf result :\n");
-	printf("This is a string.");
+	printf("%5%");
 
 	return (0);
 }

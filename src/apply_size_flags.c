@@ -12,29 +12,6 @@
 
 #include "../inc/ft_printf.h"
 
-wchar_t	*apply_width(t_arg *arg)
-{
-	int		i;
-	int		real_width;
-	wchar_t	*tmp;
-
-	i = 0;
-	if (arg->wchar_form == FALSE)
-		arg->wconverted_form = str_to_wstr(arg->converted_form);
-	real_width = arg->width - ft_wstrlen(arg->wconverted_form);
-	if (!(tmp = (wchar_t *)malloc((arg->width + 1) * sizeof(wchar_t))))
-		return (NULL);
-	ft_memset(tmp, '\0', arg->width + 1);
-	while (i < real_width && real_width >= 0)
-	{
-		tmp[i] = ' ';
-		i++;
-	}
-	tmp[i] = '\0';
-	tmp = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form));
-	return (tmp);
-}
-
 int	apply_l(t_arg *arg)
 {
 	if (arg->type == T_CHAR || arg->type == T_WCHAR || arg->type == T_WSTR

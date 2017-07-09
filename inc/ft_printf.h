@@ -36,6 +36,8 @@ typedef struct		s_flags
 	int				ll;
 	int				j;
 	int				z;
+	int				precision;
+	int				width;
 }					t_flags;
 
 typedef union		u_argv
@@ -126,7 +128,6 @@ int					apply_l(t_arg *arg);
 int					apply_ll(t_arg *arg);
 int					apply_h(t_arg *arg);
 int					apply_hh(t_arg *arg);
-wchar_t				*apply_width(t_arg *arg);
 
 //Apply_form_flags.c
 int					apply_alt_form(t_arg *arg);
@@ -134,6 +135,13 @@ int					apply_zero(t_arg *arg);
 int					apply_minus(t_arg *arg);
 int					apply_plus(t_arg *arg);
 int					apply_space(t_arg *arg);
+
+//Num_flags.c
+int					set_precision(t_arg *arg, char *str_form);
+int					apply_precision(t_arg *arg);
+int					set_width(t_arg *arg, char *str_form);
+int					apply_width(t_arg *arg);
+int					apply_num_flags(t_arg *arg);
 
 //Nbr_conv.c
 int					st_conv(t_arg *arg, va_list ap);

@@ -17,6 +17,7 @@ SRCS += ./src/set_size_flags.c
 SRCS += ./src/apply_size_flags.c
 SRCS += ./src/set_form_flags.c
 SRCS += ./src/apply_form_flags.c
+SRCS += ./src/num_flags.c
 
 SRCS += ./src/nbr_conv.c
 SRCS += ./src/char_conv.c
@@ -46,7 +47,6 @@ $(NAME): $(OBJ) $(INC)
 	#$(CC) $(CFLAGS) $(LIB) $(SRCS) -o $@
 	ar -rc $(NAME) $(OBJ)
 	ranlib $(NAME)
-	$(MAKE) clean
 
 .PHONY: clean
 clean:

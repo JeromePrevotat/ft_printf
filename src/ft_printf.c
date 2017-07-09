@@ -44,9 +44,6 @@ int	parsing(const char *format, va_list ap)
 	i = 0;
 	wstr = NULL;
 	arg = NULL;
-	//if (!(f = (wchar_t *)malloc(ft_strlen(format) * sizeof(wchar_t))))
-		//return (NULL);
-	//ft_memset(f, '\0', ft_strlen(format));
 	f = str_to_wstr(format);
 	if (init_parsing_var(&wstr, &arg) == ERROR)
 		return (ERROR);
@@ -57,12 +54,13 @@ int	parsing(const char *format, va_list ap)
 		{
 			parse_format_arg(format + i + 1, arg, ap);
 			i = i + ft_strlen(arg->str_form);
-			arg->wconverted_form = apply_width(arg);
-			wstr = wstr_memcat(wstr, arg->wconverted_form, ft_wstrlen(arg->wconverted_form));
+			if (ft_wstrlen(arg->wconverted_form) == 0)
+				wstr = wstr_memcat(wstr, str_to_wstr(arg->converted_form), ft_strlen(arg->converted_form));
+			else
+				wstr = wstr_memcat(wstr, arg->wconverted_form, ft_wstrlen(arg->wconverted_form));
 		}
 		else
 			wstr = wstr_memcat(wstr, f + i, 1);
-//			wstr = wstr_memcat(wstr, str_to_wstr(&format[i]), 1);
 		i++;
 	}
 	ft_putwstr(wstr);
@@ -88,30 +86,11 @@ int		parse_format_arg(const char *format, t_arg *arg, va_list ap)
 int		parse_flags(t_arg *arg)
 {
 	size_t	i;
-	size_t	j;
-	char	*width;
-
-	i = 0;
-	j = 0;
-	//WIDTH
-	if (!(width = (char *)malloc(ft_strlen(arg->str_form) * sizeof(char))))
-		return (-1);
-	ft_memset(width, '\0', ft_strlen(arg->str_form));
-	while (i < ft_strlen(arg->str_form) && ft_isdigit(arg->str_form[i]) == 0)
-		i++;
-	while (i < ft_strlen(arg->str_form) && ft_isdigit(arg->str_form[i]))
-	{
-		width[j] = arg->str_form[i];
-		j++;
-		i++;
-	}
-	arg->width = ft_atoi(width);
-	//END WIDTH
 
 	i = 0;
 	while (i < ft_strlen(arg->str_form))
 	{
-		if (i < ft_strlen(arg->str_form) && is_flag(arg, i) == FALSE)
+		if (i < ft_strlen(arg->str_form) && is_flag(arg, i) == ERROR)
 			return (FALSE);
 		if (i < ft_strlen(arg->str_form) && is_flag(arg, i) > 0)
 			i = i + is_flag(arg, i);
