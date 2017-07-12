@@ -86,15 +86,16 @@ int		parse_format_arg(const char *format, t_arg *arg, va_list ap)
 int		parse_flags(t_arg *arg)
 {
 	size_t	i;
+	int		next_i;
 
 	i = 0;
 	while (i < ft_strlen(arg->str_form))
 	{
-		if (i < ft_strlen(arg->str_form) && is_flag(arg, i) == ERROR)
+		next_i = is_flag(arg, i);
+		if (i < ft_strlen(arg->str_form) && next_i > 0)
+			i = i + next_i;
+		else
 			return (FALSE);
-		if (i < ft_strlen(arg->str_form) && is_flag(arg, i) > 0)
-			i = i + is_flag(arg, i);
-		i++;
 	}
 	return (TRUE);
 }

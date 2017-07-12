@@ -59,7 +59,7 @@ int		is_flag(t_arg *arg, size_t i)
 
 	flags_tab = init_flags_tab();
 	f = 0;
-	if (ft_isdigit(arg->str_form[i]) == 1)
+	if (ft_isdigit(arg->str_form[i]) == 1 && arg->str_form[i] != '0')
 		return (set_width(arg, arg->str_form + i));
 	while (f < 10)
 	{

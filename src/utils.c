@@ -34,7 +34,7 @@ int		get_width(char *str, t_arg *arg)
 	char	*tmp;
 
 	j = 1;
-	while (j < ft_strlen(str) - 1 && ft_isdigit(str[j]))
+	while (j < ft_strlen(str) && ft_isdigit(str[j]))
 		j++;
 	if (!(tmp = (char *)malloc((j + 1) * sizeof(char))))
 		return (ERROR);

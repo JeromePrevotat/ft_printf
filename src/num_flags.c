@@ -53,6 +53,11 @@ int		apply_precision(t_arg *arg)
 	{
 		if (ft_wstrlen(arg->wconverted_form) == 0)
 			arg->wconverted_form = str_to_wstr(arg->converted_form);
+		if (ft_wstrlen(arg->wconverted_form) == 1 && arg->wconverted_form[0] == '0' && arg->precision == 0)
+		{
+			ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
+			return (1);
+		}
 		if (ft_wstrlen(arg->wconverted_form) < (size_t)arg->precision)
 		{
 			i = arg->precision - ft_wstrlen(arg->wconverted_form) - 1;
@@ -77,9 +82,9 @@ int		set_width(t_arg *arg, char *str_form)
 
 	i = 0;
 	if (arg->flags.width == TRUE)
-		return (FALSE);
+		return (ERROR);
 	if (!(width = (char *)malloc(ft_strlen(str_form) * sizeof(char))))
-		return (FALSE);
+		return (ERROR);
 	ft_memset(width, '\0', ft_strlen(str_form));
 	while (i < ft_strlen(str_form) && ft_isdigit(str_form[i]))
 	{
