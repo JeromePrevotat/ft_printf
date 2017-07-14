@@ -136,5 +136,7 @@ int		apply_num_flags(t_arg *arg)
 		apply_precision(arg);
 	if (arg->flags.width == TRUE)
 		apply_width(arg);
+	if (arg->flags.minus == TRUE)
+		apply_minus(arg);
 	return (1);
 }

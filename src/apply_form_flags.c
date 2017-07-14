@@ -64,21 +64,40 @@ int	apply_zero(t_arg *arg)
 int	apply_minus(t_arg *arg)
 {
 	char	*tmp;
+	wchar_t	*tmp2;
 	int		i;
 	int		real_width;
 
-	if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
-		return (ERROR);
-	ft_memset(tmp, '\0', (arg->width + 1));
-	i = 0;
-	real_width = arg->width - ft_strlen(arg->converted_form);
-	while (i < real_width && real_width >= 0)
+	if (arg->wconverted_form != NULL)
 	{
-		tmp[i] = ' ';
-		i++;
+		if (!(tmp2 = (wchar_t *)malloc((arg->width + 1) * sizeof(wchar_t))))
+			return (ERROR);
+		ft_memset(tmp2, '\0', (arg->width + 1));
+		i = 0;
+		real_width = arg->width - ft_wstrlen(arg->wconverted_form);
+		while (i < real_width && real_width >= 0)
+		{
+			tmp2[i] = ' ';
+			i++;
+		}
+		tmp2 = wstr_memcat(arg->wconverted_form, tmp2, ft_wstrlen(tmp2));
+		arg->wconverted_form = tmp2;
 	}
-	tmp = str_memcat(arg->converted_form, tmp, ft_strlen(tmp));
-	arg->converted_form = tmp;
+	else
+	{
+		if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
+			return (ERROR);
+		ft_memset(tmp, '\0', (arg->width + 1));
+		i = 0;
+		real_width = arg->width - ft_strlen(arg->converted_form);
+		while (i < real_width && real_width >= 0)
+		{
+			tmp[i] = ' ';
+			i++;
+		}
+		tmp = str_memcat(arg->converted_form, tmp, ft_strlen(tmp));
+		arg->converted_form = tmp;
+	}
 	return (TRUE);
 }
 
