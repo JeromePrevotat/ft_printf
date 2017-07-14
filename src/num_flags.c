@@ -46,7 +46,10 @@ int		apply_precision(t_arg *arg)
 	{
 		if (ft_wstrlen(arg->wconverted_form) == 0)
 			arg->wconverted_form = str_to_wstr(arg->converted_form);
-		ft_memset(arg->wconverted_form + arg->precision, '\0', ft_strlen(arg->converted_form) - arg->precision);
+		if (ft_wstrlen(arg->wconverted_form) < (size_t)arg->precision)
+			ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
+		else
+			ft_memset(arg->wconverted_form + arg->precision, '\0', ft_strlen(arg->converted_form) - arg->precision);
 	}
 	if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
 		|| arg->type == T_LONG || arg->type == T_LLONG)

@@ -16,10 +16,10 @@
 int	main(void)
 {
 	ft_putendl("My printf result :\n");
-	ft_printf("@moulitest: %#.x %#.0x", 0, 0);
+	ft_printf("@moulitest: %5.x %5.0x", 0, 0);
 	ft_putchar('\n');
 	ft_putendl("Real printf result :\n");
-	printf("@moulitest: %#.x %#.0x", 0, 0);
+	printf("@moulitest: %5.x %5.0x", 0, 0);
 
 	return (0);
 }

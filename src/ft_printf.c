@@ -89,6 +89,7 @@ int		parse_flags(t_arg *arg)
 	int		next_i;
 
 	i = 0;
+	next_i = 0;
 	while (i < ft_strlen(arg->str_form))
 	{
 		next_i = is_flag(arg, i);
