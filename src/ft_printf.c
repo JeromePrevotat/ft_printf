@@ -54,7 +54,7 @@ int	parsing(const char *format, va_list ap)
 		{
 			parse_format_arg(format + i + 1, arg, ap);
 			i = i + ft_strlen(arg->str_form);
-			if (ft_wstrlen(arg->wconverted_form) == 0)
+			if (arg->wconverted_form == NULL)
 				wstr = wstr_memcat(wstr, str_to_wstr(arg->converted_form), ft_strlen(arg->converted_form));
 			else
 				wstr = wstr_memcat(wstr, arg->wconverted_form, ft_wstrlen(arg->wconverted_form));

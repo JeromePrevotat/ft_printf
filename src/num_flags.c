@@ -44,7 +44,7 @@ int		apply_precision(t_arg *arg)
 	i = 0;
 	if (arg->type == T_STR)
 	{
-		if (ft_wstrlen(arg->wconverted_form) == 0)
+		if (arg->wconverted_form == NULL)
 			arg->wconverted_form = str_to_wstr(arg->converted_form);
 		if (ft_wstrlen(arg->wconverted_form) < (size_t)arg->precision)
 			ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
@@ -54,8 +54,13 @@ int		apply_precision(t_arg *arg)
 	if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
 		|| arg->type == T_LONG || arg->type == T_LLONG)
 	{
-		if (ft_wstrlen(arg->wconverted_form) == 0)
+		if (arg->wconverted_form == NULL)
 			arg->wconverted_form = str_to_wstr(arg->converted_form);
+		if (arg->precision == 0)
+		{
+			ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
+			return (1);
+		}
 		if (ft_wstrlen(arg->wconverted_form) == 1 && arg->wconverted_form[0] == '0' && arg->precision == 0)
 		{
 			ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
@@ -109,7 +114,7 @@ int		apply_width(t_arg *arg)
 	wchar_t	*tmp;
 
 	i = 0;
-	if (ft_wstrlen(arg->wconverted_form) == 0)
+	if (arg->wconverted_form == NULL)
 		arg->wconverted_form = str_to_wstr(arg->converted_form);
 	real_width = arg->width - ft_wstrlen(arg->wconverted_form);
 	if (!(tmp = (wchar_t *)malloc((arg->width + 1) * sizeof(wchar_t))))

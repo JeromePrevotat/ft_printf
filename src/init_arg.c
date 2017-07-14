@@ -27,17 +27,10 @@ int	init_arg(t_arg *arg)
 			return (ERROR);
 		ft_memset(arg->converted_form, '\0', 1);
 	}
-	if (arg->wconverted_form == NULL)
-	{
-		if (!(arg->wconverted_form = (wchar_t *)malloc(1 * sizeof(wchar_t))))
-			return (ERROR);
-		ft_memset(arg->wconverted_form, '\0', 1);
-	}
 	else
 	{
 		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
 		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
-		ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
 	}
 	ft_memset(&arg->argv, '\0', 1 * sizeof(t_argv));
 	return (TRUE);
