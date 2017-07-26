@@ -22,8 +22,6 @@ char	*str_memcat(char *mem1, const char *mem2, size_t size)
 	ft_memcpy(tmp, mem1, ft_strlen(mem1));
 	ft_memcpy(tmp + ft_strlen(mem1), mem2, size);
 	tmp[ft_strlen(mem1) + size] = '\0';
-	//if (mem1 != NULL)
-		//free(mem1);
 	return (tmp);
 }
 

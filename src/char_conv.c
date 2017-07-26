@@ -40,7 +40,7 @@ int		wchar_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.wchar_arg = va_arg(ap, wchar_t);
 	arg->wchar_form = 1;
-	arg->wconverted_form = wstr_memcat(arg->wconverted_form, &arg->argv.wchar_arg, 1);
+	arg->wconverted_form = wstr_memcat(arg->wconverted_form, &arg->argv.wchar_arg, 1, 1);
 	return (1);
 }
 
@@ -48,6 +48,6 @@ int		wstr_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.wstr_arg = va_arg(ap, wchar_t *);
 	arg->wchar_form = 1;
-	arg->wconverted_form = wstr_memcat(arg->wconverted_form, arg->argv.wstr_arg, ft_wstrlen(arg->argv.wstr_arg));
+	arg->wconverted_form = wstr_memcat(arg->wconverted_form, arg->argv.wstr_arg, ft_wstrlen(arg->argv.wstr_arg), 1);
 	return (1);
 }

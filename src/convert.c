@@ -91,8 +91,6 @@ int		apply_form_flag(t_arg *arg)
 		apply_alt_form(arg);
 	if (arg->flags.zero == TRUE)
 		apply_zero(arg);
-	//if (arg->flags.minus == TRUE)
-		//apply_minus(arg);
 	if (arg->flags.plus == TRUE)
 		apply_plus(arg);
 	if (arg->flags.space == TRUE)

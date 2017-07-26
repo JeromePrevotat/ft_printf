@@ -21,16 +21,6 @@ int	set_alt_form_flag(t_arg *arg)
 	return (TRUE);
 }
 
-int	set_zero_flag(t_arg *arg)
-{
-	if (arg->flags.zero == FALSE && arg->flags.zero != OVERRIDE)
-		arg->flags.zero = TRUE;
-	else
-		if (arg->flags.zero != OVERRIDE)
-			return (FALSE);
-	return (TRUE);
-}
-
 int	set_minus_flag(t_arg *arg)
 {
 	if (arg->flags.minus == FALSE)

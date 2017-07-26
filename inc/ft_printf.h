@@ -143,6 +143,11 @@ int					set_width(t_arg *arg, char *str_form);
 int					apply_width(t_arg *arg);
 int					apply_num_flags(t_arg *arg);
 
+//Zero_flag.c
+int					set_zero_flag(t_arg *arg);
+int					apply_zero(t_arg *arg);
+int					apply_zero_hex_altform(t_arg *arg);
+
 //Nbr_conv.c
 int					st_conv(t_arg *arg, va_list ap);
 int					short_conv(t_arg *arg, va_list ap);
@@ -177,10 +182,13 @@ int					argv_sign(t_arg *arg);
 
 //Wchar_functions.c
 wchar_t				*str_to_wstr(const char *str);
-wchar_t				*wstr_memcat(wchar_t *mem1, const wchar_t *mem2, size_t size);
+//wchar_t				*wstr_memcat(wchar_t *mem1, const wchar_t *mem2, size_t size);
 size_t				ft_wstrlen(const wchar_t *str);
 void				ft_putwchar(wchar_t c);
 void				ft_putwstr(wchar_t *wstr);
+wchar_t				*wstr_memcat(wchar_t *mem1, wchar_t *mem2, size_t size, int del);
+wchar_t				*wcat(wchar_t *mem1, wchar_t *mem2, size_t size);
+void				wfree(wchar_t *mem1, wchar_t *mem2, int del);
 
 
 #endif

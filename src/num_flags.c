@@ -77,7 +77,7 @@ int		apply_precision(t_arg *arg)
 				tmp[i] = L'0';
 				i--;
 			}
-			arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form));
+			arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 2);
 		}
 	}
 	return (1);
@@ -126,7 +126,7 @@ int		apply_width(t_arg *arg)
 		i++;
 	}
 	tmp[i] = '\0';
-	arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form));
+	arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 2);
 	return (1);
 }
 
