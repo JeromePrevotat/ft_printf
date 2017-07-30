@@ -21,20 +21,20 @@ int	apply_alt_form(t_arg *arg)
 	ft_memset(tmp, '\0', 1);
 	if (arg->conv == 16 && argv_sign(arg) != 0)
 	{
-		tmp = str_memcat(tmp, "0x", 2);
-		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		tmp = str_memcat(tmp, "0x", 2, 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
 		arg->converted_form = tmp;
 	}
 	if (arg->conv == 160 && argv_sign(arg) != 0)
 	{
-		tmp = str_memcat(tmp, "0X", 2);
-		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		tmp = str_memcat(tmp, "0X", 2, 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
 		arg->converted_form = tmp;
 	}
 	if (arg->conv == 8 || arg->conv == 80)
 	{
-		tmp = str_memcat(tmp, "0", 1);
-		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		tmp = str_memcat(tmp, "0", 1, 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
 		arg->converted_form = tmp;
 	}
 	return (TRUE);
@@ -59,6 +59,7 @@ int	apply_minus(t_arg *arg)
 			tmp2[i] = ' ';
 			i++;
 		}
+		tmp2[i] = '\0';
 		arg->wconverted_form = wstr_memcat(arg->wconverted_form, tmp2, ft_wstrlen(tmp2), 1);
 	}
 	else
@@ -73,7 +74,8 @@ int	apply_minus(t_arg *arg)
 			tmp[i] = ' ';
 			i++;
 		}
-		tmp = str_memcat(arg->converted_form, tmp, ft_strlen(tmp));
+		tmp[i] = '\0';
+		tmp = str_memcat(arg->converted_form, tmp, ft_strlen(tmp), 2);
 		arg->converted_form = tmp;
 	}
 	return (TRUE);
@@ -88,8 +90,8 @@ int	apply_plus(t_arg *arg)
 	ft_memset(tmp, '\0', 1);
 	if (arg->conv == -10 && argv_sign(arg) >= 0)
 	{
-		tmp = str_memcat(tmp, "+", 1);
-		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		tmp = str_memcat(tmp, "+", 1, 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
 		arg->converted_form = tmp;
 	}
 	return (TRUE);
@@ -104,8 +106,8 @@ int	apply_space(t_arg *arg)
 	ft_memset(tmp, '\0', 1);
 	if (arg->conv == -10 && argv_sign(arg) > 0)
 	{
-		tmp = str_memcat(tmp, " ", 1);
-		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+		tmp = str_memcat(tmp, " ", 1, 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
 		arg->converted_form = tmp;
 	}
 	return (TRUE);

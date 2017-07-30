@@ -47,8 +47,7 @@ int	fill_arg(t_arg *arg, va_list ap)
 	parse_flags(arg);
 	apply_size_flag(arg);
 	convert_argv(arg, ap);
-	apply_form_flag(arg);
-	apply_num_flags(arg);
+	apply_flags(arg);
 	return (1);
 }
 

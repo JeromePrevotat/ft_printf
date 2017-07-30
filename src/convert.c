@@ -28,6 +28,8 @@ int		convert_argv(t_arg *arg, va_list ap)
 		imax_conv(arg, ap);
 	if (arg->type == T_UIMAX)
 		uimax_conv(arg, ap);
+	if (arg->type == T_UCHAR)
+		uchar_conv(arg, ap);
 	if (arg->type == T_CHAR)
 		char_conv(arg, ap);
 	if (arg->type == T_STR)
@@ -54,7 +56,7 @@ char	*convert(t_arg *arg)
 	if (arg->conv < 0)
 	{
 		if (arg->type == T_SHORT)
-			return (itoa_base(arg->argv.sh_arg, base));
+			return (itoa_base_sh(arg->argv.sh_arg, base));
 		if (arg->type == T_INT)
 			return (itoa_base(arg->argv.i_arg, base));
 		if (arg->type == T_SIZET)
@@ -85,20 +87,25 @@ char	*convert(t_arg *arg)
 	return (NULL);
 }
 
-int		apply_form_flag(t_arg *arg)
+void	apply_flags(t_arg *arg)
 {
 	if (arg->flags.alt_form == TRUE)
 		apply_alt_form(arg);
 	if (arg->flags.zero == TRUE)
 		apply_zero(arg);
-	if (arg->flags.plus == TRUE)
-		apply_plus(arg);
 	if (arg->flags.space == TRUE)
 		apply_space(arg);
-	return (FALSE);
+	if (arg->flags.precision == TRUE)
+		apply_precision(arg);
+	if (arg->flags.plus == TRUE)
+		apply_plus(arg);
+	if (arg->flags.width == TRUE && arg->flags.minus == FALSE)
+		apply_width(arg);
+	if (arg->flags.minus == TRUE)
+		apply_minus(arg);
 }
 
-int		apply_size_flag(t_arg *arg)
+void	apply_size_flag(t_arg *arg)
 {
 	if (arg->flags.h == TRUE)
 		apply_h(arg);
@@ -112,5 +119,4 @@ int		apply_size_flag(t_arg *arg)
 		apply_j(arg);
 	if (arg->flags.z == TRUE)
 		apply_z(arg);
-	return (FALSE);
 }

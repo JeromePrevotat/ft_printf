@@ -129,14 +129,3 @@ int		apply_width(t_arg *arg)
 	arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 2);
 	return (1);
 }
-
-int		apply_num_flags(t_arg *arg)
-{
-	if (arg->flags.precision == TRUE)
-		apply_precision(arg);
-	if (arg->flags.width == TRUE)
-		apply_width(arg);
-	if (arg->flags.minus == TRUE)
-		apply_minus(arg);
-	return (1);
-}

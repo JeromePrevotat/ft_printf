@@ -23,6 +23,8 @@ SRCS += ./src/zero_flag.c
 SRCS += ./src/nbr_conv.c
 SRCS += ./src/char_conv.c
 
+SRCS += ./src/r_value.c
+
 SRCS += ./src/itoa_base.c
 SRCS += ./src/utils.c
 

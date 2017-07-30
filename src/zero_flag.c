@@ -34,7 +34,10 @@ int	apply_zero(t_arg *arg)
 	if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
 		return (ERROR);
 	ft_memset(tmp, '\0', (arg->width + 1));
-	real_width = arg->width - ft_strlen(arg->converted_form);
+	if (arg->flags.plus == TRUE && argv_sign(arg) >= 0)
+		real_width = arg->width - ft_strlen(arg->converted_form) - 1;
+	else
+		real_width = arg->width - ft_strlen(arg->converted_form);
 	if (arg->flags.alt_form == TRUE && (arg->conv == 16 || arg->conv == 160))
 		return (apply_zero_hex_altform(arg));
 	if (argv_sign(arg) == -1)

@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-char	*str_memcat(char *mem1, const char *mem2, size_t size)
+char	*str_memcat(char *mem1, char *mem2, size_t size, int del)
 {
 	char	*tmp;
 
@@ -22,7 +22,21 @@ char	*str_memcat(char *mem1, const char *mem2, size_t size)
 	ft_memcpy(tmp, mem1, ft_strlen(mem1));
 	ft_memcpy(tmp + ft_strlen(mem1), mem2, size);
 	tmp[ft_strlen(mem1) + size] = '\0';
+	sfree(mem1, mem2, del);
 	return (tmp);
+}
+
+void sfree(char *mem1, char *mem2, int del)
+{
+	if (del == 1 && mem1 != NULL)
+		free(mem1);
+	if (del == 2 && mem2 != NULL)
+		free(mem2);
+	if (del == 3 && mem1 != NULL && mem2 != NULL)
+	{
+		free(mem1);
+		free(mem2);
+	}
 }
 
 int		get_width(char *str, t_arg *arg)

@@ -50,6 +50,7 @@ typedef union		u_argv
 	long long		ll_arg;
 	intmax_t		imax_arg;
 	uintmax_t		uimax_arg;
+	unsigned char	uc_arg;
 	char			c_arg;
 	char			*str_arg;
 	wchar_t			wchar_arg;
@@ -72,7 +73,7 @@ typedef struct		s_argument
 
 enum
 {
-	T_SIZET, T_SHORT, T_INT, T_LONG, T_LLONG, T_IMAX, T_UIMAX, T_CHAR, T_STR, T_WCHAR, T_WSTR, T_PTR
+	T_SIZET, T_SHORT, T_INT, T_LONG, T_LLONG, T_IMAX, T_UIMAX, T_UCHAR, T_CHAR, T_STR, T_WCHAR, T_WSTR, T_PTR
 };
 
 
@@ -80,9 +81,10 @@ enum
 //Ft_printf.c
 int					ft_printf(const char *format, ...);
 int					parsing(const char *format, va_list ap);
-int					parse_format_arg(const char *format, t_arg *arg, va_list ap);
+void				parse_format_arg(char *format, t_arg *arg, va_list ap);
 int					parse_flags(t_arg *arg);
 int					init_parsing_var(wchar_t **wstr, t_arg **arg);
+void				cat_result(t_arg *arg, wchar_t **wstr);
 
 //Parsing_utils.c
 int					is_conversion(char c);
@@ -101,8 +103,8 @@ void				init_conv_arg(t_arg *arg);
 //Convert.c
 int					convert_argv(t_arg *arg, va_list ap);
 char				*convert(t_arg *arg);
-int					apply_form_flag(t_arg *arg);
-int					apply_size_flag(t_arg *arg);
+void				apply_size_flag(t_arg *arg);
+void				apply_flags(t_arg *arg);
 
 //Special_flags.c
 int					set_j_flag(t_arg *arg);
@@ -141,7 +143,6 @@ int					set_precision(t_arg *arg, char *str_form);
 int					apply_precision(t_arg *arg);
 int					set_width(t_arg *arg, char *str_form);
 int					apply_width(t_arg *arg);
-int					apply_num_flags(t_arg *arg);
 
 //Zero_flag.c
 int					set_zero_flag(t_arg *arg);
@@ -149,22 +150,27 @@ int					apply_zero(t_arg *arg);
 int					apply_zero_hex_altform(t_arg *arg);
 
 //Nbr_conv.c
-int					st_conv(t_arg *arg, va_list ap);
-int					short_conv(t_arg *arg, va_list ap);
-int					int_conv(t_arg *arg, va_list ap);
-int					long_conv(t_arg *arg, va_list ap);
-int					llong_conv(t_arg *arg, va_list ap);
-int					imax_conv(t_arg *arg, va_list ap);
-int					uimax_conv(t_arg *arg, va_list ap);
-int					ptr_conv(t_arg *arg, va_list ap);
+void				st_conv(t_arg *arg, va_list ap);
+void				short_conv(t_arg *arg, va_list ap);
+void				int_conv(t_arg *arg, va_list ap);
+void				long_conv(t_arg *arg, va_list ap);
+void				llong_conv(t_arg *arg, va_list ap);
+void				imax_conv(t_arg *arg, va_list ap);
+void				uimax_conv(t_arg *arg, va_list ap);
+void				ptr_conv(t_arg *arg, va_list ap);
 
 //Char_conv.c
+int					uchar_conv(t_arg *arg, va_list ap);
 int					char_conv(t_arg *arg, va_list ap);
-int					str_conv(t_arg *arg, va_list ap);
-int					wchar_conv(t_arg *arg, va_list ap);
-int					wstr_conv(t_arg *arg, va_list ap);
+void				str_conv(t_arg *arg, va_list ap);
+void				wchar_conv(t_arg *arg, va_list ap);
+void				wstr_conv(t_arg *arg, va_list ap);
+
+//R_value.c
+int					check_ret(t_arg *arg);
 
 //Itoa_base.c
+char				*itoa_base_sh(short n, int base);
 char				*itoa_base(int n, int base);
 char				*itoa_base_unsigned(unsigned int n, int base);
 char				*itoa_base_long(long n, int base);
@@ -176,13 +182,13 @@ char				*itoa_base_imax(intmax_t n, int base);
 char				*itoa_base_st(size_t n, int base);
 
 //Utils.c
-char				*str_memcat(char *mem1, const char *mem2, size_t size);
+char				*str_memcat(char *mem1, char *mem2, size_t size, int del);
+void				sfree(char *mem1, char *mem2, int del);
 int					get_width(char *str, t_arg *arg);
 int					argv_sign(t_arg *arg);
 
 //Wchar_functions.c
 wchar_t				*str_to_wstr(const char *str);
-//wchar_t				*wstr_memcat(wchar_t *mem1, const wchar_t *mem2, size_t size);
 size_t				ft_wstrlen(const wchar_t *str);
 void				ft_putwchar(wchar_t c);
 void				ft_putwstr(wchar_t *wstr);

@@ -40,8 +40,10 @@ int	parsing(const char *format, va_list ap)
 	t_arg	*arg;
 	size_t	i;
 	wchar_t	*f;
+	int		ret;
 
 	i = 0;
+	ret = 0;
 	wstr = NULL;
 	arg = NULL;
 	f = str_to_wstr(format);
@@ -52,35 +54,45 @@ int	parsing(const char *format, va_list ap)
 		init_arg(arg);
 		if (format[i] == '%')
 		{
-			parse_format_arg(format + i + 1, arg, ap);
+			parse_format_arg((char *)(format + i + 1), arg, ap);
 			i = i + ft_strlen(arg->str_form);
-			if (arg->wconverted_form == NULL)
-				wstr = wstr_memcat(wstr, str_to_wstr(arg->converted_form), ft_strlen(arg->converted_form), 1);
-			else
-				wstr = wstr_memcat(wstr, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 1);
+			cat_result(arg, &wstr);
+			ret = ret + check_ret(arg);
 		}
 		else
+		{
 			wstr = wstr_memcat(wstr, (&f[i]), 1, 1);
+			ret = ret + 1;
+		}
 		i++;
 	}
 	ft_putwstr(wstr);
-	return (ft_wstrlen(wstr));
+	return (ret);
 }
 
-int		parse_format_arg(const char *format, t_arg *arg, va_list ap)
+void	cat_result(t_arg *arg, wchar_t **wstr)
+{
+	if (arg->wconverted_form == NULL)
+		*wstr = wstr_memcat(*wstr, str_to_wstr(arg->converted_form), ft_strlen(arg->converted_form), 1);
+	else
+		*wstr = wstr_memcat(*wstr, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 1);
+}
+
+void	parse_format_arg(char *format, t_arg *arg, va_list ap)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < ft_strlen(format) && is_conversion(format[i]) == FALSE)
 	{
-		arg->str_form = str_memcat(arg->str_form, &format[i], 1);
+		arg->str_form = str_memcat(arg->str_form, &format[i], 1, 1);
 		i++;
 	}
-	arg->str_form = str_memcat(arg->str_form, &format[i], 1);
-	if (fill_arg(arg, ap) == FALSE)
+	arg->str_form = str_memcat(arg->str_form, &format[i], 1, 1);
+	fill_arg(arg, ap);
+	/*if (fill_arg(arg, ap) == FALSE)
 		return (ERROR);
-	return (TRUE);
+	return (TRUE);*/
 }
 
 int		parse_flags(t_arg *arg)
