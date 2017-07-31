@@ -21,6 +21,8 @@ int	init_arg(t_arg *arg)
 			return (ERROR);
 		ft_memset(arg->str_form, '\0', 1);
 	}
+	else
+		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
 	if (arg->converted_form == NULL)
 	{
 		if (!(arg->converted_form = (char *)malloc(1 * sizeof(char))))
@@ -28,10 +30,9 @@ int	init_arg(t_arg *arg)
 		ft_memset(arg->converted_form, '\0', 1);
 	}
 	else
-	{
-		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
 		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
-	}
+	if (arg->wconverted_form != NULL)
+		ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
 	ft_memset(&arg->argv, '\0', 1 * sizeof(t_argv));
 	return (TRUE);
 }

@@ -47,9 +47,11 @@ int		apply_precision(t_arg *arg)
 		if (arg->wconverted_form == NULL)
 			arg->wconverted_form = str_to_wstr(arg->converted_form);
 		if (ft_wstrlen(arg->wconverted_form) < (size_t)arg->precision)
-			ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
+			ft_memset(arg->wconverted_form, '\0',
+				ft_wstrlen(arg->wconverted_form));
 		else
-			ft_memset(arg->wconverted_form + arg->precision, '\0', ft_strlen(arg->converted_form) - arg->precision);
+			ft_memset(arg->wconverted_form + arg->precision, '\0',
+				ft_strlen(arg->converted_form) - arg->precision);
 	}
 	if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
 		|| arg->type == T_LONG || arg->type == T_LLONG)
@@ -58,26 +60,32 @@ int		apply_precision(t_arg *arg)
 			arg->wconverted_form = str_to_wstr(arg->converted_form);
 		if (arg->precision == 0)
 		{
-			ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
+			ft_memset(arg->wconverted_form, '\0',
+				ft_wstrlen(arg->wconverted_form));
 			return (1);
 		}
-		if (ft_wstrlen(arg->wconverted_form) == 1 && arg->wconverted_form[0] == '0' && arg->precision == 0)
+		else if (ft_wstrlen(arg->wconverted_form) == 1
+			&& arg->wconverted_form[0] == '0' && arg->precision == 0)
 		{
-			ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
+			ft_memset(arg->wconverted_form, '\0',
+				ft_wstrlen(arg->wconverted_form));
 			return (1);
 		}
-		if (ft_wstrlen(arg->wconverted_form) < (size_t)arg->precision)
+		else if (ft_wstrlen(arg->wconverted_form) < (size_t)arg->precision)
 		{
-			i = arg->precision - ft_wstrlen(arg->wconverted_form) - 1;
+			i = arg->precision - ft_wstrlen(arg->wconverted_form);
 			if (!(tmp = (wchar_t *)malloc(i * sizeof(wchar_t))))
 				return (ERROR);
-			ft_memset(tmp, L'\0', i);
+			ft_memset(tmp, '\0', i);
+			tmp[i] = L'\0';
+			i--;
 			while (i >= 0)
 			{
 				tmp[i] = L'0';
 				i--;
 			}
-			arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 2);
+			arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form,
+				ft_wstrlen(arg->wconverted_form), 2);
 		}
 	}
 	return (1);
