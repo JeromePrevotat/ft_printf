@@ -19,11 +19,11 @@ int	main(void)
 
 	ret = 0;
 	ft_putendl("My printf result :\n");
-	ret = ft_printf("@moulitest: %.10o", 42);
+	ret = ft_printf("%10.5d", 4242);
 	ft_putchar('\n');
 	printf("RET = %d\n", ret);
 	ft_putendl("Real printf result :\n");
-	printf("@moulitest: %.10o", 42);
+	printf("%10.5d", 4242);
 
 	return (0);
 }

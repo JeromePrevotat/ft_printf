@@ -12,6 +12,28 @@
 
 #include "../inc/ft_printf.h"
 
+/*int		get_width(char *str, t_arg *arg)
+{
+	size_t	j;
+	size_t	i;
+	char	*tmp;
+
+	j = 1;
+	while (j < ft_strlen(str) && ft_isdigit(str[j]))
+		j++;
+	if (!(tmp = (char *)malloc((j + 1) * sizeof(char))))
+		return (ERROR);
+	ft_memset(tmp, '\0', j + 1);
+	i = 0;
+	while (i < j)
+	{
+		tmp[i] = str[i + 1];
+		i++;
+	}
+	arg->width = ft_atoi(tmp);
+	return (j);
+}*/
+
 char	*str_memcat(char *mem1, char *mem2, size_t size, int del)
 {
 	char	*tmp;
@@ -39,14 +61,14 @@ void sfree(char *mem1, char *mem2, int del)
 	}
 }
 
-int		get_width(char *str, t_arg *arg)
+int		get_width(wchar_t *str, t_arg *arg)
 {
 	size_t	j;
 	size_t	i;
 	char	*tmp;
 
 	j = 1;
-	while (j < ft_strlen(str) && ft_isdigit(str[j]))
+	while (j < ft_wstrlen(str) && ft_isdigit(str[j]))
 		j++;
 	if (!(tmp = (char *)malloc((j + 1) * sizeof(char))))
 		return (ERROR);

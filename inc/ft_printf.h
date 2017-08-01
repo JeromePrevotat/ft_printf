@@ -57,7 +57,7 @@ typedef union		u_argv
 	wchar_t			*wstr_arg;
 }					t_argv;
 
-typedef struct		s_argument
+/*typedef struct		s_argument
 {
 	t_argv			argv;
 	t_flags			flags;
@@ -66,6 +66,20 @@ typedef struct		s_argument
 	int				width;
 	int				precision;
 	char			*str_form;
+	char			*converted_form;
+	wchar_t			*wconverted_form;
+	int				wchar_form;
+}					t_arg;*/
+
+typedef struct		s_argument
+{
+	t_argv			argv;
+	t_flags			flags;
+	int				type;
+	int				conv;
+	int				width;
+	int				precision;
+	wchar_t			*str_form;
 	char			*converted_form;
 	wchar_t			*wconverted_form;
 	int				wchar_form;
@@ -80,8 +94,16 @@ enum
 
 //Ft_printf.c
 int					ft_printf(const char *format, ...);
-int					parsing(const char *format, va_list ap);
-void				parse_format_arg(char *format, t_arg *arg, va_list ap);
+//int					parsing(const char *format, va_list ap);
+int					parsing(wchar_t *format, va_list ap);
+int					cat_arg(wchar_t *format, t_arg *arg, va_list ap);
+int					cat_char(wchar_t **wstr, wchar_t *c);
+int					print_result(wchar_t *wstr, int ret, t_arg **arg);
+
+
+//void				parse_format_arg(char *format, t_arg *arg, va_list ap);
+void				parse_format_arg(wchar_t *format, t_arg *arg, va_list ap);
+
 int					parse_flags(t_arg *arg);
 int					init_parsing_var(wchar_t **wstr, t_arg **arg);
 void				cat_result(t_arg *arg, wchar_t **wstr);
@@ -138,9 +160,11 @@ int					apply_plus(t_arg *arg);
 int					apply_space(t_arg *arg);
 
 //Num_flags.c
-int					set_precision(t_arg *arg, char *str_form);
+//int					set_precision(t_arg *arg, char *str_form);
+int					set_precision(t_arg *arg, wchar_t *str_form);
 int					apply_precision(t_arg *arg);
-int					set_width(t_arg *arg, char *str_form);
+//int					set_width(t_arg *arg, char *str_form);
+int					set_width(t_arg *arg, wchar_t *str_form);
 int					apply_width(t_arg *arg);
 
 //Zero_flag.c
@@ -183,7 +207,8 @@ char				*itoa_base_st(size_t n, int base);
 //Utils.c
 char				*str_memcat(char *mem1, char *mem2, size_t size, int del);
 void				sfree(char *mem1, char *mem2, int del);
-int					get_width(char *str, t_arg *arg);
+//int					get_width(char *str, t_arg *arg);
+int					get_width(wchar_t *str, t_arg *arg);
 int					argv_sign(t_arg *arg);
 
 //Wchar_functions.c

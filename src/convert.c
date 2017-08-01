@@ -93,10 +93,10 @@ void	apply_flags(t_arg *arg)
 		apply_alt_form(arg);
 	if (arg->flags.zero == TRUE)
 		apply_zero(arg);
-	if (arg->flags.space == TRUE)
-		apply_space(arg);
 	if (arg->flags.precision == TRUE)
 		apply_precision(arg);
+	if (arg->flags.space == TRUE)
+		apply_space(arg);
 	if (arg->flags.plus == TRUE)
 		apply_plus(arg);
 	if (arg->flags.width == TRUE && arg->flags.minus == FALSE)

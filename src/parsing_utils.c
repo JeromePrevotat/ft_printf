@@ -12,6 +12,41 @@
 
 #include "../inc/ft_printf.h"
 
+/*int		is_flag(t_arg *arg, size_t i)
+{
+	char	*flags_tab;
+	int		f;
+
+	flags_tab = "#0-+ hljz.\0";
+	f = 0;
+	while (flags_tab[f] != '\0')
+	{
+		if (arg->str_form[i] == flags_tab[f])
+		{
+			if (i + 1 < ft_strlen(arg->str_form)
+				&& arg->str_form[i] == 'h' && arg->str_form[i + 1] == 'h')
+				return (set_flag(arg, 'H'));
+			if (i + 1 < ft_strlen(arg->str_form)
+				&& arg->str_form[i] == 'l' && arg->str_form[i + 1] == 'l')
+				return (set_flag(arg, 'L'));
+			if (arg->str_form[i] == '-' || arg->str_form[i] == '0')
+			{
+				if (set_flag(arg, arg->str_form[i]) == FALSE)
+					return (ERROR);
+				return (get_width(arg->str_form + i, arg));
+			}
+			if (arg->str_form[i] == '.')
+				return (set_precision(arg, arg->str_form + i + 1) + 1);
+			else
+				return (set_flag(arg, arg->str_form[i]));
+		}
+		f++;
+	}
+	if (ft_isdigit(arg->str_form[i]) == 1 && arg->str_form[i] != '0')
+		return (set_width(arg, arg->str_form + i));
+	return (ERROR);
+}*/
+
 int		is_conversion(char c)
 {
 	char	*conv_tab;
@@ -69,10 +104,10 @@ int		is_flag(t_arg *arg, size_t i)
 	{
 		if (arg->str_form[i] == flags_tab[f])
 		{
-			if (i + 1 < ft_strlen(arg->str_form)
+			if (i + 1 < ft_wstrlen(arg->str_form)
 				&& arg->str_form[i] == 'h' && arg->str_form[i + 1] == 'h')
 				return (set_flag(arg, 'H'));
-			if (i + 1 < ft_strlen(arg->str_form)
+			if (i + 1 < ft_wstrlen(arg->str_form)
 				&& arg->str_form[i] == 'l' && arg->str_form[i + 1] == 'l')
 				return (set_flag(arg, 'L'));
 			if (arg->str_form[i] == '-' || arg->str_form[i] == '0')

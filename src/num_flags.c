@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-int		set_precision(t_arg *arg, char *str_form)
+/*int		set_precision(t_arg *arg, char *str_form)
 {
 	size_t	i;
 	char	*precision;
@@ -24,6 +24,54 @@ int		set_precision(t_arg *arg, char *str_form)
 		return (FALSE);
 	ft_memset(precision, '\0', ft_strlen(str_form) + 1);
 	while (i < ft_strlen(str_form) && ft_isdigit(str_form[i]) == TRUE)
+	{
+		precision[i] = str_form[i];
+		i++;
+	}
+	precision[i] = '\0';
+	arg->precision = ft_atoi(precision);
+	arg->flags.precision = TRUE;
+	if (ft_strlen(precision) == 0)
+		return (1);
+	return (ft_strlen(precision));
+}
+
+int		set_width(t_arg *arg, char *str_form)
+{
+	size_t	i;
+	char	*width;
+
+	i = 0;
+	if (arg->flags.width == TRUE)
+		return (ERROR);
+	if (!(width = (char *)malloc(ft_strlen(str_form) * sizeof(char))))
+		return (ERROR);
+	ft_memset(width, '\0', ft_strlen(str_form));
+	while (i < ft_strlen(str_form) && ft_isdigit(str_form[i]))
+	{
+		width[i] = str_form[i];
+		i++;
+	}
+	width[i] = '\0';
+	arg->width = ft_atoi(width);
+	arg->flags.width = TRUE;
+	if (ft_strlen(width) == 0)
+		return (1);
+	return (ft_strlen(width));
+}*/
+
+int		set_precision(t_arg *arg, wchar_t *str_form)
+{
+	size_t	i;
+	char	*precision;
+
+	i = 0;
+	if (arg->flags.precision == TRUE)
+		return (FALSE);
+	if (!(precision = (char *)malloc((ft_wstrlen(str_form) + 1) * sizeof(char))))
+		return (FALSE);
+	ft_memset(precision, '\0', ft_wstrlen(str_form) + 1);
+	while (i < ft_wstrlen(str_form) && ft_isdigit(str_form[i]) == TRUE)
 	{
 		precision[i] = str_form[i];
 		i++;
@@ -64,6 +112,7 @@ int		apply_precision(t_arg *arg)
 		{
 			ft_memset(arg->wconverted_form, '\0',
 				ft_wstrlen(arg->wconverted_form));
+			arg->wconverted_form[0] = '\0';
 			return (1);
 		}
 		else if (ft_wstrlen(arg->wconverted_form) == 1
@@ -71,14 +120,15 @@ int		apply_precision(t_arg *arg)
 		{
 			ft_memset(arg->wconverted_form, '\0',
 				ft_wstrlen(arg->wconverted_form));
+			arg->wconverted_form[0] = '\0';
 			return (1);
 		}
 		else if (ft_wstrlen(arg->wconverted_form) < (size_t)arg->precision)
 		{
 			pre = arg->precision - ft_wstrlen(arg->wconverted_form);
-			if (!(tmp = (wchar_t *)malloc(pre * sizeof(wchar_t))))
+			if (!(tmp = (wchar_t *)malloc(pre + 1 * sizeof(wchar_t))))
 				return (ERROR);
-			ft_memset(tmp, '\0', pre);
+			ft_memset(tmp, '\0', pre + 1);
 			tmp[pre] = '\0';
 			pre--;
 			while (pre >= 0)
@@ -93,7 +143,7 @@ int		apply_precision(t_arg *arg)
 	return (1);
 }
 
-int		set_width(t_arg *arg, char *str_form)
+int		set_width(t_arg *arg, wchar_t *str_form)
 {
 	size_t	i;
 	char	*width;
@@ -101,10 +151,10 @@ int		set_width(t_arg *arg, char *str_form)
 	i = 0;
 	if (arg->flags.width == TRUE)
 		return (ERROR);
-	if (!(width = (char *)malloc(ft_strlen(str_form) * sizeof(char))))
+	if (!(width = (char *)malloc(ft_wstrlen(str_form) * sizeof(char))))
 		return (ERROR);
-	ft_memset(width, '\0', ft_strlen(str_form));
-	while (i < ft_strlen(str_form) && ft_isdigit(str_form[i]))
+	ft_memset(width, '\0', ft_wstrlen(str_form));
+	while (i < ft_wstrlen(str_form) && ft_isdigit(str_form[i]))
 	{
 		width[i] = str_form[i];
 		i++;
