@@ -57,6 +57,8 @@ int	apply_zero(t_arg *arg)
 	}
 	tmp[i + j] = '\0';
 	//tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
+	if (arg->converted_form != NULL)
+		free(arg->converted_form);
 	arg->converted_form = tmp;
 	return (TRUE);
 }
@@ -87,6 +89,7 @@ int	apply_zero_hex_altform(t_arg *arg)
 		i++;
 		j++;
 	}
+	tmp[i] = '\0';
 	free(arg->converted_form);
 	arg->converted_form = tmp;
 	return (TRUE);

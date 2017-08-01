@@ -20,8 +20,12 @@ int		uchar_conv(t_arg *arg, va_list ap)
 	{
 		arg->argv.c_arg = (unsigned char)va_arg(ap, int);
 		if (arg->argv.c_arg == 0)
-			return (1);
-		arg->converted_form = str_memcat(arg->converted_form, &arg->argv.c_arg, 1, 1);
+		{
+			ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
+			arg->converted_form = "0\0";
+		}
+		else
+			arg->converted_form = str_memcat(arg->converted_form, &arg->argv.c_arg, 1, 1);
 	}
 	return (TRUE);
 }

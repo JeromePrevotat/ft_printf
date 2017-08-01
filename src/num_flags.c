@@ -39,9 +39,11 @@ int		set_precision(t_arg *arg, char *str_form)
 int		apply_precision(t_arg *arg)
 {
 	int		i;
+	int		pre;
 	wchar_t	*tmp;
 
 	i = 0;
+	pre = 0;
 	if (arg->type == T_STR)
 	{
 		if (arg->wconverted_form == NULL)
@@ -73,16 +75,16 @@ int		apply_precision(t_arg *arg)
 		}
 		else if (ft_wstrlen(arg->wconverted_form) < (size_t)arg->precision)
 		{
-			i = arg->precision - ft_wstrlen(arg->wconverted_form);
-			if (!(tmp = (wchar_t *)malloc(i * sizeof(wchar_t))))
+			pre = arg->precision - ft_wstrlen(arg->wconverted_form);
+			if (!(tmp = (wchar_t *)malloc(pre * sizeof(wchar_t))))
 				return (ERROR);
-			ft_memset(tmp, '\0', i);
-			tmp[i] = L'\0';
-			i--;
-			while (i >= 0)
+			ft_memset(tmp, '\0', pre);
+			tmp[pre] = '\0';
+			pre--;
+			while (pre >= 0)
 			{
-				tmp[i] = L'0';
-				i--;
+				tmp[pre] = '0';
+				pre--;
 			}
 			arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form,
 				ft_wstrlen(arg->wconverted_form), 2);
@@ -134,6 +136,7 @@ int		apply_width(t_arg *arg)
 		i++;
 	}
 	tmp[i] = '\0';
-	arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 2);
+	arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form,
+		ft_wstrlen(arg->wconverted_form), 2);
 	return (1);
 }

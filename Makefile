@@ -1,10 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-LIB = -L. -lft
-#NAME = print
-NAME = libftprintf.a
+NAME = print
+#NAME = libftprintf.a
 
-#SRCS += ./src/main.c
+SRCS += ./src/main.c
 
 SRCS += ./src/ft_printf.c
 SRCS += ./src/parsing_utils.c
@@ -47,9 +46,9 @@ OBJ = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
-	#$(CC) $(CFLAGS) $(LIB) $(SRCS) -o $@
-	ar -rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	$(CC) $(CFLAGS) $(SRCS) -o $@
+	#ar -rc $(NAME) $(OBJ)
+	#ranlib $(NAME)
 
 .PHONY: clean
 clean:

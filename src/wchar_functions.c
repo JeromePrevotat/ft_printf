@@ -57,11 +57,14 @@ wchar_t	*wcat(wchar_t *mem1, wchar_t *mem2, size_t size)
 	if (!(tmp = (wchar_t *)malloc((ft_wstrlen(mem1) + size + 1) * sizeof(wchar_t))))
 		return (NULL);
 	ft_memset(tmp, '\0', (ft_wstrlen(mem1) + size + 1));
+	printf("YOLO1\n");
+	//SEGFAULT HERE
 	while (mem1[i] != '\0')
 	{
 		tmp[i] = mem1[i];
 		i++;
 	}
+	printf("YOLO\n");
 	while (mem2[j] != '\0' && size != 0)
 	{
 		tmp[i] = mem2[j];
@@ -69,6 +72,7 @@ wchar_t	*wcat(wchar_t *mem1, wchar_t *mem2, size_t size)
 		j++;
 		size--;
 	}
+	printf("I : %zu\nTMP SIZE : %zu\n", i, (ft_wstrlen(mem1) + size + 1));
 	tmp[i] = '\0';
 	return (tmp);
 }

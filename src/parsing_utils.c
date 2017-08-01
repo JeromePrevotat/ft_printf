@@ -22,9 +22,15 @@ int		is_conversion(char c)
 	while (i < 15)
 	{
 		if (c == conv_tab[i])
+		{
+			if (conv_tab != NULL)
+				free(conv_tab);
 			return (TRUE);
+		}
 		i++;
 	}
+	if (conv_tab != NULL)
+		free(conv_tab);
 	return (FALSE);
 }
 
@@ -57,9 +63,9 @@ int		is_flag(t_arg *arg, size_t i)
 	char	*flags_tab;
 	int		f;
 
-	flags_tab = init_flags_tab();
+	flags_tab = "#0-+ hljz.\0";
 	f = 0;
-	while (f < 10)
+	while (flags_tab[f] != '\0')
 	{
 		if (arg->str_form[i] == flags_tab[f])
 		{
@@ -85,25 +91,6 @@ int		is_flag(t_arg *arg, size_t i)
 	if (ft_isdigit(arg->str_form[i]) == 1 && arg->str_form[i] != '0')
 		return (set_width(arg, arg->str_form + i));
 	return (ERROR);
-}
-
-char	*init_flags_tab(void)
-{
-	char *flags_tab;
-
-	if (!(flags_tab = (char *)malloc(10 * sizeof(char))))
-		return (NULL);
-	flags_tab[0] = '#';
-	flags_tab[1] = '0';
-	flags_tab[2] = '-';
-	flags_tab[3] = '+';
-	flags_tab[4] = ' ';
-	flags_tab[5] = 'h';
-	flags_tab[6] = 'l';
-	flags_tab[7] = 'j';
-	flags_tab[8] = 'z';
-	flags_tab[9] = '.';
-	return (flags_tab);
 }
 
 int		set_flag(t_arg *arg, char c)

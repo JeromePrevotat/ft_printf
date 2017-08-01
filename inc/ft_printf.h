@@ -90,7 +90,6 @@ void				cat_result(t_arg *arg, wchar_t **wstr);
 int					is_conversion(char c);
 char				*init_conv_tab(void);
 int					is_flag(t_arg *arg, size_t i);
-char				*init_flags_tab(void);
 int					set_flag(t_arg *arg, char c);
 
 //Init_arg.c
