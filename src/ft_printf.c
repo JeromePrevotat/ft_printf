@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	int		ret;
 	va_list	ap;
@@ -103,7 +103,7 @@ int		parse_flags(t_arg *arg)
 	return (TRUE);
 }*/
 
-int	parsing(wchar_t *format, va_list ap)
+int		parsing(wchar_t *format, va_list ap)
 {
 	wchar_t	*wstr;
 	t_arg	*arg;
@@ -148,12 +148,8 @@ int		cat_char(wchar_t **wstr, wchar_t *c)
 int		print_result(wchar_t *wstr, int ret, t_arg **arg)
 {
 	ft_putwstr(wstr);
-	if ((*arg)->str_form != NULL)
-		free((*arg)->str_form);
-	if ((*arg)->converted_form != NULL)
-		free((*arg)->converted_form);
-	if ((*arg)->wconverted_form != NULL)
-		free((*arg)->wconverted_form);
+	if (*arg != NULL)
+		free(*arg);
 	return (ret);
 }
 
@@ -164,8 +160,6 @@ void	cat_result(t_arg *arg, wchar_t **wstr)
 	else
 		*wstr = wstr_memcat(*wstr, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 1);
 }
-
-
 
 void	parse_format_arg(wchar_t *format, t_arg *arg, va_list ap)
 {

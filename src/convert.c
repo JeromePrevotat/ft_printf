@@ -87,6 +87,35 @@ char	*convert(t_arg *arg)
 	return (NULL);
 }
 
+/*char	*convert(t_arg *arg)
+{
+	int base;
+
+	printf("ENTERING CONVERT\n");
+	base = arg->conv;
+	if (base < 0)
+		base = -base;
+	if (base > 16 && base != 160)
+		base = base / 10;
+	//SIGNED CONV
+	if (arg->conv < 0)
+	{
+		if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
+			|| arg->type == T_LONG || arg->type == T_LLONG
+			|| arg->type == T_IMAX)
+			return (s_itoa_base(arg->argv.imax_arg, base));
+	}
+	//UNSIGNED CONV
+	else
+	{
+		if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
+			|| arg->type == T_LONG || arg->type == T_LLONG
+			|| arg->type == T_IMAX)
+			return (u_itoa_base(arg->argv.uimax_arg, base));
+	}
+	return (NULL);
+}*/
+
 void	apply_flags(t_arg *arg)
 {
 	if (arg->flags.alt_form == TRUE)

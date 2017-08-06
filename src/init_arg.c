@@ -112,7 +112,10 @@ int	init_arg(t_arg *arg)
 	else
 		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
 	if (arg->wconverted_form != NULL)
+	{
 		ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
+		arg->wconverted_form = NULL;
+	}
 	ft_memset(&arg->argv, '\0', 1 * sizeof(t_argv));
 	return (TRUE);
 }

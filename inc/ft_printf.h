@@ -160,12 +160,18 @@ int					apply_plus(t_arg *arg);
 int					apply_space(t_arg *arg);
 
 //Num_flags.c
-//int					set_precision(t_arg *arg, char *str_form);
-int					set_precision(t_arg *arg, wchar_t *str_form);
-int					apply_precision(t_arg *arg);
 //int					set_width(t_arg *arg, char *str_form);
 int					set_width(t_arg *arg, wchar_t *str_form);
 int					apply_width(t_arg *arg);
+
+//Precision.c
+int					set_precision(t_arg *arg, wchar_t *str_form);
+int					apply_precision(t_arg *arg);
+int					apply_str_pre(t_arg *arg);
+int					apply_nbr_pre(t_arg *arg);
+wchar_t				*apply_negative(t_arg *arg);
+wchar_t				*apply_positive(t_arg *arg);
+
 
 //Zero_flag.c
 int					set_zero_flag(t_arg *arg);
@@ -191,6 +197,10 @@ void				wstr_conv(t_arg *arg, va_list ap);
 
 //R_value.c
 int					check_ret(t_arg *arg);
+
+//Itoa.c
+char				*s_itoa_base(intmax_t n, int base);
+char				*u_itoa_base(uintmax_t n, int base);
 
 //Itoa_base.c
 char				*itoa_base_sh(short n, int base);

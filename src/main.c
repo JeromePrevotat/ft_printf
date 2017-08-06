@@ -16,14 +16,16 @@
 int	main(void)
 {
 	int ret;
+	int	real_ret;
 
+	real_ret = 0;
 	ret = 0;
 	ft_putendl("My printf result :\n");
-	ret = ft_printf("%10.5d", 4242);
+	ret = ft_printf("%03.2d", 0);
 	ft_putchar('\n');
 	printf("RET = %d\n", ret);
 	ft_putendl("Real printf result :\n");
-	printf("%10.5d", 4242);
-
+	real_ret = printf("%03.2d", 0);
+	printf("\nREAL_RET : %d\n", real_ret);
 	return (0);
 }

@@ -16,8 +16,10 @@ SRCS += ./src/set_size_flags.c
 SRCS += ./src/apply_size_flags.c
 SRCS += ./src/set_form_flags.c
 SRCS += ./src/apply_form_flags.c
-SRCS += ./src/num_flags.c
 SRCS += ./src/zero_flag.c
+
+SRCS += ./src/precision.c
+SRCS += ./src/width.c
 
 SRCS += ./src/nbr_conv.c
 SRCS += ./src/char_conv.c
@@ -25,6 +27,7 @@ SRCS += ./src/char_conv.c
 SRCS += ./src/r_value.c
 
 SRCS += ./src/itoa_base.c
+SRCS += ./src/itoa.c
 SRCS += ./src/utils.c
 
 SRCS += ./src/wchar_functions.c

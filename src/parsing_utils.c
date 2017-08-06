@@ -114,7 +114,9 @@ int		is_flag(t_arg *arg, size_t i)
 			{
 				if (set_flag(arg, arg->str_form[i]) == FALSE)
 					return (ERROR);
-				return (get_width(arg->str_form + i, arg));
+				get_width(arg->str_form + i, arg);
+				return (1);
+				//return (get_width(arg->str_form + i, arg));
 			}
 			if (arg->str_form[i] == '.')
 				return (set_precision(arg, arg->str_form + i + 1) + 1);
