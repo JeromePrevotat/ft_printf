@@ -91,7 +91,6 @@ char	*convert(t_arg *arg)
 {
 	int base;
 
-	printf("ENTERING CONVERT\n");
 	base = arg->conv;
 	if (base < 0)
 		base = -base;
@@ -110,7 +109,7 @@ char	*convert(t_arg *arg)
 	{
 		if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
 			|| arg->type == T_LONG || arg->type == T_LLONG
-			|| arg->type == T_IMAX)
+			|| arg->type == T_IMAX || arg->type == T_UIMAX)
 			return (u_itoa_base(arg->argv.uimax_arg, base));
 	}
 	return (NULL);
@@ -124,7 +123,7 @@ void	apply_flags(t_arg *arg)
 		apply_zero(arg);
 	if (arg->flags.precision == TRUE)
 		apply_precision(arg);
-	if (arg->flags.space == TRUE)
+	if (arg->flags.space == TRUE && arg->flags.plus != TRUE)
 		apply_space(arg);
 	if (arg->flags.plus == TRUE)
 		apply_plus(arg);

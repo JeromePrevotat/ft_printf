@@ -94,25 +94,27 @@ enum
 
 //Ft_printf.c
 int					ft_printf(const char *format, ...);
-//int					parsing(const char *format, va_list ap);
-int					parsing(wchar_t *format, va_list ap);
-int					cat_arg(wchar_t *format, t_arg *arg, va_list ap);
-int					cat_char(wchar_t **wstr, wchar_t *c);
+int					get_arg(wchar_t *format, t_arg *arg, va_list ap);
+void				get_arg_str_form(wchar_t *format, t_arg *arg, va_list ap);
 int					print_result(wchar_t *wstr, int ret, t_arg **arg);
 
+//Cat_functions.c
+int					cat_format(wchar_t *format, va_list ap);
+int					cat_char(wchar_t **wstr, wchar_t *c);
+void				cat_arg(t_arg *arg, wchar_t **wstr);
+int					init_cat_format_var(wchar_t **wstr, t_arg **arg);
 
-//void				parse_format_arg(char *format, t_arg *arg, va_list ap);
-void				parse_format_arg(wchar_t *format, t_arg *arg, va_list ap);
 
 int					parse_flags(t_arg *arg);
-int					init_parsing_var(wchar_t **wstr, t_arg **arg);
-void				cat_result(t_arg *arg, wchar_t **wstr);
 
 //Parsing_utils.c
 int					is_conversion(char c);
-char				*init_conv_tab(void);
 int					is_flag(t_arg *arg, size_t i);
-int					set_flag(t_arg *arg, char c);
+int					set_flag(t_arg *arg, wchar_t c);
+
+//Undefined_behaviour.c
+wchar_t				*get_undefined_behaviour(t_arg *arg);
+int					ub_is_flag(wchar_t c);
 
 //Init_arg.c
 int					init_arg(t_arg *arg);
@@ -144,7 +146,7 @@ int					set_alt_form_flag(t_arg *arg);
 int					set_zero_flag(t_arg *arg);
 int					set_minus_flag(t_arg *arg);
 int					set_plus_flag(t_arg *arg);
-int					set_space_flag(t_arg *arg);
+int					set_space_flag(t_arg *arg, int j);
 
 //Apply_size_flags.c
 int					apply_l(t_arg *arg);

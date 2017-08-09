@@ -6,7 +6,10 @@ NAME = libftprintf.a
 #SRCS += ./src/main.c
 
 SRCS += ./src/ft_printf.c
+SRCS += ./src/cat_functions.c
 SRCS += ./src/parsing_utils.c
+
+SRCS += ./src/undefined_behaviour.c
 
 SRCS += ./src/init_arg.c
 SRCS += ./src/convert.c

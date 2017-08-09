@@ -45,12 +45,16 @@ int	set_plus_flag(t_arg *arg)
 	return (TRUE);
 }
 
-int	set_space_flag(t_arg *arg)
+int	set_space_flag(t_arg *arg, int j)
 {
 	if (arg->flags.space == FALSE && arg->flags.space != OVERRIDE)
 		arg->flags.space = TRUE;
 	else
 		if (arg->flags.space != OVERRIDE)
 			return (FALSE);
-	return (TRUE);
+	while (arg->str_form[j] != '\0' && arg->str_form[j] == ' ')
+		j++;
+	if (j == 0)
+		j++;
+	return (j);
 }

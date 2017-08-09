@@ -144,10 +144,12 @@ int		apply_nbr_pre(t_arg *arg)
 	wchar_t	*tmp;
 
 	tmp = NULL;
-	//if (ft_wstrlen(arg->wconverted_form) == 1 && arg->precision == 0 && argv_sign(arg) == 0)
 	if (arg->precision == 0 && argv_sign(arg) == 0)
 	{
-		arg->wconverted_form[0] = '\0';
+		if (arg->flags.alt_form == TRUE && (arg->conv == 8 || arg->conv == 80))
+			arg->wconverted_form[1] = '\0';
+		else
+			arg->wconverted_form[0] = '\0';
 		return (1);
 	}
 	if (argv_sign(arg) < 0)

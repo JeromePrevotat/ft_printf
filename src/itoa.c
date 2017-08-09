@@ -19,6 +19,11 @@ static int	nb_len_imax(intmax_t n, int base)
 
 	nb = n;
 	nb_len = 0;
+	if (n < 0)
+	{
+		nb = -n;
+		nb_len++;
+	}
 	while (nb / base > 0)
 	{
 		nb_len++;
@@ -34,15 +39,16 @@ char		*s_itoa_base(intmax_t n, int base)
 	intmax_t			nb;
 	char 				hex;
 
-	printf("ENTERING ITOA\n");
 	hex = 'a';
+	nb = n;
 	if (base == 160)
 	{
 		base = 16;
 		hex = 'A';
 	}
 	nb_len = nb_len_imax(n, base);
-	nb = n;
+	if (n < 0)
+		nb = -n;
 	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
 		return (NULL);
 	ft_memset(str, '\0', nb_len + 1);
@@ -55,8 +61,8 @@ char		*s_itoa_base(intmax_t n, int base)
 		nb = nb / base;
 		nb_len--;
 	}
-	str[nb_len + 1] = '\0';
-	printf("STR : %s\nNB : %jd\n", str, n);
+	if (n < 0)
+		str[0] = '-';
 	return (str);
 }
 
@@ -82,15 +88,14 @@ char		*u_itoa_base(uintmax_t n, int base)
 	uintmax_t			nb;
 	char 				hex;
 
-	printf("ENTERING UITOA\n");
 	hex = 'a';
+	nb = n;
 	if (base == 160)
 	{
 		base = 16;
 		hex = 'A';
 	}
 	nb_len = nb_len_uimax(n, base);
-	nb = n;
 	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
 		return (NULL);
 	ft_memset(str, '\0', nb_len + 1);
