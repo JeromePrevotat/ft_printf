@@ -65,21 +65,3 @@ void	get_arg_str_form(wchar_t *format, t_arg *arg, va_list ap)
 	else
 		fill_arg(arg, ap);
 }
-
-int		parse_flags(t_arg *arg)
-{
-	size_t	i;
-	int		next_i;
-
-	i = 0;
-	next_i = 0;
-	while (i < ft_wstrlen(arg->str_form))
-	{
-		next_i = is_flag(arg, i);
-		if (i < ft_wstrlen(arg->str_form) && next_i > 0)
-			i = i + next_i;
-		else
-			return (FALSE);
-	}
-	return (TRUE);
-}

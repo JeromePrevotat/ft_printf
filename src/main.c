@@ -21,7 +21,7 @@ int	main(void)
 	real_ret = 0;
 	ret = 0;
 	ft_putendl("My printf result :\n");
-	ret = ft_printf("% Z ", "test");
+	ret = ft_printf("%5%");
 	ft_putchar('\n');
 	printf("RET = %d\n", ret);
 	//ft_putendl("Real printf result :\n");

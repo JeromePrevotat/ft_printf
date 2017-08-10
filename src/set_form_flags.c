@@ -14,10 +14,12 @@
 
 int	set_alt_form_flag(t_arg *arg)
 {
-	if (arg->flags.alt_form == FALSE)
+	/*if (arg->flags.alt_form == FALSE)
 		arg->flags.alt_form = TRUE;
 	else
 		return (FALSE);
+	return (TRUE);*/
+	arg->flags.alt_form = TRUE;
 	return (TRUE);
 }
 
@@ -47,11 +49,14 @@ int	set_plus_flag(t_arg *arg)
 
 int	set_space_flag(t_arg *arg, int j)
 {
-	if (arg->flags.space == FALSE && arg->flags.space != OVERRIDE)
+	/*if (arg->flags.space == FALSE && arg->flags.space != OVERRIDE)
 		arg->flags.space = TRUE;
 	else
 		if (arg->flags.space != OVERRIDE)
-			return (FALSE);
+			return (FALSE);*/
+	if (arg->flags.space == OVERRIDE)
+		return (FALSE);
+	arg->flags.space = TRUE;
 	while (arg->str_form[j] != '\0' && arg->str_form[j] == ' ')
 		j++;
 	if (j == 0)

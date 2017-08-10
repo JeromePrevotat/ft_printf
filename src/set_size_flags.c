@@ -14,11 +14,17 @@
 
 int	set_l_flag(t_arg *arg)
 {
-	if (arg->flags.l == FALSE && arg->flags.ll == FALSE)
+	/*if (arg->flags.l == FALSE && arg->flags.ll == FALSE)
 		arg->flags.l = TRUE;
 	else
 		return (FALSE);
-	return (TRUE);
+	return (TRUE);*/
+	if (arg->flags.ll == FALSE)
+	{
+		arg->flags.l = TRUE;
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 int	set_ll_flag(t_arg *arg)
@@ -32,11 +38,17 @@ int	set_ll_flag(t_arg *arg)
 
 int	set_h_flag(t_arg *arg)
 {
-	if (arg->flags.h == FALSE && arg->flags.hh == FALSE)
+	/*if (arg->flags.h == FALSE && arg->flags.hh == FALSE)
 		arg->flags.h = TRUE;
 	else
 		return (FALSE);
-	return (TRUE);
+	return (TRUE);*/
+	if (arg->flags.hh == FALSE)
+	{
+		arg->flags.h = TRUE;
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 int	set_hh_flag(t_arg *arg)

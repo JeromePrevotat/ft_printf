@@ -104,12 +104,14 @@ int					cat_char(wchar_t **wstr, wchar_t *c);
 void				cat_arg(t_arg *arg, wchar_t **wstr);
 int					init_cat_format_var(wchar_t **wstr, t_arg **arg);
 
-
+//Flags_parsing.c
 int					parse_flags(t_arg *arg);
+int					is_flag(t_arg *arg, size_t i);
+int					check_flags_a(t_arg *arg, size_t i);
+int					check_flags_b(t_arg *arg, size_t i);
 
 //Parsing_utils.c
 int					is_conversion(char c);
-int					is_flag(t_arg *arg, size_t i);
 int					set_flag(t_arg *arg, wchar_t c);
 
 //Undefined_behaviour.c

@@ -14,7 +14,7 @@
 
 wchar_t	*get_undefined_behaviour(t_arg *arg)
 {
-	size_t	i;
+	int	i;
 
 	//printf("ENTERING GUB\n");
 	i = 0;
@@ -23,18 +23,25 @@ wchar_t	*get_undefined_behaviour(t_arg *arg)
 	//if (is_flag(arg, 2))
 		//printf("TESTED CHAR : %C\n", arg->str_form[2]);
 	//END TEST
-	//printf("TESTED CHAR ; %C\n", arg->str_form[i]);
-	while (is_flag(arg, i) && i < ft_wstrlen(arg->str_form))
+	//printf("STR FORM : %S\n", arg->str_form);
+	//if (arg->flags.space == TRUE || arg->flags.space == OVERRIDE)
+		//printf("YOLO FUCK !\n");
+	//printf("IS FLAG : %d\n", is_flag(arg, i));
+	while (is_flag(arg, i) > 0 && i < (int)ft_wstrlen(arg->str_form))
+	{
+		//printf("TESTED CHAR : >%C<\nI : %d\n", arg->str_form[i], i);
+		//printf("ENTERING WHILE\n");
 		i++;
-	//printf("STR FORM : %S\nI : %zu\n", arg->str_form, i);
-	//printf("TESTED CHAR : %C\n", arg->str_form[i - 1]);
-	if (i - 1 > 0 && (ub_is_flag(arg->str_form[i - 1]) || arg->str_form[i - 1] == 'h' || arg->str_form[i - 1] == 'l'))
+	}
+	//printf("WHILE ENDED WITH I : %d\n", i);
+	//printf("TESTED CHAR : >%C<\n", arg->str_form[i - 1]);
+	if (i - 1 >= 0 && (ub_is_flag(arg->str_form[i - 1]) || arg->str_form[i - 1] == 'h' || arg->str_form[i - 1] == 'l'))
 	{
 		//printf("ENTERING IF\n");
 		//printf("GUB IF RETURN : %S\n", arg->str_form + i);
 		return (arg->str_form + i);
 	}
-	if (i - 1 > 0)
+	if (i - 1 >= 0)
 	//printf("GUB RETURN : %S\n", arg->str_form + i - 1);
 		return (arg->str_form + i - 1);
 	return (arg->str_form + i);

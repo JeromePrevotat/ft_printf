@@ -47,6 +47,11 @@ int	fill_arg(t_arg *arg, va_list ap)
 	init_flags_arg(arg);
 	init_type_arg(arg);
 	init_conv_arg(arg);
+	/*if (parse_flags(arg) == FALSE)
+	{
+		arg->wconverted_form = get_undefined_behaviour(arg);
+		return (1);
+	}*/
 	parse_flags(arg);
 	apply_size_flag(arg);
 	convert_argv(arg, ap);
