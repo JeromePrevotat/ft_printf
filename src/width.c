@@ -18,8 +18,8 @@ int		set_width(t_arg *arg, wchar_t *str_form)
 	char	*width;
 
 	i = 0;
-	if (arg->flags.width == TRUE)
-		return (ERROR);
+	//if (arg->flags.width == TRUE)
+		//return (ERROR);
 	if (!(width = (char *)malloc(ft_wstrlen(str_form) * sizeof(char))))
 		return (ERROR);
 	ft_memset(width, '\0', ft_wstrlen(str_form));

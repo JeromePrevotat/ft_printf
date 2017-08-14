@@ -141,7 +141,7 @@ void	apply_flags(t_arg *arg)
 		apply_space(arg);
 	if (arg->flags.plus == TRUE)
 		apply_plus(arg);
-	if (arg->flags.width == TRUE && arg->flags.minus == FALSE)
+	if (arg->flags.width == TRUE && arg->flags.minus == FALSE && arg->flags.zero != TRUE)
 		apply_width(arg);
 	if (arg->flags.minus == TRUE)
 		apply_minus(arg);

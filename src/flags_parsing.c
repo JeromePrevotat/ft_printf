@@ -142,8 +142,8 @@ int		new_check_flags_a(t_arg *arg, wchar_t *format, size_t i)
 	else if (format[i] == '-' || format[i] == '0')
 	{
 		if (set_flag(arg, format[i]) != FALSE)
-			get_width(format + i, arg);
-		next_i = 1;
+			next_i = get_width(format + i, arg);
+		//next_i = 1;
 	}
 	return (next_i);
 }

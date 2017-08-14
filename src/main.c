@@ -21,7 +21,7 @@ int	main(void)
 	real_ret = 0;
 	ret = 0;
 	ft_putendl("My printf result :\n");
-	ret = ft_printf("@moulitest: %#.x %#.0x", 0, 0);
+	ret = ft_printf("%05%");
 	//ret = ft_printf("%d", 2147483648);
 	//ret = ft_printf("%015u", "4294967295");
 	//ret = ft_printf("%hU", "4294967296");
@@ -30,7 +30,7 @@ int	main(void)
 	ft_putchar('\n');
 	printf("RET = %d\n", ret);
 	ft_putendl("Real printf result :\n");
-	real_ret = printf("@moulitest: %#.x %#.0x", 0, 0);
+	//real_ret = printf("%03.2d", 0);
 	printf("\nREAL_RET : %d\n", real_ret);
 	return (0);
 }

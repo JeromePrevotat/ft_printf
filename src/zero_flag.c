@@ -24,6 +24,7 @@ int	set_zero_flag(t_arg *arg)
 		return (FALSE);
 	else
 		arg->flags.zero = TRUE;
+	arg->flags.width = TRUE;
 	return (TRUE);
 }
 

@@ -16,7 +16,6 @@ wchar_t	*get_undefined_behaviour(t_arg *arg)
 {
 	int	i;
 
-	//printf("ENTERING GUB\n");
 	i = 0;
 	while (is_flag(arg, i) > 0 && i < (int)ft_wstrlen(arg->str_form))
 		i++;
@@ -25,6 +24,7 @@ wchar_t	*get_undefined_behaviour(t_arg *arg)
 	if (i - 1 >= 0)
 		return (arg->str_form + i - 1);
 	return (arg->str_form + i);
+	return (NULL);
 }
 
 int		ub_is_flag(wchar_t c)
