@@ -17,6 +17,7 @@ int		set_width(t_arg *arg, wchar_t *str_form)
 	size_t	i;
 	char	*width;
 
+	//printf("ENTERING SET WIDTH\n");
 	i = 0;
 	//if (arg->flags.width == TRUE)
 		//return (ERROR);
@@ -30,6 +31,7 @@ int		set_width(t_arg *arg, wchar_t *str_form)
 	}
 	width[i] = '\0';
 	arg->width = ft_atoi(width);
+	//printf("SET WIDTH : %d\n", arg->width);
 	arg->flags.width = TRUE;
 	if (ft_strlen(width) == 0)
 		return (1);

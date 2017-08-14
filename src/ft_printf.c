@@ -62,9 +62,12 @@ void	get_arg_str_form(wchar_t *format, t_arg *arg, va_list ap)
 	//NEW FUNCTION
 	while (i < ft_wstrlen(format) - 1 && next_i > 0)
 	{
+		//printf("I : %zu // TESTED CHAR : %C\n", i , format[i]);
 		next_i = new_flag_parsing(arg, format, i);
 		if (next_i > 0)
 			i = i + next_i;
+		//printf("NEXT I : %d\n", next_i);
+		//printf("ARG FLAG WIDTH : %d // WIDTH : %d\n", arg->flags.width, arg->width);
 	}
 	if (i < ft_wstrlen(format) && new_is_conversion(format[i]) == TRUE)
 	{

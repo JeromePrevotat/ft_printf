@@ -18,9 +18,10 @@ int		set_precision(t_arg *arg, wchar_t *str_form)
 	char	*precision;
 
 	i = 0;
-	if (arg->flags.precision == TRUE)
-		return (FALSE);
-	else if (arg->flags.zero == TRUE)
+	//if (arg->flags.precision == TRUE)
+		//return (FALSE);
+	//else
+	if (arg->flags.zero == TRUE)
 		arg->flags.zero = OVERRIDE;
 	if (!(precision = (char *)malloc((ft_wstrlen(str_form) + 1) * sizeof(char))))
 		return (FALSE);

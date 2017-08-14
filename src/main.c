@@ -21,7 +21,7 @@ int	main(void)
 	real_ret = 0;
 	ret = 0;
 	ft_putendl("My printf result :\n");
-	ret = ft_printf("%05%");
+	ret = ft_printf("@main_ftprintf: %####0000 33..1..#00d\\n", 256);
 	//ret = ft_printf("%d", 2147483648);
 	//ret = ft_printf("%015u", "4294967295");
 	//ret = ft_printf("%hU", "4294967296");

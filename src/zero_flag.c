@@ -21,7 +21,8 @@ int	set_zero_flag(t_arg *arg)
 			return (FALSE);
 	return (TRUE);*/
 	if (arg->flags.zero == OVERRIDE || arg->flags.precision == TRUE)
-		return (FALSE);
+		//return (FALSE);
+		return (TRUE);
 	else
 		arg->flags.zero = TRUE;
 	arg->flags.width = TRUE;

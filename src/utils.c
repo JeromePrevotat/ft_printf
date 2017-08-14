@@ -57,7 +57,9 @@ int		get_width(wchar_t *str, t_arg *arg)
 		tmp[i] = str[i + 1];
 		i++;
 	}
-	arg->width = ft_atoi(tmp);
+	tmp[i] = '\0';
+	if (ft_atoi(tmp) > arg->width)
+		arg->width = ft_atoi(tmp);
 	return (j);
 }
 

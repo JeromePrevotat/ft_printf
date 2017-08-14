@@ -14,25 +14,12 @@
 
 int	set_alt_form_flag(t_arg *arg)
 {
-	/*if (arg->flags.alt_form == FALSE)
-		arg->flags.alt_form = TRUE;
-	else
-		return (FALSE);
-	return (TRUE);*/
 	arg->flags.alt_form = TRUE;
 	return (TRUE);
 }
 
 int	set_minus_flag(t_arg *arg)
 {
-	/*if (arg->flags.minus == FALSE)
-	{
-		arg->flags.zero = OVERRIDE;
-		arg->flags.minus = TRUE;
-	}
-	else
-		return (FALSE);
-	return (TRUE);*/
 	//Minus overrides zero
 	arg->flags.zero = OVERRIDE;
 	arg->flags.minus = TRUE;
@@ -41,14 +28,6 @@ int	set_minus_flag(t_arg *arg)
 
 int	set_plus_flag(t_arg *arg)
 {
-	/*if (arg->flags.plus == FALSE)
-	{
-		arg->flags.space = OVERRIDE;
-		arg->flags.plus = TRUE;
-	}
-	else
-		return (FALSE);
-	return (TRUE);*/
 	//Plus overrides space
 	arg->flags.space = OVERRIDE;
 	arg->flags.plus = TRUE;
@@ -57,17 +36,15 @@ int	set_plus_flag(t_arg *arg)
 
 int	set_space_flag(t_arg *arg, int j)
 {
-	/*if (arg->flags.space == FALSE && arg->flags.space != OVERRIDE)
-		arg->flags.space = TRUE;
-	else
-		if (arg->flags.space != OVERRIDE)
-			return (FALSE);*/
+	int	i;
+
+	i = 0;
 	if (arg->flags.space == OVERRIDE)
 		return (TRUE);
 	arg->flags.space = TRUE;
-	while (arg->str_form[j] != '\0' && arg->str_form[j] == ' ')
-		j++;
-	if (j == 0)
-		j++;
-	return (j);
+	while (arg->str_form[j + i] != '\0' && arg->str_form[j + i] == ' ')
+		i++;
+	if (i == 0)
+		i++;
+	return (i);
 }
