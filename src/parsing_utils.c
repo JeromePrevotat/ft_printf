@@ -28,6 +28,22 @@ int		is_conversion(char c)
 	return (FALSE);
 }
 
+int		new_is_conversion(wchar_t c)
+{
+	wchar_t	*conv_tab;
+	int		i;
+
+	conv_tab = L"sSpdDioOuUxXcC%\0";
+	i = 0;
+	while (conv_tab[i] != '\0')
+	{
+		if (c == conv_tab[i])
+			return (TRUE);
+		i++;
+	}
+	return (FALSE);
+}
+
 int		set_flag(t_arg *arg, wchar_t c)
 {
 	if (c == '#')

@@ -243,11 +243,13 @@ char		*itoa_base_unsigned_long(unsigned long n, int base)
 
 static int	ft_nb_len_llong(long long n, int base)
 {
-	long long	nb;
-	int			nb_len;
+	unsigned long long	nb;
+	int					nb_len;
 
-	nb = n;
 	nb_len = 0;
+	nb = n;
+	if (n < 0)
+		nb_len++;
 	while (nb / base > 0)
 	{
 		nb_len++;
@@ -283,6 +285,8 @@ char		*itoa_base_llong(long long n, int base)
 		nb = nb / base;
 		nb_len--;
 	}
+	if (n < 0)
+		str[0] = '-';
 	return (str);
 }
 

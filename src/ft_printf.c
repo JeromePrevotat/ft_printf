@@ -41,20 +41,14 @@ int		get_arg(wchar_t *format, t_arg *arg, va_list ap)
 	return (check_ret(arg));
 }
 
-int		print_result(wchar_t *wstr, int ret, t_arg **arg)
-{
-	ft_putwstr(wstr);
-	if (*arg != NULL)
-		free(*arg);
-	return (ret);
-}
-
 void	get_arg_str_form(wchar_t *format, t_arg *arg, va_list ap)
 {
 	size_t	i;
+	int		next_i;
 
+	next_i = 1;
 	i = 0;
-	while (i < ft_wstrlen(format) && is_conversion(format[i]) == FALSE)
+	/*while (i < ft_wstrlen(format) && is_conversion(format[i]) == FALSE)
 	{
 		arg->str_form = wstr_memcat(arg->str_form, &format[i], 1, 1);
 		i++;
@@ -63,5 +57,38 @@ void	get_arg_str_form(wchar_t *format, t_arg *arg, va_list ap)
 	if (is_conversion(arg->str_form[ft_wstrlen(arg->str_form) - 1]) == FALSE)
 		arg->wconverted_form = get_undefined_behaviour(arg);
 	else
+		fill_arg(arg, ap);*/
+
+	//NEW FUNCTION
+	//printf("ENTERING GET ARG FORMAT : >%S<\n", format);
+	while (i < ft_wstrlen(format) - 1 && next_i > 0)
+	{
+		next_i = new_flag_parsing(arg, format, i);
+		//printf("NEXT I : %d // TESTED CHAR : %C\n", next_i, format[i]);
+		if (next_i > 0)
+			i = i + next_i;
+	}
+	//printf("TESTED CHAR : %C\n", format[i]);
+	if (i < ft_wstrlen(format) && new_is_conversion(format[i]) == TRUE)
+	{
+		//printf("ENTERING IF\n");
+		//printf("ARG WIDTH : %d\n", arg->width);
+		arg->str_form = wstr_memcat(arg->str_form, format, i + 1, 1);
 		fill_arg(arg, ap);
+		//printf("STR FORM : %S // WIDTH : %d\n", arg->str_form, arg->width);
+		return ;
+	}
+	else if (i < ft_wstrlen(format) && is_conversion(format[i]) == FALSE)
+		arg->str_form = wstr_memcat(arg->str_form, format, i - 1, 1);
+	else
+		arg->str_form = wstr_memcat(arg->str_form, format, ft_wstrlen(format), 1);
+	arg->wconverted_form = get_undefined_behaviour(arg);
+}
+
+int		print_result(wchar_t *wstr, int ret, t_arg **arg)
+{
+	ft_putwstr(wstr);
+	if (*arg != NULL)
+	free(*arg);
+	return (ret);
 }

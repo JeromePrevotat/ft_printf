@@ -14,19 +14,23 @@
 
 int	set_j_flag(t_arg *arg)
 {
-	if (arg->flags.j == FALSE)
+	/*if (arg->flags.j == FALSE)
 		arg->flags.j = TRUE;
 	else
 		return (FALSE);
+	return (TRUE);*/
+	arg->flags.j = TRUE;
 	return (TRUE);
 }
 
 int	set_z_flag(t_arg *arg)
 {
-	if (arg->flags.z == FALSE)
+	/*if (arg->flags.z == FALSE)
 		arg->flags.z = TRUE;
 	else
 		return (FALSE);
+	return (TRUE);*/
+	arg->flags.z = TRUE;
 	return (TRUE);
 }
 
@@ -36,12 +40,12 @@ int	apply_j(t_arg *arg)
 		arg->type = T_IMAX;
 	if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
 		arg->type = T_UIMAX;
-	return (1);
+	return (TRUE);
 }
 
 int	apply_z(t_arg *arg)
 {
 	if (arg->conv == -10 || arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
 		arg->type = T_SIZET;
-	return (1);
+	return (TRUE);
 }

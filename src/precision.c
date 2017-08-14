@@ -33,9 +33,10 @@ int		set_precision(t_arg *arg, wchar_t *str_form)
 	precision[i] = '\0';
 	arg->precision = ft_atoi(precision);
 	arg->flags.precision = TRUE;
+	arg->flags.zero = OVERRIDE;
 	if (ft_strlen(precision) == 0)
 		return (1);
-	return (ft_strlen(precision));
+	return (ft_strlen(precision) + 1);
 }
 
 int		apply_precision(t_arg *arg)

@@ -14,7 +14,7 @@
 
 void	st_conv(t_arg *arg, va_list ap)
 {
-	arg->argv.st_arg = va_arg(ap, size_t);
+	arg->argv.imax_arg = va_arg(ap, size_t);
 	if (arg->conv == -10 || arg->conv == 8 || arg->conv == 10
 		|| arg->conv == 16 || arg->conv == 160)
 		arg->converted_form = str_memcat(arg->converted_form,
@@ -23,7 +23,7 @@ void	st_conv(t_arg *arg, va_list ap)
 
 void	short_conv(t_arg *arg, va_list ap)
 {
-	arg->argv.sh_arg = (short)va_arg(ap, int);
+	arg->argv.imax_arg = (short)va_arg(ap, int);
 	if (arg->conv == 8 || arg->conv == -10 || arg->conv == 10
 		|| arg->conv == 16 || arg->conv == 160)
 		arg->converted_form = str_memcat(arg->converted_form,
@@ -32,7 +32,7 @@ void	short_conv(t_arg *arg, va_list ap)
 
 void	int_conv(t_arg *arg, va_list ap)
 {
-	arg->argv.i_arg = va_arg(ap, int);
+	arg->argv.imax_arg = va_arg(ap, int);
 	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8
 		|| arg->conv == 80 || arg->conv == 10 || arg->conv == 100
 		|| arg->conv == 16 || arg->conv == 160)
@@ -42,7 +42,7 @@ void	int_conv(t_arg *arg, va_list ap)
 
 void	long_conv(t_arg *arg, va_list ap)
 {
-	arg->argv.l_arg = va_arg(ap, long);
+	arg->argv.imax_arg = va_arg(ap, long);
 	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8
 		|| arg->conv == 80 || arg->conv == 10 || arg->conv == 100
 		|| arg->conv == 16 || arg->conv == 160)
@@ -52,7 +52,7 @@ void	long_conv(t_arg *arg, va_list ap)
 
 void	llong_conv(t_arg *arg, va_list ap)
 {
-	arg->argv.ll_arg = va_arg(ap, long long);
+	arg->argv.imax_arg = va_arg(ap, long long);
 	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8
 		|| arg->conv == 80 || arg->conv == 10 || arg->conv == 100
 		|| arg->conv == 16 || arg->conv == 160)

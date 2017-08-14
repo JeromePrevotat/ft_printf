@@ -14,11 +14,16 @@
 
 int	set_zero_flag(t_arg *arg)
 {
-	if (arg->flags.zero == FALSE && arg->flags.zero != OVERRIDE)
+	/*if (arg->flags.zero == FALSE && arg->flags.zero != OVERRIDE)
 		arg->flags.zero = TRUE;
 	else
 		if (arg->flags.zero != OVERRIDE)
 			return (FALSE);
+	return (TRUE);*/
+	if (arg->flags.zero == OVERRIDE || arg->flags.precision == TRUE)
+		return (FALSE);
+	else
+		arg->flags.zero = TRUE;
 	return (TRUE);
 }
 

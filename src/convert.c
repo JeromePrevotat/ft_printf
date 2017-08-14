@@ -14,6 +14,13 @@
 
 int		convert_argv(t_arg *arg, va_list ap)
 {
+	nb_convert_argv(arg, ap);
+	char_convert_argv(arg, ap);
+	return (1);
+}
+
+void	nb_convert_argv(t_arg *arg, va_list ap)
+{
 	if (arg->type == T_SIZET)
 		st_conv(arg, ap);
 	if (arg->type == T_SHORT)
@@ -28,6 +35,10 @@ int		convert_argv(t_arg *arg, va_list ap)
 		imax_conv(arg, ap);
 	if (arg->type == T_UIMAX)
 		uimax_conv(arg, ap);
+}
+
+void	char_convert_argv(t_arg *arg, va_list ap)
+{
 	if (arg->type == T_UCHAR)
 		uchar_conv(arg, ap);
 	if (arg->type == T_CHAR)
@@ -40,7 +51,6 @@ int		convert_argv(t_arg *arg, va_list ap)
 		wstr_conv(arg, ap);
 	if (arg->type == T_PTR)
 		ptr_conv(arg, ap);
-	return (1);
 }
 
 char	*convert(t_arg *arg)
@@ -112,6 +122,10 @@ char	*convert(t_arg *arg)
 			|| arg->type == T_IMAX || arg->type == T_UIMAX)
 			return (u_itoa_base(arg->argv.uimax_arg, base));
 	}
+	if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
+		|| arg->type == T_LONG || arg->type == T_LLONG
+		|| arg->type == T_IMAX)
+		return (s_itoa_base(arg->argv.imax_arg, base));
 	return (NULL);
 }*/
 
