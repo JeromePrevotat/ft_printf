@@ -4,6 +4,8 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = libftprintf.a
 
 #SRCS += ./src/main.c
+SRCS += ./src/ft_putendl.c
+SRCS += ./src/ft_putchar.c
 
 SRCS += ./src/ft_printf.c
 SRCS += ./src/cat_functions.c
@@ -40,11 +42,10 @@ SRCS += ./src/wchar_functions.c
 
 SRCS += ./src/ft_atoi.c
 SRCS += ./src/ft_isdigit.c
-SRCS += ./src/ft_memcpy.c
 SRCS += ./src/ft_memset.c
-SRCS += ./src/ft_putchar.c
-SRCS += ./src/ft_putendl.c
 SRCS += ./src/ft_strlen.c
+SRCS += ./src/ft_memcpy.c
+SRCS += ./src/ft_putstr.c
 
 
 INC += ./inc/ft_printf.h

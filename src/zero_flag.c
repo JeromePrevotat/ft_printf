@@ -14,14 +14,7 @@
 
 int	set_zero_flag(t_arg *arg)
 {
-	/*if (arg->flags.zero == FALSE && arg->flags.zero != OVERRIDE)
-		arg->flags.zero = TRUE;
-	else
-		if (arg->flags.zero != OVERRIDE)
-			return (FALSE);
-	return (TRUE);*/
 	if (arg->flags.zero == OVERRIDE || arg->flags.precision == TRUE)
-		//return (FALSE);
 		return (TRUE);
 	else
 		arg->flags.zero = TRUE;
@@ -63,7 +56,6 @@ int	apply_zero(t_arg *arg)
 		j++;
 	}
 	tmp[i + j] = '\0';
-	//tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form));
 	if (arg->converted_form != NULL)
 		free(arg->converted_form);
 	arg->converted_form = tmp;

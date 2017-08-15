@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 17:27:00 by jprevota          #+#    #+#             */
-/*   Updated: 2016/11/16 18:47:13 by jprevota         ###   ########.fr       */
+/*   Created: 2016/11/08 12:24:25 by jprevota          #+#    #+#             */
+/*   Updated: 2016/11/13 20:40:28 by jprevota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-void	ft_putendl(const char *str)
+void	ft_putstr(char *str)
 {
 	int i;
 
@@ -24,5 +24,4 @@ void	ft_putendl(const char *str)
 		ft_putchar(str[i]);
 		i++;
 	}
-	ft_putchar('\n');
 }

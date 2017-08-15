@@ -29,17 +29,25 @@ char	*str_memcat(char *mem1, char *mem2, size_t size, int del)
 void sfree(char *mem1, char *mem2, int del)
 {
 	if (del == 1 && mem1 != NULL)
+	{
 		free(mem1);
+		mem1 = NULL;
+	}
 	if (del == 2 && mem2 != NULL)
+	{
 		free(mem2);
+		mem2 = NULL;
+	}
 	if (del == 3 && mem1 != NULL && mem2 != NULL)
 	{
 		free(mem1);
 		free(mem2);
+		mem1 = NULL;
+		mem2 = NULL;
 	}
 }
 
-int		get_width(wchar_t *str, t_arg *arg)
+/*int		get_width(wchar_t *str, t_arg *arg)
 {
 	size_t	j;
 	size_t	i;
@@ -61,9 +69,33 @@ int		get_width(wchar_t *str, t_arg *arg)
 	if (ft_atoi(tmp) > arg->width)
 		arg->width = ft_atoi(tmp);
 	return (j);
+}*/
+
+int		get_width(char *str, t_arg *arg)
+{
+	size_t	j;
+	size_t	i;
+	char	*tmp;
+
+	j = 1;
+	while (j < ft_strlen(str) && ft_isdigit(str[j]))
+		j++;
+	if (!(tmp = (char *)malloc((j + 1) * sizeof(char))))
+		return (ERROR);
+	ft_memset(tmp, '\0', j + 1);
+	i = 0;
+	while (i < j)
+	{
+		tmp[i] = str[i + 1];
+		i++;
+	}
+	tmp[i] = '\0';
+	if (ft_atoi(tmp) > arg->width)
+		arg->width = ft_atoi(tmp);
+	return (j);
 }
 
-int		argv_sign(t_arg *arg)
+/*int		argv_sign(t_arg *arg)
 {
 	if ((arg->type == T_SHORT || arg->type == T_INT) && (arg->argv.sh_arg < 0 || arg->argv.i_arg < 0))
 		return (-1);
@@ -73,5 +105,14 @@ int		argv_sign(t_arg *arg)
 		return (1);
 	if ((arg->type == T_LONG || arg->type == T_LLONG) && (arg->argv.l_arg > 0 || arg->argv.ll_arg > 0))
 		return (1);
+	return (0);
+}*/
+
+int		argv_sign(t_arg *arg)
+{
+	if (arg->argv.imax_arg > 0)
+		return (1);
+	else if (arg->argv.imax_arg < 0)
+		return (-1);
 	return (0);
 }

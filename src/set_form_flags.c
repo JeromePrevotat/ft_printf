@@ -20,7 +20,6 @@ int	set_alt_form_flag(t_arg *arg)
 
 int	set_minus_flag(t_arg *arg)
 {
-	//Minus overrides zero
 	arg->flags.zero = OVERRIDE;
 	arg->flags.minus = TRUE;
 	return (TRUE);
@@ -28,7 +27,6 @@ int	set_minus_flag(t_arg *arg)
 
 int	set_plus_flag(t_arg *arg)
 {
-	//Plus overrides space
 	arg->flags.space = OVERRIDE;
 	arg->flags.plus = TRUE;
 	return (TRUE);

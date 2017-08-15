@@ -12,25 +12,47 @@
 
 #include "../inc/ft_printf.h"
 
-void	st_conv(t_arg *arg, va_list ap)
+/*void	st_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.imax_arg = va_arg(ap, size_t);
 	if (arg->conv == -10 || arg->conv == 8 || arg->conv == 10
 		|| arg->conv == 16 || arg->conv == 160)
 		arg->converted_form = str_memcat(arg->converted_form,
 			convert(arg), ft_strlen(convert(arg)), 1);
+}*/
+
+void	st_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.imax_arg = (size_t)va_arg(ap, size_t);
+	if (arg->conv == -10 || arg->conv == 8 || arg->conv == 10
+		|| arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = convert(arg);
 }
 
-void	short_conv(t_arg *arg, va_list ap)
+/*void	short_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.imax_arg = (short)va_arg(ap, int);
 	if (arg->conv == 8 || arg->conv == -10 || arg->conv == 10
 		|| arg->conv == 16 || arg->conv == 160)
 		arg->converted_form = str_memcat(arg->converted_form,
 			convert(arg), ft_strlen(convert(arg)), 1);
+}*/
+
+void	ushort_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = (unsigned short)va_arg(ap, int);
+	if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = convert(arg);
 }
 
-void	int_conv(t_arg *arg, va_list ap)
+void	short_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.imax_arg = (short)va_arg(ap, int);
+	if (arg->conv == -10)
+		arg->converted_form = convert(arg);
+}
+
+/*void	int_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.imax_arg = va_arg(ap, int);
 	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8
@@ -38,9 +60,23 @@ void	int_conv(t_arg *arg, va_list ap)
 		|| arg->conv == 16 || arg->conv == 160)
 		arg->converted_form = str_memcat(arg->converted_form,
 			convert(arg), ft_strlen(convert(arg)), 1);
+}*/
+
+void	uint_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = (unsigned int)va_arg(ap, int);
+	if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = convert(arg);
 }
 
-void	long_conv(t_arg *arg, va_list ap)
+void	int_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.imax_arg = (int)va_arg(ap, int);
+	if (arg->conv == -10 || arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = convert(arg);
+}
+
+/*void	long_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.imax_arg = va_arg(ap, long);
 	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8
@@ -48,9 +84,24 @@ void	long_conv(t_arg *arg, va_list ap)
 		|| arg->conv == 16 || arg->conv == 160)
 		arg->converted_form = str_memcat(arg->converted_form,
 			convert(arg), ft_strlen(convert(arg)), 1);
+}*/
+
+void	ulong_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = (unsigned long)va_arg(ap, long);
+	if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160
+		|| arg->conv == 80 || arg->conv == 100)
+		arg->converted_form = convert(arg);
 }
 
-void	llong_conv(t_arg *arg, va_list ap)
+void	long_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.imax_arg = (long)va_arg(ap, long);
+	if (arg->conv == -10 || arg->conv == 100)
+		arg->converted_form = convert(arg);
+}
+
+/*void	llong_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.imax_arg = va_arg(ap, long long);
 	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8
@@ -58,9 +109,40 @@ void	llong_conv(t_arg *arg, va_list ap)
 		|| arg->conv == 16 || arg->conv == 160)
 		arg->converted_form = str_memcat(arg->converted_form,
 			convert(arg), ft_strlen(convert(arg)), 1);
+}*/
+
+void	ullong_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = (unsigned long long)va_arg(ap, long long);
+	if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = convert(arg);
 }
 
-void	imax_conv(t_arg *arg, va_list ap)
+void	llong_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.imax_arg = (long long)va_arg(ap, long long);
+	if (arg->conv == -10)
+		arg->converted_form = convert(arg);
+}
+
+/*void	uimax_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = va_arg(ap, uintmax_t);
+	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8
+		|| arg->conv == 80 || arg->conv == 10 || arg->conv == 100
+		|| arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = str_memcat(arg->converted_form,
+		convert(arg), ft_strlen(convert(arg)), 1);
+}*/
+
+void	uimax_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = (uintmax_t)va_arg(ap, uintmax_t);
+	if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+		arg->converted_form = convert(arg);
+}
+
+/*void	imax_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.imax_arg = va_arg(ap, intmax_t);
 	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8
@@ -68,23 +150,20 @@ void	imax_conv(t_arg *arg, va_list ap)
 		|| arg->conv == 16 || arg->conv == 160)
 		arg->converted_form = str_memcat(arg->converted_form,
 			convert(arg), ft_strlen(convert(arg)), 1);
-}
+}*/
 
-void	uimax_conv(t_arg *arg, va_list ap)
+void	imax_conv(t_arg *arg, va_list ap)
 {
-	arg->argv.uimax_arg = va_arg(ap, uintmax_t);
-	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 8
-		|| arg->conv == 80 || arg->conv == 10 || arg->conv == 100
-		|| arg->conv == 16 || arg->conv == 160)
-		arg->converted_form = str_memcat(arg->converted_form,
-			convert(arg), ft_strlen(convert(arg)), 1);
+	arg->argv.imax_arg = (intmax_t)va_arg(ap, intmax_t);
+	if (arg->conv == -10)
+		arg->converted_form = convert(arg);
 }
 
 void	ptr_conv(t_arg *arg, va_list ap)
 {
 	void	*p;
 
-	p = va_arg(ap, void *);
+	p = (void *)va_arg(ap, void *);
 	arg->converted_form = str_memcat(arg->converted_form, "0x", 2, 1);
 	arg->converted_form = str_memcat(arg->converted_form,
 		itoa_base_long((long)p, 16), ft_strlen(itoa_base_long((long)p, 16)), 1);

@@ -57,7 +57,6 @@ wchar_t	*wcat(wchar_t *mem1, wchar_t *mem2, size_t size)
 	if (!(tmp = (wchar_t *)malloc((ft_wstrlen(mem1) + size + 1) * sizeof(wchar_t))))
 		return (NULL);
 	ft_memset(tmp, '\0', (ft_wstrlen(mem1) + size + 1));
-	//SEGFAULT HERE
 	while (mem1[i] != '\0')
 	{
 		tmp[i] = mem1[i];

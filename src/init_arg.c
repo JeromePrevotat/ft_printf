@@ -21,7 +21,6 @@ int	init_arg(t_arg *arg)
 	arg->precision = 0;
 	arg->wchar_form = FALSE;
 	init_flags_arg(arg);
-	ft_memset(&arg->argv, '\0', 1 * sizeof(t_argv));
 	return (TRUE);
 }
 
@@ -29,12 +28,12 @@ int	init_str_form(t_arg *arg)
 {
 	if (arg->str_form == NULL)
 	{
-		if (!(arg->str_form = (wchar_t *)malloc(1 * sizeof(wchar_t))))
+		if (!(arg->str_form = (char *)malloc(1 * sizeof(char))))
 			return (ERROR);
 		ft_memset(arg->str_form, '\0', 1);
 	}
 	else
-		ft_memset(arg->str_form, '\0', ft_wstrlen(arg->str_form));
+		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
 	return (TRUE);
 }
 
