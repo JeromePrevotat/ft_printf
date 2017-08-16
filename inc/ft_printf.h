@@ -61,20 +61,6 @@ typedef union				u_argv
 	wchar_t					*wstr_arg;
 }							t_argv;
 
-/*typedef struct		s_argument
-{
-	t_argv			argv;
-	t_flags			flags;
-	int				type;
-	int				conv;
-	int				width;
-	int				precision;
-	wchar_t			*str_form;
-	char			*converted_form;
-	wchar_t			*wconverted_form;
-	int				wchar_form;
-}					t_arg;*/
-
 typedef struct		s_argument
 {
 	t_argv			argv;
@@ -97,43 +83,25 @@ enum
 
 //Ft_printf.c
 int					ft_printf(const char *format, ...);
-//int					get_arg(wchar_t *format, t_arg *arg, va_list ap);
 int					get_arg(char *format, t_arg *arg, va_list ap);
-//void					get_arg_str_form(wchar_t *format, t_arg *arg, va_list ap);
 void				get_arg_str_form(char *format, t_arg *arg, va_list ap);
-int					print_result(wchar_t *wstr, int ret, t_arg **arg);
 
 //Cat_functions.c
-//int					cat_format(wchar_t *format, va_list ap);
 int					cat_format(char *format, va_list ap);
-//int					cat_char(wchar_t **wstr, wchar_t *c);
 void				cat_arg(t_arg *arg, wchar_t **wstr);
-//int					init_cat_format_var(wchar_t **wstr, t_arg **arg);
 int					init_cat_format_var(t_arg **arg);
 
 //Flags_parsing.c
-int					parse_flags(t_arg *arg);
-int					is_flag(t_arg *arg, size_t i);
-int					check_flags_a(t_arg *arg, size_t i);
-int					check_flags_b(t_arg *arg, size_t i);
-
-//int					new_flag_parsing(t_arg *arg, wchar_t *format, size_t i);
 int					new_flag_parsing(t_arg *arg, char *format, size_t i);
-//int					new_check_flags_a(t_arg *arg, wchar_t *format, size_t i);
 int					new_check_flags_a(t_arg *arg, char *format, size_t i);
-//int					new_check_flags_b(t_arg *arg, wchar_t *format, size_t i);
 int					new_check_flags_b(t_arg *arg, char *format, size_t i);
 
 //Parsing_utils.c
-//int					new_is_conversion(wchar_t c);
 int					new_is_conversion(char c);
-//int					set_flag(t_arg *arg, wchar_t c);
 int					set_flag(t_arg *arg, char c);
 
 //Undefined_behaviour.c
-//wchar_t				*get_undefined_behaviour(t_arg *arg);
 char				*get_undefined_behaviour(t_arg *arg);
-//int					ub_is_flag(wchar_t c);
 int					ub_is_flag(char c);
 
 //Init_arg.c
@@ -147,9 +115,7 @@ void				init_flags_arg(t_arg *arg);
 int					fill_arg(t_arg *arg, va_list ap);
 void				set_type_arg(t_arg *arg);
 void				set_conv_arg(t_arg *arg);
-//void					set_nb_conv_arg(t_arg *arg, wchar_t c);
 void				set_nb_conv_arg(t_arg *arg, char c);
-//void					set_char_conv_arg(t_arg *arg, wchar_t c);
 void				set_char_conv_arg(t_arg *arg, char c);
 
 //Convert.c
@@ -194,20 +160,16 @@ int					apply_plus(t_arg *arg);
 int					apply_space(t_arg *arg);
 
 //Width.c
-//int					set_width(t_arg *arg, wchar_t *str_form);
 int					set_width(t_arg *arg, char *str_form);
 int					apply_width(t_arg *arg);
 void				apply_str_width(t_arg *arg);
 void				apply_wstr_width(t_arg *arg);
 
 //Precision.c
-//int					set_precision(t_arg *arg, wchar_t *str_form);
 int					set_precision(t_arg *arg, char *str_form);
 int					apply_precision(t_arg *arg);
 int					apply_str_pre(t_arg *arg);
 int					apply_nbr_pre(t_arg *arg);
-//wchar_t				*apply_negative(t_arg *arg);
-//wchar_t				*apply_positive(t_arg *arg);
 char				*apply_negative(t_arg *arg);
 char				*apply_positive(t_arg *arg);
 

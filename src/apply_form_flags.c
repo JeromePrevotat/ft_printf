@@ -73,21 +73,6 @@ int	apply_minus(t_arg *arg)
 
 int	apply_plus(t_arg *arg)
 {
-	/*wchar_t	*tmp;
-
-	if (arg->wconverted_form == NULL)
-		arg->wconverted_form = str_to_wstr(arg->converted_form);
-	if (!(tmp = (wchar_t *)malloc(2 * sizeof(wchar_t))))
-		return (ERROR);
-	ft_memset(tmp, '\0', 2);
-	if (arg->conv == -10 && argv_sign(arg) >= 0)
-	{
-		tmp = wstr_memcat(tmp, L"+", ft_wstrlen(L"+"), 1);
-		tmp = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 1);
-		if (arg->wconverted_form != NULL)
-			free(arg->wconverted_form);
-		arg->wconverted_form = tmp;
-	}*/
 	char	*tmp;
 	wchar_t	*wtmp;
 
@@ -131,7 +116,6 @@ int	apply_space(t_arg *arg)
 
 	tmp = NULL;
 	wtmp = NULL;
-	//printf("ARGV SIGN : %d // ARGV : %jd\n", argv_sign(arg), arg->argv.imax_arg);
 	if (arg->wchar_form == TRUE)
 	{
 		if (!(wtmp = (wchar_t *)malloc(1 * sizeof(wchar_t))))
