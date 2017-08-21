@@ -47,6 +47,7 @@ void	nb_convert_argv(t_arg *arg, va_list ap)
 
 void	char_convert_argv(t_arg *arg, va_list ap)
 {
+	//printf("TEST SEGF\n");
 	if (arg->type == T_UCHAR)
 		uchar_conv(arg, ap);
 	if (arg->type == T_CHAR)

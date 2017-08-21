@@ -21,20 +21,22 @@ int		cat_format(char *format, va_list ap)
 	i = 0;
 	ret = 0;
 	arg = NULL;
-	if (init_cat_format_var(&arg) == ERROR)
-		return (ERROR);
 	while (i < ft_strlen(format))
 	{
-		if (init_arg(arg) == ERROR)
-			return (ERROR);
 		if (format[i] == '%' && (i + 1) < ft_strlen(format))
 		{
+			if (new_init_arg(&arg) == ERROR)
+				return (ERROR);
 			ret = ret + get_arg((format + i + 1), arg, ap);
 			i = i + ft_strlen(arg->str_form);
 			if (arg->wchar_form == TRUE)
 				ft_putwstr(arg->wconverted_form);
 			else
 				ft_putstr(arg->converted_form);
+			free(arg->str_form);
+			//free(arg->converted_form);
+			//free(arg->wconverted_form);
+			free(arg);
 		}
 		else if (format[i] != '%')
 		{
@@ -56,10 +58,4 @@ void	cat_arg(t_arg *arg, wchar_t **wstr)
 		ft_wstrlen(arg->wconverted_form), 1);
 }
 
-int		init_cat_format_var(t_arg **arg)
-{
-	if (!(*arg = (t_arg *)malloc(sizeof(t_arg))))
-		return (ERROR);
-	ft_memset(*arg, '\0', 1);
-	return (TRUE);
-}
+//FREE FONCTION FOR ALL ARG COMPONENTS

@@ -89,7 +89,6 @@ void				get_arg_str_form(char *format, t_arg *arg, va_list ap);
 //Cat_functions.c
 int					cat_format(char *format, va_list ap);
 void				cat_arg(t_arg *arg, wchar_t **wstr);
-int					init_cat_format_var(t_arg **arg);
 
 //Flags_parsing.c
 int					new_flag_parsing(t_arg *arg, char *format, size_t i);
@@ -105,11 +104,11 @@ char				*get_undefined_behaviour(t_arg *arg);
 int					ub_is_flag(char c);
 
 //Init_arg.c
-int					init_arg(t_arg *arg);
-int					init_str_form(t_arg *arg);
+int					init_str_form(t_arg **arg);
 int					init_converted_form(t_arg *arg);
 int					init_wconverted_form(t_arg *arg);
 void				init_flags_arg(t_arg *arg);
+int					new_init_arg(t_arg **arg);
 
 //Fill_arg.c
 int					fill_arg(t_arg *arg, va_list ap);
@@ -144,7 +143,8 @@ int					set_alt_form_flag(t_arg *arg);
 int					set_zero_flag(t_arg *arg);
 int					set_minus_flag(t_arg *arg);
 int					set_plus_flag(t_arg *arg);
-int					set_space_flag(t_arg *arg, int j);
+//int					set_space_flag(t_arg *arg, int j);
+int					set_space_flag(t_arg *arg, char *format, int j);
 
 //Apply_size_flags.c
 int					apply_l(t_arg *arg); //TO DO WINT_T (%lc)

@@ -80,8 +80,6 @@ int		apply_nbr_pre(t_arg *arg)
 			tmp = str_to_wstr(apply_negative(arg));
 		else if (argv_sign(arg) >= 0)
 			tmp = str_to_wstr(apply_positive(arg));
-		if (arg->wconverted_form != NULL)
-			free(arg->wconverted_form);
 		arg->wconverted_form = tmp;
 	}
 	else
@@ -98,8 +96,6 @@ int		apply_nbr_pre(t_arg *arg)
 			tmp2 = apply_negative(arg);
 		else if (argv_sign(arg) >= 0)
 			tmp2 = apply_positive(arg);
-		if (arg->converted_form != NULL)
-			free(arg->converted_form);
 		arg->converted_form = tmp2;
 	}
 	return (1);

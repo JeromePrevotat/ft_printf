@@ -60,7 +60,7 @@ int		new_check_flags_b(t_arg *arg, char *format, size_t i)
 	next_i = -1;
 	if (format[i] == ' ')
 	{
-		next_i = set_space_flag(arg, i);
+		next_i = set_space_flag(arg, format, i);
 		if (next_i == 0)
 			next_i = ERROR;
 	}

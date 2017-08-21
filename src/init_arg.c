@@ -12,28 +12,37 @@
 
 #include "../inc/ft_printf.h"
 
-int	init_arg(t_arg *arg)
+int	new_init_arg(t_arg **arg)
 {
-	if (init_str_form(arg) == ERROR || init_converted_form(arg) == ERROR ||
-	init_wconverted_form(arg) == ERROR)
+	if (!((*arg) = (t_arg *)malloc(1 * sizeof(t_arg))))
 		return (ERROR);
-	arg->width = 0;
-	arg->precision = 0;
-	arg->wchar_form = FALSE;
-	init_flags_arg(arg);
+	ft_memset(*arg, '\0', 1);
+	(*arg)->type = 0;
+	(*arg)->argv.imax_arg = 0;
+	(*arg)->argv.uimax_arg = 0;
+	(*arg)->str_form = NULL;
+	(*arg)->converted_form = NULL;
+	(*arg)->wconverted_form = NULL;
+	(*arg)->width = 0;
+	(*arg)->precision = 0;
+	(*arg)->wchar_form = FALSE;
+	if (init_str_form(arg) == ERROR || init_converted_form((*arg)) == ERROR ||
+	init_wconverted_form((*arg)) == ERROR)
+		return (ERROR);
+	init_flags_arg((*arg));
 	return (TRUE);
 }
 
-int	init_str_form(t_arg *arg)
+int	init_str_form(t_arg **arg)
 {
-	if (arg->str_form == NULL)
+	if ((*arg)->str_form == NULL)
 	{
-		if (!(arg->str_form = (char *)malloc(1 * sizeof(char))))
+		if (!((*arg)->str_form = (char *)malloc(1 * sizeof(char))))
 			return (ERROR);
-		ft_memset(arg->str_form, '\0', 1);
+		ft_memset((*arg)->str_form, '\0', 1);
 	}
 	else
-		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
+		ft_memset((*arg)->str_form, '\0', ft_strlen((*arg)->str_form));
 	return (TRUE);
 }
 
@@ -41,7 +50,7 @@ int	init_converted_form(t_arg *arg)
 {
 	if (arg->converted_form == NULL)
 	{
-		if (!(arg->converted_form = (char *)malloc(2 * sizeof(char))))
+		if (!(arg->converted_form = (char *)malloc(1 * sizeof(char))))
 			return (ERROR);
 		ft_memset(arg->converted_form, '\0', 2);
 	}

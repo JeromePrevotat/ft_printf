@@ -16,13 +16,26 @@ char	*str_memcat(char *mem1, char *mem2, size_t size, int del)
 {
 	char	*tmp;
 
+	(void)del;
+	if (mem1 == NULL)
+	{
+		if (!(mem1 = (char *)malloc(1 * sizeof(char))))
+			return (NULL);
+		ft_memset(mem1, '\0', 1);
+	}
+	if (mem2 == NULL)
+	{
+		if (!(mem2 = (char *)malloc(1 * sizeof(char))))
+			return (NULL);
+		ft_memset(mem2, '\0', 1);
+	}
 	if (!(tmp = (char *)malloc((ft_strlen(mem1) + size + 1) * sizeof(char))))
 		return (NULL);
 	ft_memset(tmp, '\0', (size_t)(ft_strlen(mem1) + size + 1));
 	ft_memcpy(tmp, mem1, ft_strlen(mem1));
 	ft_memcpy(tmp + ft_strlen(mem1), mem2, size);
 	tmp[ft_strlen(mem1) + size] = '\0';
-	sfree(mem1, mem2, del);
+	//sfree(mem1, mem2, del);
 	return (tmp);
 }
 
@@ -31,19 +44,19 @@ void sfree(char *mem1, char *mem2, int del)
 	if (del == 1 && mem1 != NULL)
 	{
 		free(mem1);
-		mem1 = NULL;
+		//mem1 = NULL;
 	}
 	if (del == 2 && mem2 != NULL)
 	{
 		free(mem2);
-		mem2 = NULL;
+		//mem2 = NULL;
 	}
 	if (del == 3 && mem1 != NULL && mem2 != NULL)
 	{
 		free(mem1);
 		free(mem2);
-		mem1 = NULL;
-		mem2 = NULL;
+		//mem1 = NULL;
+		//mem2 = NULL;
 	}
 }
 
