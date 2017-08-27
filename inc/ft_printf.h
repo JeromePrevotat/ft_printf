@@ -22,6 +22,7 @@
 # include <stdarg.h>
 # include <wchar.h>
 # include <inttypes.h>
+# include <limits.h>
 
 typedef struct		s_flags
 {

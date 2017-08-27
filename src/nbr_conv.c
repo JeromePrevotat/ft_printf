@@ -59,7 +59,7 @@ void	ulong_conv(t_arg *arg, va_list ap)
 void	long_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.imax_arg = (long)va_arg(ap, long);
-	if (arg->conv == -10 || arg->conv == 100)
+	if (arg->conv == -10 || arg->conv == -100 || arg->conv == 100)
 		arg->converted_form = convert(arg);
 }
 

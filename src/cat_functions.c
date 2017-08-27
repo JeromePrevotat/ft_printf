@@ -33,8 +33,10 @@ int		cat_format(char *format, va_list ap)
 				ft_putwstr(arg->wconverted_form);
 			else
 				ft_putstr(arg->converted_form);
-			free(arg->str_form);
-			//free(arg->converted_form);
+			//if (arg->str_form != arg->converted_form && arg->converted_form != NULL)
+				//free(arg->converted_form);
+			//if (arg->str_form != NULL)
+				//free(arg->str_form);
 			//free(arg->wconverted_form);
 			free(arg);
 		}

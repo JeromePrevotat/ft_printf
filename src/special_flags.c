@@ -14,22 +14,12 @@
 
 int	set_j_flag(t_arg *arg)
 {
-	/*if (arg->flags.j == FALSE)
-		arg->flags.j = TRUE;
-	else
-		return (FALSE);
-	return (TRUE);*/
 	arg->flags.j = TRUE;
 	return (TRUE);
 }
 
 int	set_z_flag(t_arg *arg)
 {
-	/*if (arg->flags.z == FALSE)
-		arg->flags.z = TRUE;
-	else
-		return (FALSE);
-	return (TRUE);*/
 	arg->flags.z = TRUE;
 	return (TRUE);
 }

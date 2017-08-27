@@ -106,7 +106,6 @@ char	*convert(t_arg *arg)
 	if (base > 16 && base != 160)
 		base = base / 10;
 	//SIGNED CONV
-	//printf("ARG TYPE : %d // T_ULLONG : %d // ARGV : %ju\n", arg->type, T_LLONG, arg->argv.imax_arg);
 	if (arg->conv < 0)
 	{
 		if (arg->type == T_SHORT)

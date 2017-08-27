@@ -23,7 +23,7 @@ int	apply_alt_form(t_arg *arg)
 		tmp = str_memcat(tmp, "0x", 2, 1);
 	if (arg->conv == 160 && argv_sign(arg) != 0)
 		tmp = str_memcat(tmp, "0X", 2, 1);
-	if (arg->conv == 8 || arg->conv == 80)
+	if ((arg->conv == 8 || arg->conv == 80) && argv_sign(arg) > 0)
 		tmp = str_memcat(tmp, "0", 1, 1);
 	tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
 	if (arg->converted_form != NULL)
@@ -135,7 +135,7 @@ int	apply_space(t_arg *arg)
 		if (!(tmp = (char *)malloc(1 * sizeof(char))))
 			return (ERROR);
 		ft_memset(tmp, '\0', 1);
-		if (arg->conv == -10 && argv_sign(arg) > 0)
+		if (arg->conv == -10 && argv_sign(arg) >= 0)
 		{
 			tmp = str_memcat(tmp, " ", 1, 1);
 			tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);

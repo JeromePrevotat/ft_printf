@@ -75,7 +75,9 @@ void	apply_str_width(t_arg *arg)
 		i++;
 	}
 	tmp[i] = '\0';
-	arg->converted_form = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 0);
+	tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 0);
+	free(arg->converted_form);
+	arg->converted_form = tmp;
 }
 
 void	apply_wstr_width(t_arg *arg)

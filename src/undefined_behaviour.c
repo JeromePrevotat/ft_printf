@@ -14,7 +14,7 @@
 
 char	*get_undefined_behaviour(t_arg *arg)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (arg->str_form != NULL)

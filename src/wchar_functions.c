@@ -86,33 +86,59 @@ void wfree(wchar_t *mem1, wchar_t *mem2, int del)
 	}
 }
 
-size_t	ft_wstrlen(const wchar_t *str)
+size_t	ft_wstrlen(const wchar_t *wstr)
 {
-	int	len;
+	size_t	len;
 
-	if (!str)
+	if (!wstr)
 		return (ERROR);
 	len = 0;
-	while (str[len] != '\0')
-		len++;
+	while (*wstr)
+	{
+		if (*wstr <= 0x7F)
+			len++;
+		else if (*wstr <= 0x7FF)
+			len = len + 2;
+		else if (*wstr <= 0xFFFF)
+			len = len + 3;
+		else if (*wstr <= 0x10FFFF)
+			len = len + 4;
+		wstr++;
+	}
 	return (len);
 }
 
 void	ft_putwstr(wchar_t *wstr)
 {
-	size_t i;
-
 	if (!wstr)
 		return ;
-	i = 0;
-	while (wstr[i] != '\0')
+	while (*wstr)
 	{
-		ft_putwchar(wstr[i]);
-		i++;
+		ft_putwchar(*wstr);
+		wstr++;
 	}
 }
 
-void	ft_putwchar(wchar_t c)
+void	ft_putwchar(wchar_t wchar)
 {
-	write(1, &c, 1 * sizeof(wchar_t));
+	if (wchar <= 0x7F)
+		ft_putchar(wchar);
+	else if (wchar <= 0x7FF)
+	{
+		ft_putchar((wchar >> 6) + 0xC0);
+		ft_putchar((wchar & 0x3F) + 0x80);
+	}
+	else if (wchar <= 0xFFFF)
+	{
+		ft_putchar((wchar >> 12) + 0xE0);
+		ft_putchar(((wchar >> 6) & 0x3F) + 0x80);
+		ft_putchar((wchar & 0x3F) + 0x80);
+	}
+	else if (wchar <= 0x10FFFF)
+	{
+		ft_putchar((wchar >> 18) + 0xF0);
+		ft_putchar(((wchar >> 12) & 0x3F) + 0x80);
+		ft_putchar(((wchar >> 6) & 0x3F) + 0x80);
+		ft_putchar((wchar & 0x3F) + 0x80);
+	}
 }
