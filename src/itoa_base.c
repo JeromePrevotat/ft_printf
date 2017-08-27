@@ -67,10 +67,9 @@ static int	ft_nb_len(int n, int base)
 	nb = n;
 	nb_len = 0;
 	if (n < 0)
-	{
 		nb = -n;
+	if (n < 0 && base != 8 && base != 16)
 		nb_len++;
-	}
 	while (nb / base > 0)
 	{
 		nb_len++;
@@ -101,7 +100,7 @@ char		*itoa_base(int n, int base)
 		nb = nb / base;
 		nb_len--;
 	}
-	if (n < 0)
+	if (n < 0 && base != 8 && base != 16)
 		str[0] = '-';
 	return (str);
 }

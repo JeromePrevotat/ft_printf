@@ -28,7 +28,7 @@ int	main(void)
 	//"%.4S", L"我是一只猫。"
 	//"%4.1S", L"Jambon"
 	//"%.4S", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B"
-	ret = ft_printf("%.4S", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+	ret = ft_printf("%o, %ho, %hho", -42, -42, -42);
 	//ret = ft_printf("% Z%s", "test");
 	//ret = ft_printf("%d", 2147483648);
 	//ret = ft_printf("%015u", "4294967295");
@@ -38,7 +38,7 @@ int	main(void)
 	ft_putchar('\n');
 	printf("RET = %d\n", ret);
 	ft_putendl("Real printf result :\n");
-	real_ret = printf("%.4S", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+	real_ret = printf("%o, %ho, %hho", -42, -42, -42);
 	printf("\nREAL_RET : %d\n", real_ret);
 
 

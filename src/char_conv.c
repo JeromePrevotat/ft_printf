@@ -18,8 +18,14 @@ int		uchar_conv(t_arg *arg, va_list ap)
 		arg->converted_form = str_memcat(arg->converted_form, "%", 1, 1);
 	else
 	{
-		arg->argv.c_arg = (unsigned char)va_arg(ap, int);
-		if (arg->argv.c_arg == 0)
+		arg->argv.uc_arg = (unsigned char)va_arg(ap, unsigned int);
+		if (arg->flags.hh == TRUE)
+		{
+			arg->type = T_UINT;
+			arg->argv.uimax_arg = arg->argv.uc_arg;
+			arg->converted_form = convert(arg);
+		}
+		else if (arg->argv.c_arg == 0)
 			arg->converted_form = str_memcat(arg->converted_form, "0", 1, 1);
 		else
 			arg->converted_form = &arg->argv.c_arg;
@@ -34,7 +40,7 @@ int		char_conv(t_arg *arg, va_list ap)
 	else
 	{
 		arg->argv.c_arg = (char)va_arg(ap, int);
-		if (arg->argv.c_arg == 0)
+		if (arg->argv.c_arg == 0 && arg->flags.hh == FALSE)
 			return (1);
 		if (arg->flags.hh == TRUE)
 		{
