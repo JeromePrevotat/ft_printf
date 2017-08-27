@@ -173,6 +173,7 @@ int					apply_str_pre(t_arg *arg);
 int					apply_nbr_pre(t_arg *arg);
 char				*apply_negative(t_arg *arg);
 char				*apply_positive(t_arg *arg);
+char				*apply_ptr_precision(t_arg *arg);
 
 //Zero_flag.c
 int					set_zero_flag(t_arg *arg);

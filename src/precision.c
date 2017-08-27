@@ -121,14 +121,18 @@ int		apply_nbr_pre(t_arg *arg)
 		{
 			if (arg->flags.alt_form == TRUE && (arg->conv == 8 || arg->conv == 80))
 				arg->converted_form[1] = '\0';
+			else if (arg->type == T_PTR)
+				arg->converted_form[2] = '\0';
 			else
 				arg->converted_form[0] = '\0';
 			return (1);
 		}
-		if (argv_sign(arg) < 0)
+		if (argv_sign(arg) < 0 && arg->type != T_PTR)
 			tmp2 = apply_negative(arg);
-		else if (argv_sign(arg) >= 0)
+		else if (argv_sign(arg) >= 0 && arg->type != T_PTR)
 			tmp2 = apply_positive(arg);
+		else if (arg->type == T_PTR)
+			tmp2 = apply_ptr_precision(arg);
 		arg->converted_form = tmp2;
 	}
 	return (1);
@@ -190,6 +194,45 @@ char	*apply_positive(t_arg *arg)
 		}
 		tmp[i] = '\0';
 		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 0);
+	}
+	if (tmp == NULL)
+		return (arg->converted_form);
+	return (tmp);
+}
+
+char	*apply_ptr_precision(t_arg *arg)
+{
+	char	*tmp;
+	int		real_pre;
+	int		i;
+	int 	j;
+	tmp = NULL;
+	real_pre = arg->precision - ft_strlen(arg->converted_form) + 2;
+	if (ft_strlen(arg->converted_form) < arg->precision)
+	{
+		if (!(tmp = (char *)malloc(arg->precision + 1 * sizeof(char))))
+			return (NULL);
+		ft_memset(tmp, '\0', arg->precision + 1);
+		i = 0;
+		j = 0;
+		while (i < 2 && i < arg->precision)
+		{
+			tmp[i] = arg->converted_form[j];
+			i++;
+			j++;
+		}
+		while (i < real_pre + 2)
+		{
+			tmp[i] = '0';
+			i++;
+		}
+		while (j < (int)ft_strlen(arg->converted_form))
+		{
+			tmp[i] = arg->converted_form[j];
+			i++;
+			j++;
+		}
+		tmp[i] = '\0';
 	}
 	if (tmp == NULL)
 		return (arg->converted_form);
