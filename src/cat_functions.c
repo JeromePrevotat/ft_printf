@@ -33,11 +33,12 @@ int		cat_format(char *format, va_list ap)
 				ft_putwstr(arg->wconverted_form);
 			else
 				ft_putstr(arg->converted_form);
-			//if (arg->str_form != arg->converted_form && arg->converted_form != NULL)
-				//free(arg->converted_form);
-			//if (arg->str_form != NULL)
-				//free(arg->str_form);
-			//free(arg->wconverted_form);
+			/*if (arg->str_form != arg->converted_form && arg->converted_form != NULL)
+				free(arg->converted_form);
+			if (arg->str_form != NULL)
+				free(arg->str_form);
+			if (arg->wconverted_form != NULL)
+				free(arg->wconverted_form);*/
 			free(arg);
 		}
 		else if (format[i] != '%')
@@ -49,15 +50,3 @@ int		cat_format(char *format, va_list ap)
 	}
 	return (ret);
 }
-
-void	cat_arg(t_arg *arg, wchar_t **wstr)
-{
-	if (arg->wconverted_form == NULL)
-		*wstr = wstr_memcat(*wstr, str_to_wstr(arg->converted_form),
-		ft_strlen(arg->converted_form), 1);
-	else
-		*wstr = wstr_memcat(*wstr, arg->wconverted_form,
-		ft_wstrlen(arg->wconverted_form), 1);
-}
-
-//FREE FONCTION FOR ALL ARG COMPONENTS

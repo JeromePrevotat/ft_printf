@@ -89,7 +89,6 @@ void				get_arg_str_form(char *format, t_arg *arg, va_list ap);
 
 //Cat_functions.c
 int					cat_format(char *format, va_list ap);
-void				cat_arg(t_arg *arg, wchar_t **wstr);
 
 //Flags_parsing.c
 int					new_flag_parsing(t_arg *arg, char *format, size_t i);

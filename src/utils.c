@@ -16,7 +16,7 @@ char	*str_memcat(char *mem1, char *mem2, size_t size, int del)
 {
 	char	*tmp;
 
-	(void)del;
+
 	if (mem1 == NULL)
 	{
 		if (!(mem1 = (char *)malloc(1 * sizeof(char))))
@@ -35,7 +35,7 @@ char	*str_memcat(char *mem1, char *mem2, size_t size, int del)
 	ft_memcpy(tmp, mem1, ft_strlen(mem1));
 	ft_memcpy(tmp + ft_strlen(mem1), mem2, size);
 	tmp[ft_strlen(mem1) + size] = '\0';
-	//sfree(mem1, mem2, del);
+	sfree(mem1, mem2, del);
 	return (tmp);
 }
 

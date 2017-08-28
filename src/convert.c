@@ -142,7 +142,10 @@ void	apply_flags(t_arg *arg)
 {
 	if (arg->flags.alt_form == TRUE)
 		apply_alt_form(arg);
-	if (arg->flags.zero == TRUE)
+	if (arg->flags.zero == TRUE && arg->flags.minus == FALSE)
+		apply_zero(arg);
+	else if (arg->flags.zero == OVERRIDE && arg->flags.minus == FALSE && (arg->type == T_CHAR
+		|| arg->type == T_WCHAR || arg->type == T_PTR))
 		apply_zero(arg);
 	if (arg->flags.precision == TRUE)
 		apply_precision(arg);
@@ -150,7 +153,10 @@ void	apply_flags(t_arg *arg)
 		apply_space(arg);
 	if (arg->flags.plus == TRUE)
 		apply_plus(arg);
-	if (arg->flags.width == TRUE && arg->flags.minus == FALSE && arg->flags.zero != TRUE)
+	//if (arg->flags.width == TRUE && arg->flags.minus == FALSE && arg->flags.zero != TRUE)
+	//NEW CONDITION TO DISCARD ZERO FLAG WHEN OVERRIDE
+	if (arg->flags.width == TRUE && arg->flags.minus == FALSE
+		&& (arg->flags.zero == FALSE || arg->flags.zero == OVERRIDE))
 		apply_width(arg);
 	if (arg->flags.minus == TRUE)
 		apply_minus(arg);

@@ -18,6 +18,7 @@ int	new_init_arg(t_arg **arg)
 		return (ERROR);
 	ft_memset(*arg, '\0', 1);
 	(*arg)->type = 0;
+	//(*arg)->conv = 0;
 	(*arg)->argv.imax_arg = 0;
 	(*arg)->argv.uimax_arg = 0;
 	(*arg)->str_form = NULL;

@@ -33,7 +33,6 @@ int		ft_printf(const char *format, ...)
 	ret = cat_format(f, ap);
 	va_end(ap);
 	free(f);
-	f = NULL;
 	return (ret);
 }
 

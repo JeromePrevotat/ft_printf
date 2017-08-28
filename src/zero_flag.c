@@ -15,7 +15,10 @@
 int	set_zero_flag(t_arg *arg)
 {
 	if (arg->flags.zero == OVERRIDE || arg->flags.precision == TRUE)
+	{
+		arg->flags.zero = OVERRIDE;
 		return (TRUE);
+	}
 	else
 		arg->flags.zero = TRUE;
 	arg->flags.width = TRUE;
@@ -92,7 +95,8 @@ int	apply_zero_hex_altform(t_arg *arg)
 		j++;
 	}
 	tmp[i] = '\0';
-	free(arg->converted_form);
+	if (arg->converted_form != NULL)
+		free(arg->converted_form);
 	arg->converted_form = tmp;
 	return (TRUE);
 }

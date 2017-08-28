@@ -40,8 +40,11 @@ int		char_conv(t_arg *arg, va_list ap)
 	else
 	{
 		arg->argv.c_arg = (char)va_arg(ap, int);
-		if (arg->argv.c_arg == 0 && arg->flags.hh == FALSE)
+		/*if (arg->argv.c_arg == 0 && arg->flags.hh == FALSE)
+		{
+			arg->converted_form = str_memcat(arg->converted_form, &arg->argv.c_arg, 1, 1);
 			return (1);
+		}*/
 		if (arg->flags.hh == TRUE)
 		{
 			arg->conv = -10;

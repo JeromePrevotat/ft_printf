@@ -142,6 +142,8 @@ int	apply_space(t_arg *arg)
 			if (arg->converted_form != NULL)
 				free(arg->converted_form);
 			arg->converted_form = tmp;
+			//tmp = str_memcat(tmp, " ", 1, 1);
+			//arg->converted_form = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 2);
 		}
 	}
 	return (TRUE);
