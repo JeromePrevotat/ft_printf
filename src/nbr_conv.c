@@ -98,5 +98,5 @@ void	ptr_conv(t_arg *arg, va_list ap)
 	p = (void *)va_arg(ap, void *);
 	arg->converted_form = str_memcat(arg->converted_form, "0x", 2, 1);
 	arg->converted_form = str_memcat(arg->converted_form,
-		itoa_base_long((long)p, 16), ft_strlen(itoa_base_long((long)p, 16)), 1);
+		itoa_base_imax((long)p, 16), ft_strlen(itoa_base_imax((long)p, 16)), 1);
 }

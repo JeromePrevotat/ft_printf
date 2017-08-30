@@ -47,7 +47,6 @@ void	nb_convert_argv(t_arg *arg, va_list ap)
 
 void	char_convert_argv(t_arg *arg, va_list ap)
 {
-	//printf("TEST SEGF\n");
 	if (arg->type == T_UCHAR)
 		uchar_conv(arg, ap);
 	if (arg->type == T_CHAR)
@@ -62,79 +61,19 @@ void	char_convert_argv(t_arg *arg, va_list ap)
 		ptr_conv(arg, ap);
 }
 
-//CONVERT WITH NEW ITOA
-/*char	*convert(t_arg *arg)
-{
-	int base;
-
-	base = arg->conv;
-	if (base < 0)
-		base = -base;
-	if (base > 16 && base != 160)
-		base = base / 10;
-	//SIGNED CONV
-	if (arg->conv < 0)
-	{
-		if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
-			|| arg->type == T_LONG || arg->type == T_LLONG
-			|| arg->type == T_IMAX)
-			return (s_itoa_base(arg->argv.imax_arg, base));
-	}
-	//UNSIGNED CONV
-	else
-	{
-		if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
-			|| arg->type == T_LONG || arg->type == T_LLONG
-			|| arg->type == T_IMAX || arg->type == T_UIMAX)
-			return (u_itoa_base(arg->argv.uimax_arg, base));
-	}
-	if (arg->type == T_SHORT || arg->type == T_INT || arg->type == T_SIZET
-		|| arg->type == T_LONG || arg->type == T_LLONG
-		|| arg->type == T_IMAX)
-		return (s_itoa_base(arg->argv.imax_arg, base));
-	return (NULL);
-}*/
-
-//NEW CONVERT
 char	*convert(t_arg *arg)
 {
-	int base;
+	int	base;
 
 	base = arg->conv;
 	if (base < 0)
 		base = -base;
 	if (base > 16 && base != 160)
 		base = base / 10;
-	//SIGNED CONV
 	if (arg->conv < 0)
-	{
-		if (arg->type == T_SHORT)
-			return (itoa_base_sh((short)arg->argv.imax_arg, base));
-		if (arg->type == T_INT)
-			return (itoa_base((int)arg->argv.imax_arg, base));
-		if (arg->type == T_SIZET)
-			return (itoa_base_st((size_t)arg->argv.imax_arg, base));
-		if (arg->type == T_LONG)
-			return (itoa_base_long((long)arg->argv.imax_arg, base));
-		if (arg->type == T_LLONG)
-			return (itoa_base_llong((long long)arg->argv.imax_arg, base));
-		if (arg->type == T_IMAX)
-			return (itoa_base_imax(arg->argv.imax_arg, base));
-	}
-	//UNSIGNED CONV
+		return (itoa_base_imax(arg->argv.imax_arg, base));
 	else
-	{
-		if (arg->type == T_USHORT)
-			return (itoa_base_unsigned((unsigned short)arg->argv.uimax_arg, base));
-		if (arg->type == T_UINT)
-			return (itoa_base_unsigned((unsigned int)arg->argv.uimax_arg, base));
-		if (arg->type == T_ULONG)
-			return (itoa_base_unsigned_long((unsigned long)arg->argv.uimax_arg, base));
-		if (arg->type == T_ULLONG)
-			return (itoa_base_unsigned_llong((unsigned long long)arg->argv.uimax_arg, base));
-		if (arg->type == T_UIMAX)
-			return (itoa_base_uimax(arg->argv.uimax_arg, base));
-	}
+		return (itoa_base_uimax(arg->argv.uimax_arg, base));
 	return (NULL);
 }
 

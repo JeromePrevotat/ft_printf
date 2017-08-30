@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include "../inc/ft_printf.h"
+#include <string.h>
 
 int	main(void)
 {
@@ -21,62 +22,56 @@ int	main(void)
 
 	real_ret = 0;
 	ret = 0;
-	ft_putendl("My printf result :\n");
-	ret = ft_printf("%zi", LLONG_MIN);
-	printf("RET : %d\n", ret);
+	ft_putendl("My printf result :");
+	ret = ft_printf("%15.4o", 424242);
+	printf("\nRET : %d\n\n", ret);
 
-	ft_putchar('\n');
-
-	ft_putendl("Real printf result :\n");
-	real_ret = printf("%zi", LLONG_MIN);
+	ft_putendl("Real printf result :");
+	real_ret = printf("%15.4o", 424242);
 	printf("\nREAL_RET : %d\n", real_ret);
 
 	//TO FIX
 	//ft_printf("%D", LONG_MAX);				???
 	//ft_printf("%ld", LONG_MAX);				???
-	//ft_printf("%D", LONG_MIN);				ITOA ISSUE
-	//ft_printf("%ld", LONG_MIN);				ITOA ISSUE
-	//ret = ft_printf("%zd", LLONG_MIN);		ITOA ISSUE
-	//ret = ft_printf("%zi", LLONG_MIN);		ITOA ISSUE
-	//ft_printf("%li", (long)INT_MIN - 1);		RET ISSUE
-	//ft_printf("%lld", LLONG_MAX);				RET ISSUE
-	//ft_printf("%hhd", CHAR_MAX);				RET ISSUE
-	//ft_printf("%hhd", CHAR_MAX + 42);			RET ISSUE
-	//ft_printf("%hhd", CHAR_MIN - 42);			RET ISSUE
-	//ft_printf("%hhi%hhi", 0, 42);				RET ISSUE
-	//ft_printf("%zd", LLONG_MAX);				RET ISSUE
-	//ft_printf("%lp", 42);						RET ISSUE
-	//ft_printf("{%3c}", 0);					RET ISSUE
-	//ft_printf("{%03c}", 0);					RET ISSUE
-	//ft_printf("%#X", INT_MAX);				RET ISSUE
-	//ft_printf("%#x", INT_MAX);				RET ISSUE
-	//ft_printf("%8.4u", 424242424);			RET ISSUE
-	//ft_printf("%4.15d", -424242);				RET ISSUE
-	//ft_printf("%8.4d", 424242424);			RET ISSUE
-	//ft_printf("%8.4X", 424242424);			RET ISSUE
-	//ft_printf("%4.15x", 42424242);			RET ISSUE
-	//ft_printf("%8.4x", 424242424);			RET ISSUE
-	//ft_printf("%4.15o", 424242);				RET ISSUE
+	//ft_printf("%li", (long)INT_MIN - 1);		???
+	//ft_printf("%lld", LLONG_MAX);				???
+	//ft_printf("%hhd", CHAR_MAX);				???
+	//ft_printf("%hhd", CHAR_MAX + 42);			???
+	//ft_printf("%hhd", CHAR_MIN - 42);			???
+	//ft_printf("%hhi%hhi", 0, 42);				???
+	//ft_printf("%zd", LLONG_MAX);				???
+	//ft_printf("%lp", 42);						???
+	//ft_printf("{%3c}", 0);					???
+	//ft_printf("{%03c}", 0);					???
+	//ft_printf("%#X", INT_MAX);				???
+	//ft_printf("%#x", INT_MAX);				???
+	//ft_printf("%8.4u", 424242424);			???
+	//ft_printf("%8.4d", 424242424);			???
+	//ft_printf("%8.4X", 424242424);			???
+	//ft_printf("%8.4x", 424242424);			???
+	//ft_printf("{% c}", 0);					???
+	//ft_printf("{% C}", 0);					???
+	//ft_printf("%zu, %zu", 0, ULLONG_MAX);		???
+	//ft_printf("%zo, %zo", 0, ULLONG_MAX);		???
+	//ft_printf("%zx, %zx", 0, ULLONG_MAX);		???
+	//ft_printf("%zX, %zX", 0, ULLONG_MAX);		???
+	//ft_printf("%4.15d", -424242);				last char wrong
+	//ft_printf("%4.15x", 42424242);			last char wrong
+	//ft_printf("%4.15o", 424242);				last char wrong
+	//ft_printf("%15.4o", 424242);				last char wrong
 	//ft_printf("{%05.c}", 0);					WIDTH+PRECISION+CHAR NULL
 	//ft_printf("{%#.5x}", 1);					PRECISION WITH PTR
 	//ft_printf("{%05.s}", 0);					ZERO WITH STR ISSUE
 	//ft_printf("{%05.S}", L"42 c est cool");	ZERO WITH WSTR ISSUE
 	//ft_printf("{%05.Z}", 0);					WIDTH WITH UB
-	//ft_printf("%15.4o", 424242);				RET ISSUE (WIDTH ?)
-	//ft_printf("{% c}", 0);					RET ISSUE (CHAR NULL)
-	//ft_printf("{% C}", 0);					RET ISSUE (WCHAR NULL)
-	//ft_printf("{%10R}");						RET ISSUE (WIDTH PARSING UB)
-	//ft_printf("{%05p}", 0);					RET ISSUE (ZERO & PTR)
+	//ft_printf("{%10R}");						WIDTH PARSING UB
+	//ft_printf("{%05p}", 0);					ZERO & PTR
 	//ft_printf("{%030S}", L"我是一只猫。");		RET ISSUE & WCHAR ISSUE
 	//ft_printf("{%-15Z}", 123);				RET ISSUE & RIGTH PADDING
 	//ft_printf("%15.4d", -424242);				RET ISSUE & WIDTH+MINUS
 	//ft_printf("%hhC, %hhC", 0, L'Á±≥');		WCHAR ISSUE
 	//ft_printf("%15.4S", L"我是一只猫。");		WCHAR ISSUE
 	//ft_printf("%.4S", L"我是一只猫。");			WCHAR ISSUE
-	//ft_printf("%zu, %zu", 0, ULLONG_MAX);		SEGFAULT
-	//ft_printf("%zo, %zo", 0, ULLONG_MAX);		SEGFAULT
-	//ft_printf("%zx, %zx", 0, ULLONG_MAX);		SEGFAULT
-	//ft_printf("%zX, %zX", 0, ULLONG_MAX);		SEGFAULT
 	//ft_printf("{%-30S}", L"我是一只猫。");		FREE ISSUE
 	/*ft_printf("%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C \
 	%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C\

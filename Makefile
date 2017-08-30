@@ -34,7 +34,6 @@ SRCS += ./src/char_conv.c
 
 SRCS += ./src/r_value.c
 
-SRCS += ./src/itoa_base.c
 SRCS += ./src/itoa.c
 SRCS += ./src/utils.c
 

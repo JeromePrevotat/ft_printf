@@ -40,16 +40,11 @@ int		char_conv(t_arg *arg, va_list ap)
 	else
 	{
 		arg->argv.c_arg = (char)va_arg(ap, int);
-		/*if (arg->argv.c_arg == 0 && arg->flags.hh == FALSE)
-		{
-			arg->converted_form = str_memcat(arg->converted_form, &arg->argv.c_arg, 1, 1);
-			return (1);
-		}*/
 		if (arg->flags.hh == TRUE)
 		{
 			arg->conv = -10;
 			arg->type = T_INT;
-			arg->argv.i_arg = arg->argv.c_arg;
+			arg->argv.imax_arg = arg->argv.c_arg;
 			arg->converted_form = convert(arg);
 		}
 		else
@@ -91,14 +86,6 @@ void	wchar_conv(t_arg *arg, va_list ap)
 	arg->wconverted_form = wstr_memcat(arg->wconverted_form,
 		&arg->argv.wchar_arg, 1, 1);
 }
-
-/*void	wstr_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.wstr_arg = (wchar_t *)va_arg(ap, wchar_t *);
-	arg->wchar_form = TRUE;
-	arg->wconverted_form = wstr_memcat(arg->wconverted_form, arg->argv.wstr_arg,
-		ft_wstrlen(arg->argv.wstr_arg), 1);
-}*/
 
 void	wstr_conv(t_arg *arg, va_list ap)
 {
