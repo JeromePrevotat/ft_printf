@@ -45,6 +45,7 @@ SRCS += ./src/ft_memset.c
 SRCS += ./src/ft_strlen.c
 SRCS += ./src/ft_memcpy.c
 SRCS += ./src/ft_putstr.c
+SRCS += ./src/ft_strcmp.c
 
 
 INC += ./inc/ft_printf.h

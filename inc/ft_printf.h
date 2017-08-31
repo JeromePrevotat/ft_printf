@@ -17,12 +17,14 @@
 # define TRUE 1
 # define FALSE 0
 # define OVERRIDE 3
+# define DONE 4
 
 # include "./libft.h"
 # include <stdarg.h>
 # include <wchar.h>
 # include <inttypes.h>
 # include <limits.h>
+# include <locale.h>
 
 typedef struct		s_flags
 {
@@ -178,6 +180,8 @@ char				*apply_ptr_precision(t_arg *arg);
 int					set_zero_flag(t_arg *arg);
 int					apply_zero(t_arg *arg);
 int					apply_zero_hex_altform(t_arg *arg);
+int					apply_str_zero(t_arg *arg);
+int					apply_wstr_zero(t_arg *arg);
 
 //Nbr_conv.c
 void				st_conv(t_arg *arg, va_list ap);
@@ -216,7 +220,8 @@ int					argv_sign(t_arg *arg);
 
 //Wchar_functions.c
 wchar_t				*str_to_wstr(const char *str);
-size_t				ft_wstrlen(const wchar_t *str);
+size_t				ft_wstr_blen(const wchar_t *str);
+size_t				ft_wstr_clen(const wchar_t *wstr);
 void				ft_putwchar(wchar_t c);
 void				ft_putwstr(wchar_t *wstr);
 wchar_t				*wstr_memcat(wchar_t *mem1, wchar_t *mem2, size_t size, int del);

@@ -15,7 +15,7 @@
 int		uchar_conv(t_arg *arg, va_list ap)
 {
 	if (arg->conv == '%')
-		arg->converted_form = str_memcat(arg->converted_form, "%", 1, 1);
+		arg->converted_form = str_memcat(arg->converted_form, "%\0", 2, 1);
 	else
 	{
 		arg->argv.uc_arg = (unsigned char)va_arg(ap, unsigned int);
@@ -26,7 +26,7 @@ int		uchar_conv(t_arg *arg, va_list ap)
 			arg->converted_form = convert(arg);
 		}
 		else if (arg->argv.c_arg == 0)
-			arg->converted_form = str_memcat(arg->converted_form, "0", 1, 1);
+			arg->converted_form = str_memcat(arg->converted_form, "0\0", 2, 1);
 		else
 			arg->converted_form = &arg->argv.c_arg;
 	}
@@ -36,7 +36,7 @@ int		uchar_conv(t_arg *arg, va_list ap)
 int		char_conv(t_arg *arg, va_list ap)
 {
 	if (arg->conv == '%')
-		arg->converted_form = str_memcat(arg->converted_form, "%", 1, 1);
+		arg->converted_form = str_memcat(arg->converted_form, "%\0", 2, 1);
 	else
 	{
 		arg->argv.c_arg = (char)va_arg(ap, int);
@@ -111,5 +111,5 @@ void	wstr_conv(t_arg *arg, va_list ap)
 		arg->wconverted_form = null;
 	}
 	else
-		arg->wconverted_form = arg->argv.wstr_arg;
+		arg->wconverted_form = wstr_memcat(arg->wconverted_form, arg->argv.wstr_arg, ft_wstr_clen(arg->argv.wstr_arg), 1);
 }

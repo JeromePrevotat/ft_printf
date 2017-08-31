@@ -54,9 +54,9 @@ wchar_t	*wcat(wchar_t *mem1, wchar_t *mem2, size_t size)
 
 	i = 0;
 	j = 0;
-	if (!(tmp = (wchar_t *)malloc((ft_wstrlen(mem1) + size + 1) * sizeof(wchar_t))))
+	if (!(tmp = (wchar_t *)malloc((ft_wstr_blen(mem1) + size + 1) * sizeof(wchar_t))))
 		return (NULL);
-	ft_memset(tmp, '\0', (ft_wstrlen(mem1) + size + 1));
+	ft_memset(tmp, '\0', (ft_wstr_blen(mem1) + size + 1));
 	while (mem1[i] != '\0')
 	{
 		tmp[i] = mem1[i];
@@ -86,7 +86,7 @@ void wfree(wchar_t *mem1, wchar_t *mem2, int del)
 	}
 }
 
-size_t	ft_wstrlen(const wchar_t *wstr)
+size_t	ft_wstr_blen(const wchar_t *wstr)
 {
 	size_t	len;
 
@@ -103,6 +103,21 @@ size_t	ft_wstrlen(const wchar_t *wstr)
 			len = len + 3;
 		else if (*wstr <= 0x10FFFF)
 			len = len + 4;
+		wstr++;
+	}
+	return (len);
+}
+
+size_t	ft_wstr_clen(const wchar_t *wstr)
+{
+	size_t	len;
+
+	if (!wstr)
+		return (ERROR);
+	len = 0;
+	while (*wstr)
+	{
+		len++;
 		wstr++;
 	}
 	return (len);

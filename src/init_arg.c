@@ -64,7 +64,7 @@ int	init_wconverted_form(t_arg *arg)
 {
 	if (arg->wconverted_form != NULL)
 	{
-		ft_memset(arg->wconverted_form, '\0', ft_wstrlen(arg->wconverted_form));
+		ft_memset(arg->wconverted_form, '\0', ft_wstr_blen(arg->wconverted_form));
 		arg->wconverted_form = NULL;
 	}
 	return (TRUE);

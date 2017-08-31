@@ -19,15 +19,18 @@ int	main(void)
 
 	int ret;
 	int	real_ret;
+	char	*local;
 
+	local = NULL;
+	local = setlocale(LC_ALL, "");
 	real_ret = 0;
 	ret = 0;
 	ft_putendl("My printf result :");
-	ret = ft_printf("%15.4o", 424242);
+	ret = ft_printf(">%15.4S<", L"我是一只猫。");
 	printf("\nRET : %d\n\n", ret);
 
 	ft_putendl("Real printf result :");
-	real_ret = printf("%15.4o", 424242);
+	real_ret = printf(">%15.4S<", L"我是一只猫。");
 	printf("\nREAL_RET : %d\n", real_ret);
 
 	//TO FIX
@@ -55,14 +58,14 @@ int	main(void)
 	//ft_printf("%zo, %zo", 0, ULLONG_MAX);		???
 	//ft_printf("%zx, %zx", 0, ULLONG_MAX);		???
 	//ft_printf("%zX, %zX", 0, ULLONG_MAX);		???
-	//ft_printf("%4.15d", -424242);				last char wrong
-	//ft_printf("%4.15x", 42424242);			last char wrong
-	//ft_printf("%4.15o", 424242);				last char wrong
-	//ft_printf("%15.4o", 424242);				last char wrong
-	//ft_printf("{%05.c}", 0);					WIDTH+PRECISION+CHAR NULL
+	//ft_printf("%4.15d", -424242);				last char wrong (FIXED ?)
+	//ft_printf("%4.15x", 42424242);			last char wrong (FIXED ?)
+	//ft_printf("%4.15o", 424242);				last char wrong (FIXED ?)
+	//ft_printf("%15.4o", 424242);				last char wrong (FIXED ?)
+	//ft_printf("{%05.s}", 0);					ZERO WITH STR ISSUE (FIXED ?)
+	//ft_printf("{%05.S}", L"42 c est cool");	ZERO WITH WSTR ISSUE (FIXED ?)
+	//ft_printf("{%05.c}", 0);					WIDTH+PRECISION+CHAR NULL (FIXED ?)
 	//ft_printf("{%#.5x}", 1);					PRECISION WITH PTR
-	//ft_printf("{%05.s}", 0);					ZERO WITH STR ISSUE
-	//ft_printf("{%05.S}", L"42 c est cool");	ZERO WITH WSTR ISSUE
 	//ft_printf("{%05.Z}", 0);					WIDTH WITH UB
 	//ft_printf("{%10R}");						WIDTH PARSING UB
 	//ft_printf("{%05p}", 0);					ZERO & PTR

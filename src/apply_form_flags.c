@@ -45,14 +45,14 @@ int	apply_minus(t_arg *arg)
 		if (!(tmp = (wchar_t *)malloc((arg->width + 1) * sizeof(wchar_t))))
 			return (ERROR);
 		ft_memset(tmp, '\0', (arg->width + 1));
-		real_width = arg->width - ft_wstrlen(arg->wconverted_form);
+		real_width = arg->width - ft_wstr_clen(arg->wconverted_form);
 		while (i < real_width && real_width >= 0)
 		{
 			tmp[i] = ' ';
 			i++;
 		}
 		tmp[i] = '\0';
-		arg->wconverted_form = wstr_memcat(arg->wconverted_form, tmp, ft_wstrlen(tmp), 1);
+		arg->wconverted_form = wstr_memcat(arg->wconverted_form, tmp, ft_wstr_blen(tmp), 1);
 	}
 	else
 	{
@@ -85,8 +85,8 @@ int	apply_plus(t_arg *arg)
 		ft_memset(wtmp, '\0', 2);
 		if (arg->conv == -10 && argv_sign(arg) >= 0)
 		{
-			wtmp = wstr_memcat(wtmp, L"+", ft_wstrlen(L"+"), 1);
-			wtmp = wstr_memcat(wtmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 1);
+			wtmp = wstr_memcat(wtmp, L"+", ft_wstr_blen(L"+"), 1);
+			wtmp = wstr_memcat(wtmp, arg->wconverted_form, ft_wstr_blen(arg->wconverted_form), 1);
 			if (arg->wconverted_form != NULL)
 				free(arg->wconverted_form);
 			arg->wconverted_form = wtmp;
@@ -124,7 +124,7 @@ int	apply_space(t_arg *arg)
 		if (arg->conv == -10 && argv_sign(arg) > 0)
 		{
 			wtmp = wstr_memcat(wtmp, L" ", 1, 1);
-			wtmp = wstr_memcat(wtmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 1);
+			wtmp = wstr_memcat(wtmp, arg->wconverted_form, ft_wstr_blen(arg->wconverted_form), 1);
 			if (arg->wconverted_form != NULL)
 				free(arg->wconverted_form);
 			arg->wconverted_form = wtmp;

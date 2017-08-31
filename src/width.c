@@ -95,12 +95,12 @@ void	apply_wstr_width(t_arg *arg)
 	if (arg->type == T_WCHAR && arg->argv.wchar_arg == 0)
 		real_width = arg->width - 1;
 	else
-		real_width = arg->width - ft_wstrlen(arg->wconverted_form);
+		real_width = arg->width - ft_wstr_blen(arg->wconverted_form);
 	while (i < real_width && real_width >= 0)
 	{
 		tmp[i] = L' ';
 		i++;
 	}
 	tmp[i] = L'\0';
-	arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstrlen(arg->wconverted_form), 0);
+	arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstr_blen(arg->wconverted_form), 0);
 }

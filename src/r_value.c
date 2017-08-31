@@ -27,9 +27,9 @@ int	check_ret(t_arg *arg)
 	else
 	{
 		if (arg->type == T_WCHAR && arg->argv.wchar_arg == 0 && arg->conv != '%')
-			ret = 1	+ ft_wstrlen(arg->wconverted_form);
+			ret = 1	+ ft_wstr_blen(arg->wconverted_form);
 		else
-			ret = ft_wstrlen(arg->wconverted_form);
+			ret = ft_wstr_blen(arg->wconverted_form);
 	}
 	return (ret);
 }

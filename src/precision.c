@@ -18,8 +18,9 @@ int		set_precision(t_arg *arg, char *str_form)
 	char	*precision;
 
 	i = 0;
-	if (arg->conv != 2 && arg->conv != 20 && arg->conv != 3 && arg->conv != 30 && arg->conv != 4 )
-		arg->flags.zero = OVERRIDE;
+	//printf("CONV : %d\n", arg->conv);
+//	if (arg->conv != 2 && arg->conv != 20 && arg->conv != 3 && arg->conv != 30 && arg->conv != 4)
+		//arg->flags.zero = OVERRIDE;
 	if (!(precision = (char *)malloc((ft_strlen(str_form) + 1) * sizeof(char))))
 		return (FALSE);
 	ft_memset(precision, '\0', ft_strlen(str_form) + 1);
@@ -47,44 +48,45 @@ int		apply_precision(t_arg *arg)
 
 int		apply_str_pre(t_arg *arg)
 {
-	int		end;
-	int		len;
 	int		i;
+	int		len;
 	wchar_t	*tmp;
 
+	tmp = NULL;
 	if (arg->wchar_form == TRUE)
 	{
-		len = 0;
-		end = 0;
-		tmp = NULL;
-		while (*(arg->wconverted_form + end) && len < arg->precision)
+		if (ft_wstr_blen(arg->wconverted_form) > arg->precision)
 		{
-			if (*(arg->wconverted_form + end) <= 0x7F)
-				len++;
-			else if (*(arg->wconverted_form + end) <= 0x7FF)
-				len = len + 2;
-			else if (*(arg->wconverted_form + end) <= 0xFFFF)
-				len = len + 3;
-			else if (*(arg->wconverted_form + end)<= 0x10FFFF)
-				len = len + 4;
-			end++;
-		}
-		if (len < arg->precision)
-			return (1);
-		else
-		{
-			if (!(tmp = (wchar_t *)malloc(end + 1 * sizeof(wchar_t))))
+			if (!(tmp = (wchar_t *)malloc(arg->precision + 1 * sizeof(wchar_t))))
 				return (ERROR);
-			ft_memset(tmp, '\0', end + 1);
+			ft_memset(tmp, '\0', arg->precision + 1);
 			i = 0;
-			while (i < end)
+			/*while (i < arg->precision)
 			{
 				tmp[i] = *(arg->wconverted_form + i);
 				i++;
 			}
 			tmp[i] = L'\0';
+			arg->wconverted_form = tmp;*/
+			len = 0;
+			while (*arg->wconverted_form && len < arg->precision - 1)
+			{
+				if (*arg->wconverted_form <= 0x7F)
+					len++;
+				else if (*arg->wconverted_form <= 0x7FF)
+					len = len + 2;
+				else if (*arg->wconverted_form <= 0xFFFF)
+					len = len + 3;
+				else if (*arg->wconverted_form <= 0x10FFFF)
+					len = len + 4;
+				tmp[i] = *(arg->wconverted_form + i);
+				i++;
+				arg->wconverted_form++;
+			}
+			tmp[i] = L'\0';
 			arg->wconverted_form = tmp;
 		}
+		return (1);
 	}
 	else
 		if (ft_strlen(arg->converted_form) > (size_t)arg->precision)
