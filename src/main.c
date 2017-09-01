@@ -26,11 +26,11 @@ int	main(void)
 	real_ret = 0;
 	ret = 0;
 	ft_putendl("My printf result :");
-	ret = ft_printf(">%15.4S<", L"我是一只猫。");
+	ret = ft_printf("{%-15Z}", 123);
 	printf("\nRET : %d\n\n", ret);
 
 	ft_putendl("Real printf result :");
-	real_ret = printf(">%15.4S<", L"我是一只猫。");
+	real_ret = printf("{%-15Z}", 123);
 	printf("\nREAL_RET : %d\n", real_ret);
 
 	//TO FIX
@@ -58,12 +58,6 @@ int	main(void)
 	//ft_printf("%zo, %zo", 0, ULLONG_MAX);		???
 	//ft_printf("%zx, %zx", 0, ULLONG_MAX);		???
 	//ft_printf("%zX, %zX", 0, ULLONG_MAX);		???
-	//ft_printf("%4.15d", -424242);				last char wrong (FIXED ?)
-	//ft_printf("%4.15x", 42424242);			last char wrong (FIXED ?)
-	//ft_printf("%4.15o", 424242);				last char wrong (FIXED ?)
-	//ft_printf("%15.4o", 424242);				last char wrong (FIXED ?)
-	//ft_printf("{%05.s}", 0);					ZERO WITH STR ISSUE (FIXED ?)
-	//ft_printf("{%05.S}", L"42 c est cool");	ZERO WITH WSTR ISSUE (FIXED ?)
 	//ft_printf("{%05.c}", 0);					WIDTH+PRECISION+CHAR NULL (FIXED ?)
 	//ft_printf("{%#.5x}", 1);					PRECISION WITH PTR
 	//ft_printf("{%05.Z}", 0);					WIDTH WITH UB
@@ -86,18 +80,6 @@ int	main(void)
 	'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e',
 	'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
 	't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}');
-		ret = ft_printf("%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C \
-	%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C\
-	%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C%C",
-	' ', '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-',
-	'.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';',
-	'<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
-	'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
-	'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e',
-	'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-	't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}');*/ // ???
-
-
 
 
 	/*

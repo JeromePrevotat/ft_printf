@@ -42,7 +42,7 @@ wchar_t	*wstr_memcat(wchar_t *mem1, wchar_t *mem2, size_t size, int del)
 		ft_memset(mem1, '\0', 1);
 	}
 	tmp = wcat(mem1, mem2, size);
-	wfree(mem1, mem2, del);
+	//wfree(mem1, mem2, del);
 	return (tmp);
 }
 

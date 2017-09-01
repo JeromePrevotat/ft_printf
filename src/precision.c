@@ -57,19 +57,12 @@ int		apply_str_pre(t_arg *arg)
 	{
 		if (ft_wstr_blen(arg->wconverted_form) > arg->precision)
 		{
+			i = 0;
+			len = 0;
 			if (!(tmp = (wchar_t *)malloc(arg->precision + 1 * sizeof(wchar_t))))
 				return (ERROR);
 			ft_memset(tmp, '\0', arg->precision + 1);
-			i = 0;
-			/*while (i < arg->precision)
-			{
-				tmp[i] = *(arg->wconverted_form + i);
-				i++;
-			}
-			tmp[i] = L'\0';
-			arg->wconverted_form = tmp;*/
-			len = 0;
-			while (*arg->wconverted_form && len < arg->precision - 1)
+			while (*arg->wconverted_form && len < arg->precision)
 			{
 				if (*arg->wconverted_form <= 0x7F)
 					len++;
@@ -79,7 +72,8 @@ int		apply_str_pre(t_arg *arg)
 					len = len + 3;
 				else if (*arg->wconverted_form <= 0x10FFFF)
 					len = len + 4;
-				tmp[i] = *(arg->wconverted_form + i);
+				if (len <= arg->precision)
+					*(tmp + i) = *(arg->wconverted_form);
 				i++;
 				arg->wconverted_form++;
 			}

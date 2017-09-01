@@ -45,7 +45,7 @@ int	apply_minus(t_arg *arg)
 		if (!(tmp = (wchar_t *)malloc((arg->width + 1) * sizeof(wchar_t))))
 			return (ERROR);
 		ft_memset(tmp, '\0', (arg->width + 1));
-		real_width = arg->width - ft_wstr_clen(arg->wconverted_form);
+		real_width = arg->width - ft_wstr_blen(arg->wconverted_form);
 		while (i < real_width && real_width >= 0)
 		{
 			tmp[i] = ' ';
