@@ -14,7 +14,8 @@
 
 int	check_ret(t_arg *arg)
 {
-	int	 ret;
+	(void)arg;
+	/*int	 ret;
 
 	ret = 0;
 	if ((arg->type == T_CHAR && arg->argv.c_arg == 0 && arg->conv != '%')
@@ -22,5 +23,6 @@ int	check_ret(t_arg *arg)
 		ret = 1 + ft_strlen(arg->converted_form);
 	else
 		ret = ft_strlen(arg->converted_form);
-	return (ret);
+	return (ret);*/
+	return (1);
 }

@@ -39,6 +39,8 @@ SRCS += ./src/utils.c
 
 SRCS += ./src/wchar_functions.c
 
+SRCS += ./src/buff.c
+
 SRCS += ./src/ft_atoi.c
 SRCS += ./src/ft_isdigit.c
 SRCS += ./src/ft_memset.c

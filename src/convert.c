@@ -61,7 +61,7 @@ void	char_convert_argv(t_arg *arg, va_list ap)
 		ptr_conv(arg, ap);
 }
 
-char	*convert(t_arg *arg)
+/*char	*convert(t_arg *arg)
 {
 	int	base;
 
@@ -75,18 +75,37 @@ char	*convert(t_arg *arg)
 	else
 		return (itoa_base_uimax(arg->argv.uimax_arg, base));
 	return (NULL);
+}*/
+
+void	convert(t_arg *arg)
+{
+	int	base;
+
+	base = arg->conv;
+	if (base < 0)
+		base = -base;
+	if (base > 16 && base != 160)
+		base = base / 10;
+	if (arg->conv < 0)
+		cat_str_buffer(arg->converted_form, itoa_base_imax(arg->argv.imax_arg, base), ft_strlen(itoa_base_imax(arg->argv.imax_arg, base)));
+	else
+		cat_str_buffer(arg->converted_form, itoa_base_uimax(arg->argv.uimax_arg, base), ft_strlen(itoa_base_uimax(arg->argv.uimax_arg, base)));
 }
 
 void	apply_flags(t_arg *arg)
 {
-	if (arg->flags.precision == TRUE)
+	if (arg->flags.zero == TRUE && arg->flags.minus == FALSE && arg->flags.precision == FALSE && arg->type == T_PTR)
+		apply_zero(arg);
+	if (arg->flags.precision == TRUE && (arg->conv == 16 || arg->conv == 160))
 		apply_precision(arg);
 	if (arg->flags.alt_form == TRUE)
 		apply_alt_form(arg);
+	if (arg->flags.precision == TRUE && (arg->conv != 16 || arg->conv != 160))
+		apply_precision(arg);
 	if (arg->flags.zero == TRUE && arg->flags.minus == FALSE && arg->flags.precision == FALSE)
 		apply_zero(arg);
 	else if (arg->flags.zero == TRUE && arg->flags.minus == FALSE && (arg->type == T_CHAR
-		|| arg->type == T_WCHAR || arg->type == T_PTR || arg->type == T_STR || arg->type == T_WSTR))
+		|| arg->type == T_WCHAR || arg->type == T_STR || arg->type == T_WSTR))
 		apply_zero(arg);
 	/*if (arg->flags.precision == TRUE)
 		apply_precision(arg);*/

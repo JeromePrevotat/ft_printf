@@ -26,6 +26,12 @@
 # include <limits.h>
 # include <locale.h>
 
+typedef struct		s_buff
+{
+	char			*str;
+	size_t			len;
+}					t_buff;
+
 typedef struct		s_flags
 {
 	int				alt_form;
@@ -73,7 +79,7 @@ typedef struct		s_argument
 	int				width;
 	int				precision;
 	char			*str_form;
-	char			*converted_form;
+	t_buff			*converted_form;
 	int				wchar_form;
 }					t_arg;
 
@@ -122,8 +128,8 @@ void				set_char_conv_arg(t_arg *arg, char c);
 int					convert_argv(t_arg *arg, va_list ap);
 void				nb_convert_argv(t_arg *arg, va_list ap);
 void				char_convert_argv(t_arg *arg, va_list ap);
-char				*convert(t_arg *arg);
-
+//char				*convert(t_arg *arg);
+void				convert(t_arg *arg);
 void				apply_size_flag(t_arg *arg);
 void				apply_flags(t_arg *arg);
 
@@ -228,5 +234,10 @@ void				wfree(wchar_t *mem1, wchar_t *mem2, int del);
 char				*wstr_to_str(t_arg *arg, wchar_t *wstr);
 int					wchar_to_char(wchar_t wchar, char *str);
 
+//Buff.c
+int					init_buffer(t_buff **buff);
+void				write_buffer(t_buff *buff);
+void				cat_buffer(t_buff *buff, t_buff *src);
+void				cat_str_buffer(t_buff *buff, char *src, size_t size);
 
 #endif

@@ -19,10 +19,10 @@ int	new_init_arg(t_arg **arg)
 	ft_memset(*arg, '\0', 1);
 	(*arg)->type = 0;
 	//(*arg)->conv = 0;
+	(*arg)->converted_form = NULL;
 	(*arg)->argv.imax_arg = 0;
 	(*arg)->argv.uimax_arg = 0;
 	(*arg)->str_form = NULL;
-	(*arg)->converted_form = NULL;
 	(*arg)->width = 0;
 	(*arg)->precision = 0;
 	(*arg)->wchar_form = FALSE;
@@ -45,7 +45,7 @@ int	init_str_form(t_arg **arg)
 	return (TRUE);
 }
 
-int	init_converted_form(t_arg *arg)
+/*int	init_converted_form(t_arg *arg)
 {
 	if (arg->converted_form == NULL)
 	{
@@ -55,6 +55,13 @@ int	init_converted_form(t_arg *arg)
 	}
 	else
 		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
+	return (TRUE);
+}*/
+
+int	init_converted_form(t_arg *arg)
+{
+	if (init_buffer(&(*arg).converted_form) == ERROR)
+		return (ERROR);
 	return (TRUE);
 }
 

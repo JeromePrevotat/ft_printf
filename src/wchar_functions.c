@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-wchar_t	*wstr_memcat(wchar_t *mem1, wchar_t *mem2, size_t size, int del)
+/*wchar_t	*wstr_memcat(wchar_t *mem1, wchar_t *mem2, size_t size, int del)
 {
 	wchar_t *tmp;
 
@@ -26,7 +26,7 @@ wchar_t	*wstr_memcat(wchar_t *mem1, wchar_t *mem2, size_t size, int del)
 	tmp = wcat(mem1, mem2, size);
 	//wfree(mem1, mem2, del);
 	return (tmp);
-}
+}*/
 
 wchar_t	*wcat(wchar_t *mem1, wchar_t *mem2, size_t size)
 {

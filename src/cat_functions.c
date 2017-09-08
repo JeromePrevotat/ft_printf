@@ -56,23 +56,28 @@ int		cat_format(char *format, va_list ap)
 	t_arg	*arg;
 	size_t	i;
 	int		ret;
-	char	*buff;
+	t_buff	*buff;
 
 	i = 0;
 	ret = 0;
 	arg = NULL;
-	if (!(buff = (char *)malloc(1 * sizeof(char))))
+	buff = NULL;
+	if (init_buffer(&buff) == ERROR)
 		return (0);
-	ft_memset(buff, '\0', 1);
 	while (i < ft_strlen(format))
 	{
 		if (format[i] == '%' && (i + 1) < ft_strlen(format))
 		{
 			if (new_init_arg(&arg) == ERROR)
 				return (ERROR);
-			ret = ret + get_arg((format + i + 1), arg, ap);
+			//ret = ret + get_arg((format + i + 1), arg, ap);
+			get_arg((format + i + 1), arg, ap);
 			i = i + ft_strlen(arg->str_form);
-			buff = str_memcat(buff, arg->converted_form, ft_strlen(arg->converted_form), 1);
+
+			//buff = str_memcat(buff, arg->converted_form, ft_strlen(arg->converted_form), 1);
+
+			cat_buffer(buff, arg->converted_form);
+
 			/*if (arg->str_form != arg->converted_form && arg->converted_form != NULL)
 				free(arg->converted_form);
 			if (arg->str_form != NULL)
@@ -84,10 +89,15 @@ int		cat_format(char *format, va_list ap)
 		else if (format[i] != '%')
 		{
 			ret++;
-			buff = str_memcat(buff, &format[i], 1, 1);
+
+			//buff = str_memcat(buff, &format[i], 1, 1);
+			cat_str_buffer(buff, &format[i], 1);
 		}
 		i++;
 	}
-	ft_putstr(buff);
+
+	//ft_putstr(buff);
+	write_buffer(buff);
+	ret = buff->len;
 	return (ret);
 }

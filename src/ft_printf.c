@@ -40,7 +40,8 @@ int		ft_printf(const char *format, ...)
 int		get_arg(char *format, t_arg *arg, va_list ap)
 {
 	get_arg_str_form(format, arg, ap);
-	return (check_ret(arg));
+	//return (check_ret(arg));
+	return (1);
 }
 
 void	get_arg_str_form(char *format, t_arg *arg, va_list ap)
@@ -66,5 +67,5 @@ void	get_arg_str_form(char *format, t_arg *arg, va_list ap)
 		arg->str_form = str_memcat(arg->str_form, format, i + 1, 1);
 	else
 		arg->str_form = str_memcat(arg->str_form, format, ft_strlen(format), 1);
-	arg->converted_form = get_undefined_behaviour(arg);
+	arg->converted_form->str = get_undefined_behaviour(arg);
 }
