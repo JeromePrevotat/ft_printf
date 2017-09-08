@@ -34,77 +34,40 @@ int	apply_alt_form(t_arg *arg)
 
 int	apply_minus(t_arg *arg)
 {
-	wchar_t	*tmp;
-	char	*tmp2;
+	char	*tmp;
 	int		i;
 	int		real_width;
 
 	i = 0;
-	if (arg->wconverted_form != NULL)
+	if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
+		return (ERROR);
+	ft_memset(tmp, '\0', (arg->width + 1));
+	real_width = arg->width - ft_strlen(arg->converted_form);
+	while (i < real_width && real_width >= 0)
 	{
-		if (!(tmp = (wchar_t *)malloc((arg->width + 1) * sizeof(wchar_t))))
-			return (ERROR);
-		ft_memset(tmp, '\0', (arg->width + 1));
-		real_width = arg->width - ft_wstr_blen(arg->wconverted_form);
-		while (i < real_width && real_width >= 0)
-		{
-			tmp[i] = ' ';
-			i++;
-		}
-		tmp[i] = '\0';
-		arg->wconverted_form = wstr_memcat(arg->wconverted_form, tmp, ft_wstr_blen(tmp), 1);
+		tmp[i] = ' ';
+		i++;
 	}
-	else
-	{
-		if (!(tmp2 = (char *)malloc((arg->width + 1) * sizeof(char))))
-			return (ERROR);
-		ft_memset(tmp2, '\0', (arg->width + 1));
-		real_width = arg->width - ft_strlen(arg->converted_form);
-		while (i < real_width && real_width >= 0)
-		{
-			tmp2[i] = ' ';
-			i++;
-		}
-		tmp2[i] = '\0';
-		arg->converted_form = str_memcat(arg->converted_form, tmp2, ft_strlen(tmp2), 1);
-	}
+	tmp[i] = '\0';
+	arg->converted_form = str_memcat(arg->converted_form, tmp, ft_strlen(tmp), 1);
 	return (TRUE);
 }
 
 int	apply_plus(t_arg *arg)
 {
 	char	*tmp;
-	wchar_t	*wtmp;
 
 	tmp = NULL;
-	wtmp = NULL;
-	if (arg->wchar_form == TRUE)
+	if (!(tmp = (char *)malloc(2 * sizeof(char))))
+		return (ERROR);
+	ft_memset(tmp, '\0', 2);
+	if (arg->conv == -10 && argv_sign(arg) >= 0)
 	{
-		if (!(wtmp = (wchar_t *)malloc(2 * sizeof(wchar_t))))
-			return (ERROR);
-		ft_memset(wtmp, '\0', 2);
-		if (arg->conv == -10 && argv_sign(arg) >= 0)
-		{
-			wtmp = wstr_memcat(wtmp, L"+", ft_wstr_blen(L"+"), 1);
-			wtmp = wstr_memcat(wtmp, arg->wconverted_form, ft_wstr_blen(arg->wconverted_form), 1);
-			if (arg->wconverted_form != NULL)
-				free(arg->wconverted_form);
-			arg->wconverted_form = wtmp;
-		}
-	}
-	else
-	{
-		if (!(tmp = (char *)malloc(2 * sizeof(char))))
-			return (ERROR);
-		ft_memset(tmp, '\0', 2);
-		if (arg->conv == -10 && argv_sign(arg) >= 0)
-		{
-			tmp = str_memcat(tmp, "+", ft_strlen("+"), 1);
-			tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
-			if (arg->converted_form != NULL)
-				free(arg->converted_form);
-			arg->converted_form = tmp;
-		}
+		tmp = str_memcat(tmp, "+", ft_strlen("+"), 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
+		if (arg->converted_form != NULL)
+			free(arg->converted_form);
+		arg->converted_form = tmp;
 	}
 	return (TRUE);
 }
@@ -112,39 +75,19 @@ int	apply_plus(t_arg *arg)
 int	apply_space(t_arg *arg)
 {
 	char	*tmp;
-	wchar_t	*wtmp;
 
 	tmp = NULL;
-	wtmp = NULL;
-	if (arg->wchar_form == TRUE)
+	if (!(tmp = (char *)malloc(1 * sizeof(char))))
+		return (ERROR);
+	ft_memset(tmp, '\0', 1);
+	if (arg->conv == -10 && argv_sign(arg) >= 0)
 	{
-		if (!(wtmp = (wchar_t *)malloc(1 * sizeof(wchar_t))))
-			return (ERROR);
-		ft_memset(wtmp, '\0', 1);
-		if (arg->conv == -10 && argv_sign(arg) > 0)
-		{
-			wtmp = wstr_memcat(wtmp, L" ", 1, 1);
-			wtmp = wstr_memcat(wtmp, arg->wconverted_form, ft_wstr_blen(arg->wconverted_form), 1);
-			if (arg->wconverted_form != NULL)
-				free(arg->wconverted_form);
-			arg->wconverted_form = wtmp;
-		}
+		tmp = str_memcat(tmp, " ", 1, 1);
+		tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
+		if (arg->converted_form != NULL)
+			free(arg->converted_form);
+		arg->converted_form = tmp;
 	}
-	else
-	{
-		if (!(tmp = (char *)malloc(1 * sizeof(char))))
-			return (ERROR);
-		ft_memset(tmp, '\0', 1);
-		if (arg->conv == -10 && argv_sign(arg) >= 0)
-		{
-			tmp = str_memcat(tmp, " ", 1, 1);
-			tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
-			if (arg->converted_form != NULL)
-				free(arg->converted_form);
-			arg->converted_form = tmp;
-			//tmp = str_memcat(tmp, " ", 1, 1);
-			//arg->converted_form = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 2);
-		}
-	}
+
 	return (TRUE);
 }

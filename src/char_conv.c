@@ -83,13 +83,12 @@ void	wchar_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.wchar_arg = (wchar_t)va_arg(ap, wchar_t);
 	arg->wchar_form = TRUE;
-	arg->wconverted_form = wstr_memcat(arg->wconverted_form,
-		&arg->argv.wchar_arg, 1, 1);
+	arg->converted_form = wstr_to_str(arg, &arg->argv.wchar_arg);
 }
 
 void	wstr_conv(t_arg *arg, va_list ap)
 {
-	wchar_t	*null;
+	char	*null;
 	wchar_t	*tmp;
 
 	null = NULL;
@@ -98,18 +97,18 @@ void	wstr_conv(t_arg *arg, va_list ap)
 	arg->wchar_form = TRUE;
 	if (arg->argv.wstr_arg == NULL)
 	{
-		if (!((null) = (wchar_t *)malloc(7 * sizeof(wchar_t))))
+		if (!((null) = (char *)malloc(7 * sizeof(char))))
 			return ;
 		ft_memset(null, '\0', 7);
-		null[0] = L'(';
-		null[1] = L'n';
-		null[2] = L'u';
-		null[3] = L'l';
-		null[4] = L'l';
-		null[5] = L')';
-		null[6] = L'\0';
-		arg->wconverted_form = null;
+		null[0] = '(';
+		null[1] = 'n';
+		null[2] = 'u';
+		null[3] = 'l';
+		null[4] = 'l';
+		null[5] = ')';
+		null[6] = '\0';
+		arg->converted_form = null;
 	}
 	else
-		arg->wconverted_form = wstr_memcat(arg->wconverted_form, arg->argv.wstr_arg, ft_wstr_clen(arg->argv.wstr_arg), 1);
+		arg->converted_form = wstr_to_str(arg, arg->argv.wstr_arg);
 }

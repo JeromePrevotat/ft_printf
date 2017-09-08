@@ -18,9 +18,6 @@ int		set_precision(t_arg *arg, char *str_form)
 	char	*precision;
 
 	i = 0;
-	//printf("CONV : %d\n", arg->conv);
-//	if (arg->conv != 2 && arg->conv != 20 && arg->conv != 3 && arg->conv != 30 && arg->conv != 4)
-		//arg->flags.zero = OVERRIDE;
 	if (!(precision = (char *)malloc((ft_strlen(str_form) + 1) * sizeof(char))))
 		return (FALSE);
 	ft_memset(precision, '\0', ft_strlen(str_form) + 1);
@@ -48,89 +45,44 @@ int		apply_precision(t_arg *arg)
 
 int		apply_str_pre(t_arg *arg)
 {
-	int		i;
-	int		len;
-	wchar_t	*tmp;
+	int	i;
 
-	tmp = NULL;
-	if (arg->wchar_form == TRUE)
+	i = 0;
+	if (arg->precision <= 0)
 	{
-		if (ft_wstr_blen(arg->wconverted_form) > arg->precision)
-		{
-			i = 0;
-			len = 0;
-			if (!(tmp = (wchar_t *)malloc(arg->precision + 1 * sizeof(wchar_t))))
-				return (ERROR);
-			ft_memset(tmp, '\0', arg->precision + 1);
-			while (*arg->wconverted_form && len < arg->precision)
-			{
-				if (*arg->wconverted_form <= 0x7F)
-					len++;
-				else if (*arg->wconverted_form <= 0x7FF)
-					len = len + 2;
-				else if (*arg->wconverted_form <= 0xFFFF)
-					len = len + 3;
-				else if (*arg->wconverted_form <= 0x10FFFF)
-					len = len + 4;
-				if (len <= arg->precision)
-					*(tmp + i) = *(arg->wconverted_form);
-				i++;
-				arg->wconverted_form++;
-			}
-			tmp[i] = L'\0';
-			arg->wconverted_form = tmp;
-		}
+		arg->converted_form[0] = '\0';
 		return (1);
 	}
-	else
-		if (ft_strlen(arg->converted_form) > (size_t)arg->precision)
-			arg->converted_form[arg->precision] = '\0';
+	if (arg->type == T_WSTR)
+		return (1);
+	if ((int)ft_strlen(arg->converted_form) > arg->precision)
+		arg->converted_form[arg->precision] = '\0';
+
 	return (1);
 }
 
 int		apply_nbr_pre(t_arg *arg)
 {
-	wchar_t	*tmp;
-	char	*tmp2;
+	char	*tmp;
 
-	tmp2 = NULL;
 	tmp = NULL;
-	if (arg->wchar_form == TRUE)
+	if (arg->precision == 0 && argv_sign(arg) == 0)
 	{
-		if (arg->precision == 0 && argv_sign(arg) == 0)
-		{
-			if (arg->flags.alt_form == TRUE && (arg->conv == 8 || arg->conv == 80))
-				arg->wconverted_form[1] = '\0';
-			else
-				arg->wconverted_form[0] = '\0';
-			return (1);
-		}
-		if (argv_sign(arg) < 0)
-			tmp = str_to_wstr(apply_negative(arg));
-		else if (argv_sign(arg) >= 0)
-			tmp = str_to_wstr(apply_positive(arg));
-		arg->wconverted_form = tmp;
-	}
-	else
-	{
-		if (arg->precision == 0 && argv_sign(arg) == 0)
-		{
-			if (arg->flags.alt_form == TRUE && (arg->conv == 8 || arg->conv == 80))
-				arg->converted_form[1] = '\0';
-			else if (arg->type == T_PTR)
-				arg->converted_form[2] = '\0';
-			else
-				arg->converted_form[0] = '\0';
-			return (1);
-		}
-		if (argv_sign(arg) < 0 && arg->type != T_PTR)
-			tmp2 = apply_negative(arg);
-		else if (argv_sign(arg) >= 0 && arg->type != T_PTR)
-			tmp2 = apply_positive(arg);
+		if (arg->flags.alt_form == TRUE && (arg->conv == 8 || arg->conv == 80))
+			arg->converted_form[1] = '\0';
 		else if (arg->type == T_PTR)
-			tmp2 = apply_ptr_precision(arg);
-		arg->converted_form = tmp2;
+			arg->converted_form[2] = '\0';
+		else
+			arg->converted_form[0] = '\0';
+		return (1);
 	}
+	if (argv_sign(arg) < 0 && arg->type != T_PTR)
+		tmp = apply_negative(arg);
+	else if (argv_sign(arg) >= 0 && arg->type != T_PTR)
+		tmp = apply_positive(arg);
+	else if (arg->type == T_PTR)
+		tmp = apply_ptr_precision(arg);
+	arg->converted_form = tmp;
 	return (1);
 }
 

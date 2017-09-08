@@ -19,6 +19,7 @@ int		ft_printf(const char *format, ...)
 	char	*f;
 	size_t	i;
 
+	MB_CUR_MAX = 4;
 	i = 0;
 	if (!(f = (char *)malloc((ft_strlen(format) + 1 ) * sizeof(char))))
 		return (ERROR);

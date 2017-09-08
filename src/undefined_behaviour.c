@@ -43,7 +43,7 @@ char	*get_undefined_behaviour(t_arg *arg)
 	tmp = NULL;
 	if (arg->str_form != NULL)
 	{
-		while (i < ft_strlen(arg->str_form) - 1 && next_i > 0)
+		while (i < ft_strlen(arg->str_form) && next_i > 0)
 		{
 			next_i = new_flag_parsing(arg, arg->str_form, i);
 			if (next_i > 0)

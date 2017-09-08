@@ -23,12 +23,10 @@ int	new_init_arg(t_arg **arg)
 	(*arg)->argv.uimax_arg = 0;
 	(*arg)->str_form = NULL;
 	(*arg)->converted_form = NULL;
-	(*arg)->wconverted_form = NULL;
 	(*arg)->width = 0;
 	(*arg)->precision = 0;
 	(*arg)->wchar_form = FALSE;
-	if (init_str_form(arg) == ERROR || init_converted_form((*arg)) == ERROR ||
-	init_wconverted_form((*arg)) == ERROR)
+	if (init_str_form(arg) == ERROR || init_converted_form((*arg)) == ERROR)
 		return (ERROR);
 	init_flags_arg((*arg));
 	return (TRUE);
@@ -57,16 +55,6 @@ int	init_converted_form(t_arg *arg)
 	}
 	else
 		ft_memset(arg->converted_form, '\0', ft_strlen(arg->converted_form));
-	return (TRUE);
-}
-
-int	init_wconverted_form(t_arg *arg)
-{
-	if (arg->wconverted_form != NULL)
-	{
-		ft_memset(arg->wconverted_form, '\0', ft_wstr_blen(arg->wconverted_form));
-		arg->wconverted_form = NULL;
-	}
 	return (TRUE);
 }
 

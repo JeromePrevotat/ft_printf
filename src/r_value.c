@@ -17,19 +17,10 @@ int	check_ret(t_arg *arg)
 	int	 ret;
 
 	ret = 0;
-	if (arg->wchar_form == FALSE)
-	{
-		if (arg->type == T_CHAR && arg->argv.c_arg == 0 && arg->conv != '%')
-			ret = 1 + ft_strlen(arg->converted_form);
-		else
-			ret = ft_strlen(arg->converted_form);
-	}
+	if ((arg->type == T_CHAR && arg->argv.c_arg == 0 && arg->conv != '%')
+		|| (arg->type == T_WCHAR && arg->argv.wchar_arg == 0 && arg->conv != '%'))
+		ret = 1 + ft_strlen(arg->converted_form);
 	else
-	{
-		if (arg->type == T_WCHAR && arg->argv.wchar_arg == 0 && arg->conv != '%')
-			ret = 1	+ ft_wstr_blen(arg->wconverted_form);
-		else
-			ret = ft_wstr_blen(arg->wconverted_form);
-	}
+		ret = ft_strlen(arg->converted_form);
 	return (ret);
 }

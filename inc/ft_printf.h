@@ -74,7 +74,6 @@ typedef struct		s_argument
 	int				precision;
 	char			*str_form;
 	char			*converted_form;
-	wchar_t			*wconverted_form;
 	int				wchar_form;
 }					t_arg;
 
@@ -219,14 +218,15 @@ int					get_width(char *str, t_arg *arg);
 int					argv_sign(t_arg *arg);
 
 //Wchar_functions.c
-wchar_t				*str_to_wstr(const char *str);
 size_t				ft_wstr_blen(const wchar_t *str);
 size_t				ft_wstr_clen(const wchar_t *wstr);
-void				ft_putwchar(wchar_t c);
-void				ft_putwstr(wchar_t *wstr);
+int					ft_putwchar(wchar_t c);
+int					ft_putwstr(wchar_t *wstr);
 wchar_t				*wstr_memcat(wchar_t *mem1, wchar_t *mem2, size_t size, int del);
 wchar_t				*wcat(wchar_t *mem1, wchar_t *mem2, size_t size);
 void				wfree(wchar_t *mem1, wchar_t *mem2, int del);
+char				*wstr_to_str(t_arg *arg, wchar_t *wstr);
+int					wchar_to_char(wchar_t wchar, char *str);
 
 
 #endif

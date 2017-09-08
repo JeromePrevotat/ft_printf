@@ -38,18 +38,10 @@ int		apply_width(t_arg *arg)
 {
 	int		i;
 	int		real_width;
-	char	*tmp;
 
 	i = 0;
 	real_width = 0;
-	tmp = NULL;
-	if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
-	return (ERROR);
-	if (arg->wchar_form == TRUE)
-		apply_wstr_width(arg);
-	else
-		apply_str_width(arg);
-	free(tmp);
+	apply_str_width(arg);
 	return (1);
 }
 
@@ -78,29 +70,4 @@ void	apply_str_width(t_arg *arg)
 	tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 0);
 	free(arg->converted_form);
 	arg->converted_form = tmp;
-}
-
-void	apply_wstr_width(t_arg *arg)
-{
-	wchar_t	*tmp;
-	int		real_width;
-	int		i;
-
-	i = 0;
-	real_width = 0;
-	tmp = NULL;
-	if (!(tmp = (wchar_t *)malloc((arg->width + 1) * sizeof(wchar_t))))
-		return ;
-	ft_memset(tmp, '\0', (arg->width + 1));
-	if (arg->type == T_WCHAR && arg->argv.wchar_arg == 0)
-		real_width = arg->width - 1;
-	else
-		real_width = arg->width - ft_wstr_blen(arg->wconverted_form);
-	while (i < real_width && real_width > 0)
-	{
-		tmp[i] = L' ';
-		i++;
-	}
-	tmp[i] = L'\0';
-	arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstr_blen(arg->wconverted_form), 1);
 }

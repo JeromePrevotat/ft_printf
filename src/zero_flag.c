@@ -34,8 +34,6 @@ int	apply_zero(t_arg *arg)
 
 	if (arg->type == T_STR)
 		return (apply_str_zero(arg));
-	if (arg->type == T_WSTR)
-		return (apply_wstr_zero(arg));
 	i = 0;
 	j = 0;
 	if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
@@ -94,32 +92,6 @@ int	apply_str_zero(t_arg *arg)
 		}
 		tmp[i] = '\0';
 		arg->converted_form = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 2);
-		arg->flags.zero = DONE;
-	}
-	return (1);
-}
-
-int	apply_wstr_zero(t_arg *arg)
-{
-	int		i;
-	int		real_width;
-	wchar_t	*tmp;
-
-	i = 0;
-	tmp = NULL;
-	real_width = arg->width - ft_wstr_clen(arg->wconverted_form);
-	if (real_width > 0)
-	{
-		if (!(tmp = (wchar_t *)malloc((arg->width + 1) * sizeof(wchar_t))))
-		return (ERROR);
-		ft_memset(tmp, '\0', (arg->width + 1));
-		while (i < real_width)
-		{
-			tmp[i] = L'0';
-			i++;
-		}
-		tmp[i] = '\0';
-		arg->wconverted_form = wstr_memcat(tmp, arg->wconverted_form, ft_wstr_clen(arg->wconverted_form), 2);
 		arg->flags.zero = DONE;
 	}
 	return (1);
