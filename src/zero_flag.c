@@ -43,7 +43,7 @@ int	apply_zero(t_arg *arg)
 		|| ((arg->conv == 2 && arg->argv.c_arg == 0) || (arg->conv == 20 && arg->argv.wchar_arg == 0)))
 		//real_width = arg->width - ft_strlen(arg->converted_form) - 1;
 		real_width = arg->width - arg->converted_form->len;*/
-	if (arg->flags.plus == TRUE)
+	if (arg->flags.plus == TRUE && argv_sign(arg) >= 0)
 		real_width = arg->width - arg->converted_form->len - 1;
 	else if (arg->type == T_PTR)
 		//real_width = arg->width - ft_strlen(arg->converted_form) - 2;
@@ -76,7 +76,7 @@ int	apply_zero(t_arg *arg)
 	//if (arg->converted_form != NULL)
 	if (arg->converted_form->str != NULL)
 		//free(arg->converted_form);
-		free(arg->converted_form->str);
+		//free(arg->converted_form->str);
 	//arg->converted_form = tmp;
 	arg->converted_form->str = tmp;
 	//

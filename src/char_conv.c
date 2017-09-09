@@ -123,5 +123,6 @@ void	wstr_conv(t_arg *arg, va_list ap)
 	}
 	else
 		//arg->converted_form = wstr_to_str(arg, arg->argv.wstr_arg);
-		cat_str_buffer(arg->converted_form, wstr_to_str(arg, arg->argv.wstr_arg), ft_wstr_blen(arg->argv.wstr_arg));
+		//cat_str_buffer(arg->converted_form, wstr_to_str(arg, arg->argv.wstr_arg), ft_wstr_blen(arg->argv.wstr_arg));
+		cat_str_buffer(arg->converted_form, wstr_to_str(arg, arg->argv.wstr_arg), ft_strlen(wstr_to_str(arg, arg->argv.wstr_arg)));
 }

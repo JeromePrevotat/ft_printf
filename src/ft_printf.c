@@ -68,4 +68,5 @@ void	get_arg_str_form(char *format, t_arg *arg, va_list ap)
 	else
 		arg->str_form = str_memcat(arg->str_form, format, ft_strlen(format), 1);
 	arg->converted_form->str = get_undefined_behaviour(arg);
+	apply_flags(arg);
 }

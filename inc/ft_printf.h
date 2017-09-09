@@ -108,7 +108,7 @@ int					set_flag(t_arg *arg, char c);
 
 //Undefined_behaviour.c
 char				*get_undefined_behaviour(t_arg *arg);
-int					ub_is_flag(char c);
+int					ub_is_flag(char c, t_arg *arg);
 
 //Init_arg.c
 int					init_str_form(t_arg **arg);

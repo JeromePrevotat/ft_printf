@@ -100,12 +100,12 @@ void	apply_flags(t_arg *arg)
 		apply_precision(arg);
 	if (arg->flags.alt_form == TRUE)
 		apply_alt_form(arg);
-	if (arg->flags.precision == TRUE && (arg->conv != 16 || arg->conv != 160))
+	if (arg->flags.precision == TRUE && (arg->conv != 16 && arg->conv != 160 && arg->conv != 0))
 		apply_precision(arg);
 	if (arg->flags.zero == TRUE && arg->flags.minus == FALSE && arg->flags.precision == FALSE)
 		apply_zero(arg);
 	else if (arg->flags.zero == TRUE && arg->flags.minus == FALSE && (arg->type == T_CHAR
-		|| arg->type == T_WCHAR || arg->type == T_STR || arg->type == T_WSTR))
+		|| arg->type == T_WCHAR || arg->type == T_STR || arg->type == T_WSTR || arg->type == 0))
 		apply_zero(arg);
 	/*if (arg->flags.precision == TRUE)
 		apply_precision(arg);*/
