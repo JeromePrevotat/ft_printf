@@ -42,21 +42,13 @@ char	*str_memcat(char *mem1, char *mem2, size_t size, int del)
 void sfree(char *mem1, char *mem2, int del)
 {
 	if (del == 1 && mem1 != NULL)
-	{
 		free(mem1);
-		//mem1 = NULL;
-	}
 	if (del == 2 && mem2 != NULL)
-	{
 		free(mem2);
-		//mem2 = NULL;
-	}
 	if (del == 3 && mem1 != NULL && mem2 != NULL)
 	{
 		free(mem1);
 		free(mem2);
-		//mem1 = NULL;
-		//mem2 = NULL;
 	}
 }
 

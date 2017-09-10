@@ -1,46 +1,35 @@
 CC = gcc
-CFLAGS = -Wall -Wextra #-Werror
-#NAME = print
+#CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 
-#SRCS += ./src/main.c
+TEST = print
+
+SRCS_T +=./src/main.c
+
 SRCS += ./src/ft_putendl.c
 SRCS += ./src/ft_putchar.c
-
 SRCS += ./src/ft_printf.c
 SRCS += ./src/cat_functions.c
 SRCS += ./src/parsing_utils.c
-
 SRCS += ./src/flags_parsing.c
-
 SRCS += ./src/undefined_behaviour.c
-
 SRCS += ./src/init_arg.c
 SRCS += ./src/fill_arg.c
 SRCS += ./src/convert.c
-
 SRCS += ./src/special_flags.c
 SRCS += ./src/set_size_flags.c
 SRCS += ./src/apply_size_flags.c
 SRCS += ./src/set_form_flags.c
 SRCS += ./src/apply_form_flags.c
 SRCS += ./src/zero_flag.c
-
 SRCS += ./src/precision.c
 SRCS += ./src/width.c
-
 SRCS += ./src/nbr_conv.c
 SRCS += ./src/char_conv.c
-
-SRCS += ./src/r_value.c
-
 SRCS += ./src/itoa.c
 SRCS += ./src/utils.c
-
 SRCS += ./src/wchar_functions.c
-
 SRCS += ./src/buff.c
-
 SRCS += ./src/ft_atoi.c
 SRCS += ./src/ft_isdigit.c
 SRCS += ./src/ft_memset.c
@@ -48,19 +37,23 @@ SRCS += ./src/ft_strlen.c
 SRCS += ./src/ft_memcpy.c
 SRCS += ./src/ft_putstr.c
 SRCS += ./src/ft_strcmp.c
+SRCS += ./src/ft_strdup.c
 
 
 INC += ./inc/ft_printf.h
 INC += ./inc/libft.h
 
 OBJ = $(SRCS:.c=.o)
+OBJ_T = $(SRCS_T:.c=.o)
 
-all: $(NAME)
+all: $(NAME) $(TEST)
 
 $(NAME): $(OBJ) $(INC)
-	#$(CC) -g $(CFLAGS) $(SRCS) -o $@
 	ar -rc $(NAME) $(OBJ)
 	ranlib $(NAME)
+
+$(TEST): $(OBJ) $(OBJ_T) $(INC)
+	$(CC) -g $(CFLAGS) $(SRCS) $(SRCS_T) -o $@
 
 .PHONY: clean
 clean:

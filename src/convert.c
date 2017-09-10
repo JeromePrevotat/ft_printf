@@ -61,35 +61,23 @@ void	char_convert_argv(t_arg *arg, va_list ap)
 		ptr_conv(arg, ap);
 }
 
-/*char	*convert(t_arg *arg)
-{
-	int	base;
-
-	base = arg->conv;
-	if (base < 0)
-		base = -base;
-	if (base > 16 && base != 160)
-		base = base / 10;
-	if (arg->conv < 0)
-		return (itoa_base_imax(arg->argv.imax_arg, base));
-	else
-		return (itoa_base_uimax(arg->argv.uimax_arg, base));
-	return (NULL);
-}*/
-
 void	convert(t_arg *arg)
 {
-	int	base;
+	int		base;
+	char	*tmp;
 
+	tmp = NULL;
 	base = arg->conv;
 	if (base < 0)
 		base = -base;
 	if (base > 16 && base != 160)
 		base = base / 10;
 	if (arg->conv < 0)
-		cat_str_buffer(arg->converted_form, itoa_base_imax(arg->argv.imax_arg, base), ft_strlen(itoa_base_imax(arg->argv.imax_arg, base)));
+		tmp = itoa_base_imax(arg->argv.imax_arg, base);
 	else
-		cat_str_buffer(arg->converted_form, itoa_base_uimax(arg->argv.uimax_arg, base), ft_strlen(itoa_base_uimax(arg->argv.uimax_arg, base)));
+		tmp = itoa_base_uimax(arg->argv.uimax_arg, base);
+	arg->conv_form->len = ft_strlen(tmp);
+	arg->conv_form->str = tmp;
 }
 
 void	apply_flags(t_arg *arg)
@@ -107,15 +95,10 @@ void	apply_flags(t_arg *arg)
 	else if (arg->flags.zero == TRUE && arg->flags.minus == FALSE && (arg->type == T_CHAR
 		|| arg->type == T_WCHAR || arg->type == T_STR || arg->type == T_WSTR || arg->type == 0))
 		apply_zero(arg);
-	/*if (arg->flags.precision == TRUE)
-		apply_precision(arg);*/
 	if (arg->flags.space == TRUE && arg->flags.plus != TRUE)
 		apply_space(arg);
 	if (arg->flags.plus == TRUE)
 		apply_plus(arg);
-	//NEW CONDITION TO DISCARD ZERO FLAG WHEN OVERRIDE
-	//if (arg->flags.width == TRUE && arg->flags.minus == FALSE
-		//&& (arg->flags.zero == FALSE || arg->flags.zero == OVERRIDE))
 	if (arg->flags.width == TRUE && arg->flags.minus == FALSE
 		&& (arg->flags.zero == FALSE || arg->flags.zero != DONE))
 		apply_width(arg);

@@ -15,8 +15,7 @@
 int		uchar_conv(t_arg *arg, va_list ap)
 {
 	if (arg->conv == '%')
-		//arg->converted_form = str_memcat(arg->converted_form, "%\0", 2, 1);
-		cat_str_buffer(arg->converted_form, "%", 1);
+		cat_str_buffer(arg->conv_form, "%", 1);
 	else
 	{
 		arg->argv.uc_arg = (unsigned char)va_arg(ap, unsigned int);
@@ -24,15 +23,12 @@ int		uchar_conv(t_arg *arg, va_list ap)
 		{
 			arg->type = T_UINT;
 			arg->argv.uimax_arg = arg->argv.uc_arg;
-			//arg->converted_form = convert(arg);
 			convert(arg);
 		}
 		else if (arg->argv.c_arg == 0)
-			//arg->converted_form = str_memcat(arg->converted_form, "0\0", 2, 1);
-			cat_str_buffer(arg->converted_form, "0", 1);
+			cat_str_buffer(arg->conv_form, "0", 1);
 		else
-			//arg->converted_form = &arg->argv.c_arg;
-			cat_str_buffer(arg->converted_form, &arg->argv.c_arg, 1);
+			cat_str_buffer(arg->conv_form, &arg->argv.c_arg, 1);
 	}
 	return (TRUE);
 }
@@ -40,8 +36,7 @@ int		uchar_conv(t_arg *arg, va_list ap)
 int		char_conv(t_arg *arg, va_list ap)
 {
 	if (arg->conv == '%')
-		//arg->converted_form = str_memcat(arg->converted_form, "%\0", 2, 1);
-		cat_str_buffer(arg->converted_form, "%", 1);
+		cat_str_buffer(arg->conv_form, "%", 1);
 	else
 	{
 		arg->argv.c_arg = (char)va_arg(ap, int);
@@ -51,12 +46,10 @@ int		char_conv(t_arg *arg, va_list ap)
 			arg->conv = -10;
 			arg->type = T_INT;
 			arg->argv.imax_arg = arg->argv.c_arg;
-			//arg->converted_form = convert(arg);
 			convert(arg);
 		}
 		else
-			//arg->converted_form = str_memcat(arg->converted_form, &arg->argv.c_arg, 1, 1);
-			cat_str_buffer(arg->converted_form, &arg->argv.c_arg, 1);
+			cat_str_buffer(arg->conv_form, &arg->argv.c_arg, 1);
 	}
 	return (TRUE);
 }
@@ -79,22 +72,19 @@ void	str_conv(t_arg *arg, va_list ap)
 		null[4] = 'l';
 		null[5] = ')';
 		null[6] = '\0';
-		//arg->converted_form = null;
-		cat_str_buffer(arg->converted_form, null, ft_strlen(null));
+		cat_str_buffer(arg->conv_form, null, ft_strlen(null));
 	}
 	else
-		//arg->converted_form = str_memcat(arg->converted_form, arg->argv.str_arg, ft_strlen(arg->argv.str_arg), 1);
-		cat_str_buffer(arg->converted_form, arg->argv.str_arg, ft_strlen(arg->argv.str_arg));
+		cat_str_buffer(arg->conv_form, arg->argv.str_arg, ft_strlen(arg->argv.str_arg));
 }
 
 void	wchar_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.wchar_arg = (wchar_t)va_arg(ap, wchar_t);
 	arg->wchar_form = TRUE;
-	//arg->converted_form = wstr_to_str(arg, &arg->argv.wchar_arg);
-	cat_str_buffer(arg->converted_form, wstr_to_str(arg, &arg->argv.wchar_arg), ft_strlen(wstr_to_str(arg, &arg->argv.wchar_arg)));
+	cat_str_buffer(arg->conv_form, wstr_to_str(arg, &arg->argv.wchar_arg), ft_strlen(wstr_to_str(arg, &arg->argv.wchar_arg)));
 	if (arg->argv.wchar_arg == 0)
-		arg->converted_form->len = 1;
+		arg->conv_form->len = 1;
 }
 
 void	wstr_conv(t_arg *arg, va_list ap)
@@ -118,11 +108,8 @@ void	wstr_conv(t_arg *arg, va_list ap)
 		null[4] = 'l';
 		null[5] = ')';
 		null[6] = '\0';
-		//arg->converted_form = null;
-		cat_str_buffer(arg->converted_form, null, ft_strlen(null));
+		cat_str_buffer(arg->conv_form, null, ft_strlen(null));
 	}
 	else
-		//arg->converted_form = wstr_to_str(arg, arg->argv.wstr_arg);
-		//cat_str_buffer(arg->converted_form, wstr_to_str(arg, arg->argv.wstr_arg), ft_wstr_blen(arg->argv.wstr_arg));
-		cat_str_buffer(arg->converted_form, wstr_to_str(arg, arg->argv.wstr_arg), ft_strlen(wstr_to_str(arg, arg->argv.wstr_arg)));
+		cat_str_buffer(arg->conv_form, wstr_to_str(arg, arg->argv.wstr_arg), ft_strlen(wstr_to_str(arg, arg->argv.wstr_arg)));
 }

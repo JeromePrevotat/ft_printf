@@ -12,15 +12,10 @@
 
 #include "../inc/ft_printf.h"
 
-int	init_buffer(t_buff **buff)
+void	init_buffer(t_buff *buff)
 {
-	if (!((*buff) = (t_buff *)malloc(1 * sizeof(t_buff))))
-		return (ERROR);
-	if (!((*buff)->str = (char *)malloc(1 * sizeof(char))))
-		return (ERROR);
-	ft_memset((*buff)->str, '\0', 1);
-	(*buff)->len = 0;
-	return (1);
+	buff->str = NULL;
+	buff->len = 0;
 }
 
 void write_buffer(t_buff *buff)
@@ -37,7 +32,7 @@ void write_buffer(t_buff *buff)
 	//write(1, buff->str, buff->len);
 }
 
-void cat_buffer(t_buff *buff, t_buff *src)
+void cat_buffer(t_buff *buff, t_arg *arg)
 {
 	size_t	i;
 	size_t	j;
@@ -45,24 +40,27 @@ void cat_buffer(t_buff *buff, t_buff *src)
 
 	i = 0;
 	j = 0;
-	if (!(new_buff = (char *)malloc((src->len + buff->len + 1) * sizeof(char))))
-		return;
-	ft_memset(new_buff, '\0', src->len + buff->len + 1);
+	if (!(new_buff = (char *)malloc((arg->conv_form->len + buff->len + 1) * sizeof(char))))
+		return ;
+	ft_memset(new_buff, '\0', arg->conv_form->len + buff->len + 1);
 	while (i < buff->len)
 	{
 		new_buff[i] = buff->str[i];
 		i++;
 	}
-	while (j < src->len)
+	while (j < arg->conv_form->len)
 	{
-		new_buff[i + j] = src->str[j];
+		new_buff[i + j] = arg->conv_form->str[j];
 		j++;
 	}
 	new_buff[i + j] = '\0';
-	buff->len = buff->len + src->len;
-	free(buff->str);
-	//free(src->str);
-	//free(src);
+	buff->len = buff->len + arg->conv_form->len;
+
+	if (buff->str != NULL)
+	{
+		free(buff->str);
+		buff->str = NULL;
+	}
 	buff->str = new_buff;
 }
 
@@ -74,9 +72,9 @@ void cat_str_buffer(t_buff *buff, char *src, size_t size)
 
 	i = 0;
 	j = 0;
-	if (!(new_buff = (char *)malloc((size + buff->len) * sizeof(char))))
+	if (!(new_buff = (char *)malloc((size + buff->len + 1) * sizeof(char))))
 		return;
-	ft_memset(new_buff, '\0', size + buff->len);
+	ft_memset(new_buff, '\0', size + buff->len + 1);
 	while (i < buff->len)
 	{
 		new_buff[i] = buff->str[i];
@@ -87,7 +85,14 @@ void cat_str_buffer(t_buff *buff, char *src, size_t size)
 		new_buff[i + j] = src[j];
 		j++;
 	}
-	//free(buff->str);
+	new_buff[i + j] = '\0';
+
+	if (buff->str != NULL)
+	{
+		free(buff->str);
+		buff->str = NULL;
+	}
+
 	buff->str = new_buff;
 	buff->len = buff->len + size;
 }

@@ -79,7 +79,7 @@ typedef struct		s_argument
 	int				width;
 	int				precision;
 	char			*str_form;
-	t_buff			*converted_form;
+	t_buff			*conv_form;
 	int				wchar_form;
 }					t_arg;
 
@@ -91,11 +91,12 @@ enum
 
 //Ft_printf.c
 int					ft_printf(const char *format, ...);
-int					get_arg(char *format, t_arg *arg, va_list ap);
-void				get_arg_str_form(char *format, t_arg *arg, va_list ap);
+int					get_arg_str_form(char *format, t_arg *arg, va_list ap);
 
 //Cat_functions.c
 int					cat_format(char *format, va_list ap);
+void				reset_arg(t_arg *arg);
+void				free_ressources(t_arg *arg, t_buff *buff);
 
 //Flags_parsing.c
 int					new_flag_parsing(t_arg *arg, char *format, size_t i);
@@ -103,7 +104,7 @@ int					new_check_flags_a(t_arg *arg, char *format, size_t i);
 int					new_check_flags_b(t_arg *arg, char *format, size_t i);
 
 //Parsing_utils.c
-int					new_is_conversion(char c);
+int					is_conversion(char c);
 int					set_flag(t_arg *arg, char c);
 
 //Undefined_behaviour.c
@@ -111,11 +112,8 @@ char				*get_undefined_behaviour(t_arg *arg);
 int					ub_is_flag(char c, t_arg *arg);
 
 //Init_arg.c
-int					init_str_form(t_arg **arg);
-int					init_converted_form(t_arg *arg);
-int					init_wconverted_form(t_arg *arg);
 void				init_flags_arg(t_arg *arg);
-int					new_init_arg(t_arg **arg);
+void				init_arg(t_arg *arg);
 
 //Fill_arg.c
 int					fill_arg(t_arg *arg, va_list ap);
@@ -128,7 +126,6 @@ void				set_char_conv_arg(t_arg *arg, char c);
 int					convert_argv(t_arg *arg, va_list ap);
 void				nb_convert_argv(t_arg *arg, va_list ap);
 void				char_convert_argv(t_arg *arg, va_list ap);
-//char				*convert(t_arg *arg);
 void				convert(t_arg *arg);
 void				apply_size_flag(t_arg *arg);
 void				apply_flags(t_arg *arg);
@@ -150,7 +147,6 @@ int					set_alt_form_flag(t_arg *arg);
 int					set_zero_flag(t_arg *arg);
 int					set_minus_flag(t_arg *arg);
 int					set_plus_flag(t_arg *arg);
-//int					set_space_flag(t_arg *arg, int j);
 int					set_space_flag(t_arg *arg, char *format, int j);
 
 //Apply_size_flags.c
@@ -219,7 +215,6 @@ char				*itoa_base_imax(intmax_t n, int base);
 //Utils.c
 char				*str_memcat(char *mem1, char *mem2, size_t size, int del);
 void				sfree(char *mem1, char *mem2, int del);
-//int					get_width(wchar_t *str, t_arg *arg);
 int					get_width(char *str, t_arg *arg);
 int					argv_sign(t_arg *arg);
 
@@ -235,9 +230,9 @@ char				*wstr_to_str(t_arg *arg, wchar_t *wstr);
 int					wchar_to_char(wchar_t wchar, char *str);
 
 //Buff.c
-int					init_buffer(t_buff **buff);
+void				init_buffer(t_buff *buff);
 void				write_buffer(t_buff *buff);
-void				cat_buffer(t_buff *buff, t_buff *src);
+void				cat_buffer(t_buff *buff, t_arg *arg);
 void				cat_str_buffer(t_buff *buff, char *src, size_t size);
 
 #endif

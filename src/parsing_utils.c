@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-int		new_is_conversion(char c)
+int		is_conversion(char c)
 {
 	char	*conv_tab;
 	int		i;

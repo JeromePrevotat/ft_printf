@@ -12,92 +12,73 @@
 
 #include "../inc/ft_printf.h"
 
-/*int		cat_format(char *format, va_list ap)
-{
-	t_arg	*arg;
-	size_t	i;
-	int		ret;
-
-	i = 0;
-	ret = 0;
-	arg = NULL;
-	while (i < ft_strlen(format))
-	{
-		if (format[i] == '%' && (i + 1) < ft_strlen(format))
-		{
-			if (new_init_arg(&arg) == ERROR)
-				return (ERROR);
-			ret = ret + get_arg((format + i + 1), arg, ap);
-			i = i + ft_strlen(arg->str_form);
-			if (arg->wchar_form == TRUE)
-				ft_putwstr(arg->wconverted_form);
-			else
-				ft_putstr(arg->converted_form);
-			//if (arg->str_form != arg->converted_form && arg->converted_form != NULL)
-				//free(arg->converted_form);
-			//if (arg->str_form != NULL)
-				//free(arg->str_form);
-			//if (arg->wconverted_form != NULL)
-				//free(arg->wconverted_form);
-			free(arg);
-		}
-		else if (format[i] != '%')
-		{
-			ret++;
-			write(1, &format[i], 1);
-		}
-		i++;
-	}
-	return (ret);
-}*/
-
 int		cat_format(char *format, va_list ap)
 {
+	t_buff	*buff;
 	t_arg	*arg;
 	size_t	i;
 	int		ret;
-	t_buff	*buff;
 
 	i = 0;
 	ret = 0;
-	arg = NULL;
-	buff = NULL;
-	if (init_buffer(&buff) == ERROR)
-		return (0);
+	if (!(arg = (t_arg *)malloc(1 * sizeof(t_arg))))
+		return (ERROR);
+	if (!(buff = (t_buff *)malloc(1 * sizeof(t_buff))))
+		return (ERROR);
+	init_buffer(buff);
+	init_arg(arg);
 	while (i < ft_strlen(format))
 	{
 		if (format[i] == '%' && (i + 1) < ft_strlen(format))
 		{
-			if (new_init_arg(&arg) == ERROR)
-				return (ERROR);
-			//ret = ret + get_arg((format + i + 1), arg, ap);
-			get_arg((format + i + 1), arg, ap);
-			i = i + ft_strlen(arg->str_form);
-
-			//buff = str_memcat(buff, arg->converted_form, ft_strlen(arg->converted_form), 1);
-
-			cat_buffer(buff, arg->converted_form);
-
-			/*if (arg->str_form != arg->converted_form && arg->converted_form != NULL)
-				free(arg->converted_form);
-			if (arg->str_form != NULL)
-				free(arg->str_form);
-			if (arg->wconverted_form != NULL)
-				free(arg->wconverted_form);*/
-			free(arg);
+			//printf("i : %d\n", i);
+			i = i + get_arg_str_form((format + i + 1), arg, ap);
+			//i = i + ft_strlen(arg->str_form);
+			//printf("next i : %d\n", i);
+			cat_buffer(buff, arg);
+			reset_arg(arg);
 		}
 		else if (format[i] != '%')
 		{
 			ret++;
-
-			//buff = str_memcat(buff, &format[i], 1, 1);
 			cat_str_buffer(buff, &format[i], 1);
 		}
 		i++;
 	}
-
-	//ft_putstr(buff);
+	//printf("str : >%s< // len : %zu\n", buff->str, buff->len);
 	write_buffer(buff);
 	ret = buff->len;
+	free_ressources(arg, buff);
 	return (ret);
+}
+
+void free_ressources(t_arg *arg, t_buff *buff)
+{
+	if (arg != NULL)
+	{
+		if (arg->str_form != NULL)
+			free(arg->str_form);
+		if (arg->conv_form != NULL)
+		{
+			if (arg->conv_form->str != NULL)
+				free(arg->conv_form->str);
+			free(arg->conv_form);
+		}
+		free(arg);
+	}
+	if (buff != NULL)
+	{
+		if (buff->str != NULL)
+			free(buff->str);
+		free(buff);
+	}
+}
+
+void reset_arg(t_arg *arg)
+{
+	if (arg->str_form != NULL)
+		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
+	if (arg->conv_form->str != NULL)
+		ft_memset(arg->conv_form->str, '\0', arg->conv_form->len);
+	arg->conv_form->len = 0;
 }

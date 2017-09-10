@@ -55,8 +55,7 @@ void	apply_str_width(t_arg *arg)
 	if (arg->type == T_CHAR && arg->argv.c_arg == 0)
 		real_width = arg->width - 1;
 	else
-		//real_width = arg->width - ft_strlen(arg->converted_form);
-		real_width = arg->width - arg->converted_form->len;
+		real_width = arg->width - arg->conv_form->len;
 	if (real_width >= 0)
 	{
 		while (i < real_width)
@@ -65,10 +64,8 @@ void	apply_str_width(t_arg *arg)
 			i++;
 		}
 		tmp[i] = '\0';
-		//tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 0);
-		tmp = str_memcat(tmp, arg->converted_form->str, arg->converted_form->len, 0);
-		//free(arg->converted_form->str);
-		arg->converted_form->str = tmp;
-		arg->converted_form->len = arg->converted_form->len + real_width;
+		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 0);
+		arg->conv_form->str = tmp;
+		arg->conv_form->len = arg->conv_form->len + real_width;
 	}
 }

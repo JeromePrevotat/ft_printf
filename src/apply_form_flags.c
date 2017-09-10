@@ -25,19 +25,11 @@ int	apply_alt_form(t_arg *arg)
 		tmp = str_memcat(tmp, "0X", 2, 1);
 	if ((arg->conv == 8 || arg->conv == 80) && argv_sign(arg) > 0)
 		tmp = str_memcat(tmp, "0", 1, 1);
-
-	//
-	arg->converted_form->len = arg->converted_form->len + ft_strlen(tmp);
-	//
-
-	//tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
-	tmp = str_memcat(tmp, arg->converted_form->str, arg->converted_form->len, 1);
-	//if (arg->converted_form != NULL)
-	if (arg->converted_form->str != NULL)
-		//free(arg->converted_form);
-		free(arg->converted_form->str);
-	//arg->converted_form = tmp;
-	arg->converted_form->str = tmp;
+	arg->conv_form->len = arg->conv_form->len + ft_strlen(tmp);
+	tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 1);
+	if (arg->conv_form->str != NULL)
+		free(arg->conv_form->str);
+	arg->conv_form->str = tmp;
 	return (TRUE);
 }
 
@@ -51,16 +43,14 @@ int	apply_minus(t_arg *arg)
 	if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
 		return (ERROR);
 	ft_memset(tmp, '\0', (arg->width + 1));
-	//real_width = arg->width - ft_strlen(arg->converted_form);
-	real_width = arg->width - arg->converted_form->len;
+	real_width = arg->width - arg->conv_form->len;
 	while (i < real_width && real_width >= 0)
 	{
 		tmp[i] = ' ';
 		i++;
 	}
 	tmp[i] = '\0';
-	//arg->converted_form = str_memcat(arg->converted_form, tmp, ft_strlen(tmp), 1);
-	cat_str_buffer(arg->converted_form, tmp, ft_strlen(tmp));
+	cat_str_buffer(arg->conv_form, tmp, ft_strlen(tmp));
 	return (TRUE);
 }
 
@@ -75,17 +65,11 @@ int	apply_plus(t_arg *arg)
 	if (arg->conv == -10 && argv_sign(arg) >= 0)
 	{
 		tmp = str_memcat(tmp, "+", ft_strlen("+"), 1);
-		//tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
-		tmp = str_memcat(tmp, arg->converted_form->str, arg->converted_form->len, 1);
-		//if (arg->converted_form != NULL)
-			//free(arg->converted_form);
-		//arg->converted_form = tmp;
-		if (arg->converted_form->str != NULL)
-			free(arg->converted_form->str);
-		arg->converted_form->str = tmp;
-		//
-		arg->converted_form->len++;
-		//
+		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 1);
+		if (arg->conv_form->str != NULL)
+			free(arg->conv_form->str);
+		arg->conv_form->str = tmp;
+		arg->conv_form->len++;
 	}
 	return (TRUE);
 }
@@ -101,17 +85,11 @@ int	apply_space(t_arg *arg)
 	if (arg->conv == -10 && argv_sign(arg) >= 0)
 	{
 		tmp = str_memcat(tmp, " ", 1, 1);
-		//tmp = str_memcat(tmp, arg->converted_form, ft_strlen(arg->converted_form), 1);
-		tmp = str_memcat(tmp, arg->converted_form->str, arg->converted_form->len, 1);
-		//if (arg->converted_form != NULL)
-			//free(arg->converted_form);
-		//arg->converted_form = tmp;
-		if (arg->converted_form->str != NULL)
-			free(arg->converted_form->str);
-		arg->converted_form->str = tmp;
-		//
-		arg->converted_form->len++;
-		//
+		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 1);
+		if (arg->conv_form->str != NULL)
+			free(arg->conv_form->str);
+		arg->conv_form->str = tmp;
+		arg->conv_form->len++;
 	}
 
 	return (TRUE);
