@@ -77,7 +77,9 @@ void	convert(t_arg *arg)
 	else
 		tmp = itoa_base_uimax(arg->argv.uimax_arg, base);
 	arg->conv_form->len = ft_strlen(tmp);
-	arg->conv_form->str = tmp;
+	arg->conv_form->str = ft_strdup(tmp);
+	if (tmp != NULL)
+		free(tmp);
 }
 
 void	apply_flags(t_arg *arg)

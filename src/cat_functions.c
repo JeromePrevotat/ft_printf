@@ -31,10 +31,7 @@ int		cat_format(char *format, va_list ap)
 	{
 		if (format[i] == '%' && (i + 1) < ft_strlen(format))
 		{
-			//printf("i : %d\n", i);
 			i = i + get_arg_str_form((format + i + 1), arg, ap);
-			//i = i + ft_strlen(arg->str_form);
-			//printf("next i : %d\n", i);
 			cat_buffer(buff, arg);
 			reset_arg(arg);
 		}
@@ -45,7 +42,6 @@ int		cat_format(char *format, va_list ap)
 		}
 		i++;
 	}
-	//printf("str : >%s< // len : %zu\n", buff->str, buff->len);
 	write_buffer(buff);
 	ret = buff->len;
 	free_ressources(arg, buff);
@@ -81,4 +77,11 @@ void reset_arg(t_arg *arg)
 	if (arg->conv_form->str != NULL)
 		ft_memset(arg->conv_form->str, '\0', arg->conv_form->len);
 	arg->conv_form->len = 0;
+	arg->type = 0;
+	arg->argv.imax_arg = 0;
+	arg->argv.uimax_arg = 0;
+	arg->width = 0;
+	arg->precision = 0;
+	arg->wchar_form = FALSE;
+	init_flags_arg(arg);
 }

@@ -29,10 +29,10 @@ int	main(void)
 	real_ret = 0;
 	ret = 0;
 	ft_putendl("My printf result :");
-	ret = ft_printf("%jx", -4294967296);
+	ret = ft_printf("%s %C %d %p %x %% %S", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير");
 	printf("\nRET : %d\n\n", ret);
 	ft_putendl("Real printf result :");
-	real_ret = printf("%jx", -4294967296);
+	real_ret = printf("%s %C %d %p %x %% %S", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير");
 	printf("\nREAL_RET : %d\n", real_ret);
 
 
