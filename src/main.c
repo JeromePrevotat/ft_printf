@@ -29,26 +29,17 @@ int	main(void)
 	real_ret = 0;
 	ret = 0;
 	ft_putendl("My printf result :");
-	ret = ft_printf("%s %C %d %p %x %% %S", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير");
+	ret = ft_printf("%llX, %llX", 0, ULLONG_MAX);
 	printf("\nRET : %d\n\n", ret);
 	ft_putendl("Real printf result :");
-	real_ret = printf("%s %C %d %p %x %% %S", "bonjour ", L'該', 42, &free, 42, L"لحم خنزير");
+	real_ret = printf("%llX, %llX", 0, ULLONG_MAX);
 	printf("\nREAL_RET : %d\n", real_ret);
 
 
 
-	//ft_printf("%d\\n", 42);
-	/*
-	ft_printf("\\n");
-	ft_printf("%%\\n");
-	ft_printf("%d%d\\n", 42, 41);
 
-	ft_printf("%d%d%d\\n", 42, 43, 44);
-	ft_printf("%ld\\n", 2147483647);
-	ft_printf("%lld\\n", 9223372036854775807);
-	ft_printf("%x\\n", 505);
-	ft_printf("%X\\n", 505);
-	ft_printf("%p\\n", &ft_printf);
+//	ft_printf("%p\\n", &ft_printf);
+	/*
 	ft_printf("%20.15d\\n", 54321);
 	ft_printf("%-10d\\n", 3);
 	ft_printf("% d\\n", 3);
