@@ -84,7 +84,10 @@ void	convert(t_arg *arg)
 	}
 	arg->conv_form->str = ft_strdup(tmp);
 	if (tmp != NULL)
+	{
 		free(tmp);
+		tmp = NULL;
+	}
 }
 
 void	apply_flags(t_arg *arg)

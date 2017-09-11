@@ -16,8 +16,10 @@ int		set_precision(t_arg *arg, char *str_form)
 {
 	size_t	i;
 	char	*precision;
+	int		next_i;
 
 	i = 0;
+	next_i = 1;
 	if (!(precision = (char *)malloc((ft_strlen(str_form) + 1) * sizeof(char))))
 		return (FALSE);
 	ft_memset(precision, '\0', ft_strlen(str_form) + 1);
@@ -29,9 +31,13 @@ int		set_precision(t_arg *arg, char *str_form)
 	precision[i] = '\0';
 	arg->precision = ft_atoi(precision);
 	arg->flags.precision = TRUE;
-	if (ft_strlen(precision) == 0)
-		return (1);
-	return (ft_strlen(precision) + 1);
+	next_i = ft_strlen(precision);
+	if (precision != NULL)
+	{
+		free(precision);
+		precision = NULL;
+	}
+	return (next_i + 1);
 }
 
 int		apply_precision(t_arg *arg)
@@ -95,8 +101,17 @@ int		apply_nbr_pre(t_arg *arg)
 		tmp = apply_positive(arg);
 	else if (arg->type == T_PTR)
 		tmp = apply_ptr_precision(arg);
-	arg->conv_form->str = tmp;
+
+
+	if (arg->conv_form->str != NULL)
+	{
+		free(arg->conv_form->str);
+		arg->conv_form->str = NULL;
+	}
+
+
 	arg->conv_form->len = ft_strlen(tmp);
+	arg->conv_form->str = tmp;
 	return (1);
 }
 
@@ -131,7 +146,7 @@ char	*apply_negative(t_arg *arg)
 		tmp[i] = '\0';
 	}
 	if (tmp == NULL)
-		return (arg->conv_form->str);
+		return (ft_strdup(arg->conv_form->str));
 	return (tmp);
 }
 
@@ -147,7 +162,6 @@ char	*apply_positive(t_arg *arg)
 	{
 		i = 0;
 		if (!(tmp = (char *)malloc((real_pre - arg->conv_form->len + 1) * sizeof(char))))
-
 			return (NULL);
 		ft_memset(tmp, '\0', (real_pre - arg->conv_form->len + 1));
 		while (i < real_pre - arg->conv_form->len)
@@ -156,10 +170,10 @@ char	*apply_positive(t_arg *arg)
 			i++;
 		}
 		tmp[i] = '\0';
-		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 0);
+		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 1);
 	}
 	if (tmp == NULL)
-		return (arg->conv_form->str);
+		return (ft_strdup(arg->conv_form->str));
 	return (tmp);
 }
 
@@ -199,6 +213,6 @@ char	*apply_ptr_precision(t_arg *arg)
 		tmp[i] = '\0';
 	}
 	if (tmp == NULL)
-		return (arg->conv_form->str);
+		return (ft_strdup(arg->conv_form->str));
 	return (tmp);
 }

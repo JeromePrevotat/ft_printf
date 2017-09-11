@@ -16,8 +16,10 @@ int		set_width(t_arg *arg, char *str_form)
 {
 	size_t	i;
 	char	*width;
+	int		next_i;
 
 	i = 0;
+	next_i = 0;
 	if (!(width = (char *)malloc(ft_strlen(str_form) * sizeof(char))))
 		return (ERROR);
 	ft_memset(width, '\0', ft_strlen(str_form));
@@ -30,8 +32,12 @@ int		set_width(t_arg *arg, char *str_form)
 	arg->width = ft_atoi(width);
 	arg->flags.width = TRUE;
 	if (ft_strlen(width) == 0)
-		return (1);
-	return (ft_strlen(width));
+		next_i = 1;
+	else
+		next_i = ft_strlen(width);
+	if (width != NULL)
+		free(width);
+	return (next_i);
 }
 
 int		apply_width(t_arg *arg)
@@ -49,23 +55,25 @@ void	apply_str_width(t_arg *arg)
 	i = 0;
 	real_width = 0;
 	tmp = NULL;
-	if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
-		return ;
-	ft_memset(tmp, '\0', (arg->width + 1));
 	if (arg->type == T_CHAR && arg->argv.c_arg == 0)
 		real_width = arg->width - 1;
 	else
 		real_width = arg->width - arg->conv_form->len;
 	if (real_width >= 0)
 	{
+		if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
+			return ;
+		ft_memset(tmp, '\0', (arg->width + 1));
 		while (i < real_width)
 		{
 			tmp[i] = ' ';
 			i++;
 		}
 		tmp[i] = '\0';
-		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 0);
-		arg->conv_form->str = tmp;
+		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 1);
+		if (arg->conv_form->str != NULL)
+			free(arg->conv_form->str);
 		arg->conv_form->len = arg->conv_form->len + real_width;
+		arg->conv_form->str = tmp;
 	}
 }

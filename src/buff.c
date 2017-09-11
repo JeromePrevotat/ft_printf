@@ -23,13 +23,13 @@ void write_buffer(t_buff *buff)
 	size_t	i;
 
 	i = 0;
-	while (i < buff->len)
+	/*while (i < buff->len)
 	{
 		write(1, buff->str + i, 1);
 		i++;
-	}
+	}*/
 
-	//write(1, buff->str, buff->len);
+	write(1, buff->str, buff->len);
 }
 
 void cat_buffer(t_buff *buff, t_arg *arg)

@@ -65,8 +65,14 @@ int	apply_zero(t_arg *arg)
 		j++;
 	}
 	tmp[i + j] = '\0';
+
 	if (arg->conv_form->str != NULL)
-		arg->conv_form->str = tmp;
+	{
+		free(arg->conv_form->str);
+		arg->conv_form->str = NULL;
+	}
+
+	arg->conv_form->str = tmp;
 	if (real_width >= 0)
 		arg->conv_form->len = arg->conv_form->len + real_width;
 	arg->flags.zero = DONE;

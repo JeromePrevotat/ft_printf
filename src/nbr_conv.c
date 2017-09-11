@@ -109,5 +109,8 @@ void	ptr_conv(t_arg *arg, va_list ap)
 	}
 	arg->conv_form->str = ft_strdup(tmp);
 	if (tmp != NULL)
+	{
 		free(tmp);
+		tmp = NULL;
+	}
 }

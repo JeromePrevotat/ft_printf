@@ -73,6 +73,11 @@ void	str_conv(t_arg *arg, va_list ap)
 		null[5] = ')';
 		null[6] = '\0';
 		cat_str_buffer(arg->conv_form, null, ft_strlen(null));
+		if (null != NULL)
+		{
+			free(null);
+			null = NULL;
+		}
 	}
 	else
 		cat_str_buffer(arg->conv_form, arg->argv.str_arg, ft_strlen(arg->argv.str_arg));
@@ -80,9 +85,19 @@ void	str_conv(t_arg *arg, va_list ap)
 
 void	wchar_conv(t_arg *arg, va_list ap)
 {
+	char	*tmp;
+
+	tmp = NULL;
 	arg->argv.wchar_arg = (wchar_t)va_arg(ap, wchar_t);
 	arg->wchar_form = TRUE;
-	cat_str_buffer(arg->conv_form, wstr_to_str(arg, &arg->argv.wchar_arg), ft_strlen(wstr_to_str(arg, &arg->argv.wchar_arg)));
+	tmp = wstr_to_str(arg, &arg->argv.wchar_arg);
+	//cat_str_buffer(arg->conv_form, wstr_to_str(arg, &arg->argv.wchar_arg), ft_strlen(wstr_to_str(arg, &arg->argv.wchar_arg)));
+	cat_str_buffer(arg->conv_form, tmp, ft_strlen(tmp));
+	if (tmp != NULL)
+	{
+		free(tmp);
+		tmp = NULL;
+	}
 	if (arg->argv.wchar_arg == 0)
 		arg->conv_form->len = 1;
 }
@@ -90,7 +105,7 @@ void	wchar_conv(t_arg *arg, va_list ap)
 void	wstr_conv(t_arg *arg, va_list ap)
 {
 	char	*null;
-	wchar_t	*tmp;
+	char	*tmp;
 
 	null = NULL;
 	tmp = NULL;
@@ -109,7 +124,21 @@ void	wstr_conv(t_arg *arg, va_list ap)
 		null[5] = ')';
 		null[6] = '\0';
 		cat_str_buffer(arg->conv_form, null, ft_strlen(null));
+		if (null != NULL)
+		{
+			free(null);
+			null = NULL;
+		}
 	}
 	else
-		cat_str_buffer(arg->conv_form, wstr_to_str(arg, arg->argv.wstr_arg), ft_strlen(wstr_to_str(arg, arg->argv.wstr_arg)));
+	{
+		//cat_str_buffer(arg->conv_form, wstr_to_str(arg, arg->argv.wstr_arg), ft_strlen(wstr_to_str(arg, arg->argv.wstr_arg)));
+		tmp = wstr_to_str(arg, arg->argv.wstr_arg);
+		cat_str_buffer(arg->conv_form, tmp, ft_strlen(tmp));
+		if (tmp != NULL)
+		{
+			free(tmp);
+			tmp = NULL;
+		}
+	}
 }

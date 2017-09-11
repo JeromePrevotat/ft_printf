@@ -73,6 +73,11 @@ int		get_width(char *str, t_arg *arg)
 	tmp[i] = '\0';
 	if (ft_atoi(tmp) > arg->width)
 		arg->width = ft_atoi(tmp);
+	if (tmp != NULL)
+	{
+		free(tmp);
+		tmp = NULL;
+	}
 	return (j);
 }
 
