@@ -19,9 +19,11 @@ char	*get_undefined_behaviour(t_arg *arg)
 	i = 0;
 	if (arg->str_form != NULL)
 	{
-		while (ub_is_flag(arg->str_form[i], arg) && i < ft_strlen(arg->str_form))
+		while (ub_is_flag(arg->str_form[i], arg)
+			&& i < ft_strlen(arg->str_form))
 			i++;
-		if (i - 1 >= 0 && ((ub_is_flag(arg->str_form[i - 1], arg) || arg->str_form[i - 1] == 'h' || arg->str_form[i - 1] == 'l')))
+		if (i - 1 >= 0 && ((ub_is_flag(arg->str_form[i - 1], arg)
+			|| arg->str_form[i - 1] == 'h' || arg->str_form[i - 1] == 'l')))
 		{
 			arg->conv_form->len = ft_strlen(arg->str_form + i);
 			return (ft_strdup(arg->str_form + i));

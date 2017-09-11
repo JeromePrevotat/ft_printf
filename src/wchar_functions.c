@@ -12,6 +12,12 @@
 
 #include "../inc/ft_printf.h"
 
+
+//EXCLUSION DEMI CODETS
+//if (wchar >= 0xD800 && wchar <= 0xDFFF)
+	//return (-1);
+
+
 size_t	ft_wstr_blen(const wchar_t *wstr)
 {
 	size_t	len;
@@ -32,61 +38,6 @@ size_t	ft_wstr_blen(const wchar_t *wstr)
 		wstr++;
 	}
 	return (len);
-}
-
-size_t	ft_wstr_clen(const wchar_t *wstr)
-{
-	size_t	len;
-
-	if (!wstr)
-		return (ERROR);
-	len = 0;
-	while (*wstr)
-	{
-		len++;
-		wstr++;
-	}
-	return (len);
-}
-
-int		ft_putwstr(wchar_t *wstr)
-{
-	if (!wstr)
-		return (0);
-	while (*wstr)
-	{
-		ft_putwchar(*wstr);
-		wstr++;
-	}
-	return (1);
-}
-
-int		ft_putwchar(wchar_t wchar)
-{
-	//EXCLUSION DEMI CODETS
-	//if (wchar >= 0xD800 && wchar <= 0xDFFF)
-		//return (-1);
-	if (wchar <= 0x7F)
-		ft_putchar(wchar);
-	else if (wchar <= 0x7FF)
-	{
-		ft_putchar((wchar >> 6) + 0xC0);
-		ft_putchar((wchar & 0x3F) + 0x80);
-	}
-	else if (wchar <= 0xFFFF)
-	{
-		ft_putchar((wchar >> 12) + 0xE0);
-		ft_putchar(((wchar >> 6) & 0x3F) + 0x80);
-		ft_putchar((wchar & 0x3F) + 0x80);
-	}
-	else if (wchar <= 0x10FFFF)
-	{
-		ft_putchar((wchar >> 18) + 0xF0);
-		ft_putchar(((wchar >> 12) & 0x3F) + 0x80);
-		ft_putchar(((wchar >> 6) & 0x3F) + 0x80);
-		ft_putchar((wchar & 0x3F) + 0x80);
-	}
-	return (1);
 }
 
 char	*wstr_to_str(t_arg *arg, wchar_t *wstr)

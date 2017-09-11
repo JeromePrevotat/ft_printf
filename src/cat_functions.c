@@ -17,13 +17,10 @@ int		cat_format(char *format, va_list ap)
 	t_buff	*buff;
 	t_arg	*arg;
 	size_t	i;
-	int		ret;
 
 	i = 0;
-	ret = 0;
-	if (!(arg = (t_arg *)malloc(1 * sizeof(t_arg))))
-		return (ERROR);
-	if (!(buff = (t_buff *)malloc(1 * sizeof(t_buff))))
+	if (!(arg = (t_arg *)malloc(1 * sizeof(t_arg)))
+		|| !(buff = (t_buff *)malloc(1 * sizeof(t_buff))))
 		return (ERROR);
 	init_buffer(buff);
 	init_arg(arg);
@@ -36,16 +33,10 @@ int		cat_format(char *format, va_list ap)
 			reset_arg(arg);
 		}
 		else if (format[i] != '%')
-		{
-			ret++;
 			cat_str_buffer(buff, &format[i], 1);
-		}
 		i++;
 	}
-	write_buffer(buff);
-	ret = buff->len;
-	free_ressources(arg, buff);
-	return (ret);
+	return (end(buff, arg));
 }
 
 void free_ressources(t_arg *arg, t_buff *buff)
@@ -70,7 +61,7 @@ void free_ressources(t_arg *arg, t_buff *buff)
 	}
 }
 
-void reset_arg(t_arg *arg)
+void	reset_arg(t_arg *arg)
 {
 	if (arg->str_form != NULL)
 		ft_memset(arg->str_form, '\0', ft_strlen(arg->str_form));
@@ -78,10 +69,21 @@ void reset_arg(t_arg *arg)
 		ft_memset(arg->conv_form->str, '\0', arg->conv_form->len);
 	arg->conv_form->len = 0;
 	arg->type = 0;
+	arg->conv = 0;
 	arg->argv.imax_arg = 0;
 	arg->argv.uimax_arg = 0;
 	arg->width = 0;
 	arg->precision = 0;
 	arg->wchar_form = FALSE;
 	init_flags_arg(arg);
+}
+
+int		end(t_buff *buff, t_arg *arg)
+{
+	int	ret;
+
+	write_buffer(buff);
+	ret = buff->len;
+	free_ressources(arg, buff);
+	return (ret);
 }

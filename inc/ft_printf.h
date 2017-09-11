@@ -52,15 +52,6 @@ typedef struct		s_flags
 typedef union				u_argv
 {
 	void					*ptr;
-	size_t					st_arg;
-	unsigned short			ush_arg;
-	short					sh_arg;
-	unsigned int			ui_arg;
-	int						i_arg;
-	unsigned long			ul_arg;
-	long					l_arg;
-	unsigned long long		ull_arg;
-	long long				ll_arg;
 	uintmax_t				uimax_arg;
 	intmax_t				imax_arg;
 	unsigned char			uc_arg;
@@ -97,6 +88,7 @@ int					get_arg_str_form(char *format, t_arg *arg, va_list ap);
 int					cat_format(char *format, va_list ap);
 void				reset_arg(t_arg *arg);
 void				free_ressources(t_arg *arg, t_buff *buff);
+int					end(t_buff *buff, t_arg *arg);
 
 //Flags_parsing.c
 int					new_flag_parsing(t_arg *arg, char *format, size_t i);
@@ -150,7 +142,7 @@ int					set_plus_flag(t_arg *arg);
 int					set_space_flag(t_arg *arg, char *format, int j);
 
 //Apply_size_flags.c
-int					apply_l(t_arg *arg); //TO DO WINT_T (%lc)
+int					apply_l(t_arg *arg);
 int					apply_ll(t_arg *arg);
 int					apply_h(t_arg *arg);
 int					apply_hh(t_arg *arg);
@@ -164,18 +156,19 @@ int					apply_space(t_arg *arg);
 
 //Width.c
 int					set_width(t_arg *arg, char *str_form);
-int					apply_width(t_arg *arg);
+void				apply_width(t_arg *arg);
 void				apply_str_width(t_arg *arg);
-void				apply_wstr_width(t_arg *arg);
 
 //Precision.c
 int					set_precision(t_arg *arg, char *str_form);
-int					apply_precision(t_arg *arg);
-int					apply_str_pre(t_arg *arg);
-int					apply_nbr_pre(t_arg *arg);
+void				apply_precision(t_arg *arg);
+void				apply_str_pre(t_arg *arg);
+void				apply_nbr_pre(t_arg *arg);
+void				apply_pre_zero(t_arg *arg);
 char				*apply_negative(t_arg *arg);
 char				*apply_positive(t_arg *arg);
 char				*apply_ptr_precision(t_arg *arg);
+char				*ptr_pre(t_arg *arg, int real_pre);
 
 //Zero_flag.c
 int					set_zero_flag(t_arg *arg);
@@ -199,8 +192,8 @@ void				uimax_conv(t_arg *arg, va_list ap);
 void				ptr_conv(t_arg *arg, va_list ap);
 
 //Char_conv.c
-int					uchar_conv(t_arg *arg, va_list ap);
-int					char_conv(t_arg *arg, va_list ap);
+void				uchar_conv(t_arg *arg, va_list ap);
+void				char_conv(t_arg *arg, va_list ap);
 void				str_conv(t_arg *arg, va_list ap);
 void				wchar_conv(t_arg *arg, va_list ap);
 void				wstr_conv(t_arg *arg, va_list ap);

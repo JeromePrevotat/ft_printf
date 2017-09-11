@@ -16,7 +16,8 @@ int	apply_l(t_arg *arg)
 {
 	if (arg->conv == -10)
 		arg->type = T_LONG;
-	else if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+	else if (arg->conv == 8 || arg->conv == 10
+			|| arg->conv == 16 || arg->conv == 160)
 		arg->type = T_ULONG;
 	else if (arg->type == T_CHAR)
 		arg->type = T_WCHAR;
@@ -29,7 +30,8 @@ int	apply_ll(t_arg *arg)
 {
 	if (arg->conv == -10)
 		arg->type = T_LLONG;
-	else if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+	else if (arg->conv == 8 || arg->conv == 10
+			|| arg->conv == 16 || arg->conv == 160)
 		arg->type = T_ULLONG;
 	return (TRUE);
 }
@@ -38,7 +40,8 @@ int	apply_h(t_arg *arg)
 {
 	if (arg->conv == -10)
 		arg->type = T_SHORT;
-	else if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+	else if (arg->conv == 8 || arg->conv == 10
+			|| arg->conv == 16 || arg->conv == 160)
 		arg->type = T_USHORT;
 	return (TRUE);
 }
@@ -47,7 +50,8 @@ int	apply_hh(t_arg *arg)
 {
 	if (arg->conv == -10)
 		arg->type = T_CHAR;
-	else if (arg->conv == 8 || arg->conv == 10 || arg->conv == 16 || arg->conv == 160)
+	else if (arg->conv == 8 || arg->conv == 10
+			|| arg->conv == 16 || arg->conv == 160)
 		arg->type = T_UCHAR;
 	return (TRUE);
 }

@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-int		uchar_conv(t_arg *arg, va_list ap)
+void	uchar_conv(t_arg *arg, va_list ap)
 {
 	if (arg->conv == '%')
 		cat_str_buffer(arg->conv_form, "%", 1);
@@ -30,10 +30,9 @@ int		uchar_conv(t_arg *arg, va_list ap)
 		else
 			cat_str_buffer(arg->conv_form, &arg->argv.c_arg, 1);
 	}
-	return (TRUE);
 }
 
-int		char_conv(t_arg *arg, va_list ap)
+void	char_conv(t_arg *arg, va_list ap)
 {
 	if (arg->conv == '%')
 		cat_str_buffer(arg->conv_form, "%", 1);
@@ -51,34 +50,16 @@ int		char_conv(t_arg *arg, va_list ap)
 		else
 			cat_str_buffer(arg->conv_form, &arg->argv.c_arg, 1);
 	}
-	return (TRUE);
 }
 
 void	str_conv(t_arg *arg, va_list ap)
 {
 	char	*null;
 
-	null = NULL;
+	null = "(null)";
 	arg->argv.str_arg = (char *)va_arg(ap, char *);
 	if (arg->argv.str_arg == NULL)
-	{
-		if (!((null) = (char *)malloc(7 * sizeof(char))))
-			return ;
-		ft_memset(null, '\0', 7);
-		null[0] = '(';
-		null[1] = 'n';
-		null[2] = 'u';
-		null[3] = 'l';
-		null[4] = 'l';
-		null[5] = ')';
-		null[6] = '\0';
 		cat_str_buffer(arg->conv_form, null, ft_strlen(null));
-		if (null != NULL)
-		{
-			free(null);
-			null = NULL;
-		}
-	}
 	else
 		cat_str_buffer(arg->conv_form, arg->argv.str_arg, ft_strlen(arg->argv.str_arg));
 }
@@ -91,7 +72,6 @@ void	wchar_conv(t_arg *arg, va_list ap)
 	arg->argv.wchar_arg = (wchar_t)va_arg(ap, wchar_t);
 	arg->wchar_form = TRUE;
 	tmp = wstr_to_str(arg, &arg->argv.wchar_arg);
-	//cat_str_buffer(arg->conv_form, wstr_to_str(arg, &arg->argv.wchar_arg), ft_strlen(wstr_to_str(arg, &arg->argv.wchar_arg)));
 	cat_str_buffer(arg->conv_form, tmp, ft_strlen(tmp));
 	if (tmp != NULL)
 	{
@@ -107,32 +87,14 @@ void	wstr_conv(t_arg *arg, va_list ap)
 	char	*null;
 	char	*tmp;
 
-	null = NULL;
+	null = "(null)";
 	tmp = NULL;
 	arg->argv.wstr_arg = (wchar_t *)va_arg(ap, wchar_t *);
 	arg->wchar_form = TRUE;
 	if (arg->argv.wstr_arg == NULL)
-	{
-		if (!((null) = (char *)malloc(7 * sizeof(char))))
-			return ;
-		ft_memset(null, '\0', 7);
-		null[0] = '(';
-		null[1] = 'n';
-		null[2] = 'u';
-		null[3] = 'l';
-		null[4] = 'l';
-		null[5] = ')';
-		null[6] = '\0';
 		cat_str_buffer(arg->conv_form, null, ft_strlen(null));
-		if (null != NULL)
-		{
-			free(null);
-			null = NULL;
-		}
-	}
 	else
 	{
-		//cat_str_buffer(arg->conv_form, wstr_to_str(arg, arg->argv.wstr_arg), ft_strlen(wstr_to_str(arg, arg->argv.wstr_arg)));
 		tmp = wstr_to_str(arg, arg->argv.wstr_arg);
 		cat_str_buffer(arg->conv_form, tmp, ft_strlen(tmp));
 		if (tmp != NULL)

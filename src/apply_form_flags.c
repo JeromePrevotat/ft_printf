@@ -49,7 +49,7 @@ int	apply_minus(t_arg *arg)
 		if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
 		return (ERROR);
 		ft_memset(tmp, '\0', (arg->width + 1));
-		while (i < real_width && real_width >= 0)
+		while (i < real_width && real_width > 0)
 		{
 			tmp[i] = ' ';
 			i++;
@@ -98,10 +98,12 @@ int	apply_space(t_arg *arg)
 		tmp = str_memcat(tmp, " ", 1, 1);
 		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 1);
 		if (arg->conv_form->str != NULL)
+		{
 			free(arg->conv_form->str);
+			arg->conv_form->str = NULL;
+		}
 		arg->conv_form->str = tmp;
 		arg->conv_form->len++;
 	}
-
 	return (TRUE);
 }

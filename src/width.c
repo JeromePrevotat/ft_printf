@@ -40,10 +40,36 @@ int		set_width(t_arg *arg, char *str_form)
 	return (next_i);
 }
 
-int		apply_width(t_arg *arg)
+void	apply_width(t_arg *arg)
 {
-	apply_str_width(arg);
-	return (1);
+	char	*tmp;
+	int		real_width;
+	int		i;
+
+	i = 0;
+	real_width = 0;
+	tmp = NULL;
+	if (arg->type == T_CHAR && arg->argv.c_arg == 0)
+		real_width = arg->width - 1;
+	else
+		real_width = arg->width - arg->conv_form->len;
+	if (real_width >= 0)
+	{
+		if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
+			return ;
+		ft_memset(tmp, '\0', (arg->width + 1));
+		while (i < real_width)
+		{
+			tmp[i] = ' ';
+			i++;
+		}
+		tmp[i] = '\0';
+		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 1);
+		if (arg->conv_form->str != NULL)
+			free(arg->conv_form->str);
+		arg->conv_form->len = arg->conv_form->len + real_width;
+		arg->conv_form->str = tmp;
+	}
 }
 
 void	apply_str_width(t_arg *arg)

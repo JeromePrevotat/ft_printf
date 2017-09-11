@@ -41,8 +41,7 @@ int		new_check_flags_a(t_arg *arg, char *format, size_t i)
 	int	next_i;
 
 	next_i = -1;
-	if (i + 1 < ft_strlen(format)
-		&& format[i] == 'h' && format[i + 1] == 'h')
+	if (i + 1 < ft_strlen(format) && format[i] == 'h' && format[i + 1] == 'h')
 		next_i = set_flag(arg, 'H');
 	else if (i + 1 < ft_strlen(format)
 		&& format[i] == 'l' && format[i + 1] == 'l')
