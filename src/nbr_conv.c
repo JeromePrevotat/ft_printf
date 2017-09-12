@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nbr_conv.c  	                                    :+:      :+:    :+:   */
+/*   nbr_conv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,66 +16,6 @@ void	st_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.imax_arg = (size_t)va_arg(ap, size_t);
 	convert(arg);
-}
-
-void	ushort_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.uimax_arg = (unsigned short)va_arg(ap, int);
-		convert(arg);
-}
-
-void	short_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.imax_arg = (short)va_arg(ap, int);
-		convert(arg);
-}
-
-void	uint_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.uimax_arg = (unsigned int)va_arg(ap, int);
-		convert(arg);
-}
-
-void	int_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.imax_arg = (int)va_arg(ap, int);
-		convert(arg);
-}
-
-void	ulong_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.uimax_arg = (unsigned long)va_arg(ap, long);
-		convert(arg);
-}
-
-void	long_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.imax_arg = (long)va_arg(ap, long);
-		convert(arg);
-}
-
-void	ullong_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.uimax_arg = (unsigned long long)va_arg(ap, long long);
-		convert(arg);
-}
-
-void	llong_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.imax_arg = (long long)va_arg(ap, long long);
-		convert(arg);
-}
-
-void	uimax_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.uimax_arg = (uintmax_t)va_arg(ap, uintmax_t);
-		convert(arg);
-}
-
-void	imax_conv(t_arg *arg, va_list ap)
-{
-	arg->argv.imax_arg = (intmax_t)va_arg(ap, intmax_t);
-		convert(arg);
 }
 
 void	ptr_conv(t_arg *arg, va_list ap)

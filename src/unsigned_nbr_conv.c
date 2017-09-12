@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zero_flag.c                                        :+:      :+:    :+:   */
+/*   unsigned_nbr_conv.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,32 @@
 
 #include "../inc/ft_printf.h"
 
-int		set_zero_flag(t_arg *arg)
+void	ushort_conv(t_arg *arg, va_list ap)
 {
-	if (arg->flags.zero == OVERRIDE || arg->flags.precision == TRUE)
-	{
-		arg->flags.zero = OVERRIDE;
-		return (TRUE);
-	}
-	else
-		arg->flags.zero = TRUE;
-	arg->flags.width = TRUE;
-	return (TRUE);
+	arg->argv.uimax_arg = (unsigned short)va_arg(ap, int);
+	convert(arg);
+}
+
+void	uint_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = (unsigned int)va_arg(ap, int);
+	convert(arg);
+}
+
+void	ulong_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = (unsigned long)va_arg(ap, long);
+	convert(arg);
+}
+
+void	ullong_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = (unsigned long long)va_arg(ap, long long);
+	convert(arg);
+}
+
+void	uimax_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.uimax_arg = (uintmax_t)va_arg(ap, uintmax_t);
+	convert(arg);
 }

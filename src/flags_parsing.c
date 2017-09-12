@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_ultis.c  	                                :+:      :+:    :+:   */
+/*   parsing_ultis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -36,7 +36,7 @@ int	new_flag_parsing(t_arg *arg, char *format, size_t i)
 	return (next_i);
 }
 
-int		new_check_flags_a(t_arg *arg, char *format, size_t i)
+int	new_check_flags_a(t_arg *arg, char *format, size_t i)
 {
 	int	next_i;
 
@@ -52,7 +52,7 @@ int		new_check_flags_a(t_arg *arg, char *format, size_t i)
 	return (next_i);
 }
 
-int		new_check_flags_b(t_arg *arg, char *format, size_t i)
+int	new_check_flags_b(t_arg *arg, char *format, size_t i)
 {
 	int	next_i;
 

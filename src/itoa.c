@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   itoa_base.c  	                                    :+:      :+:    :+:   */
+/*   itoa_base.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -34,21 +34,15 @@ static int	ft_nb_len_imax(intmax_t n, int base)
 
 char		*itoa_base_imax(intmax_t n, int base)
 {
-	char				*str;
-	int					nb_len;
-	uintmax_t			nb;
-	char 				hex;
+	char		*str;
+	int			nb_len;
+	uintmax_t	nb;
+	char		hex;
 
-	hex = 'a';
-	if (base == 160)
-	{
-		base = 16;
-		hex = 'A';
-	}
+	hex = (base == 160) ? 'A' : 'a';
+	base = (base == 160) ? base / 10 : base;
 	nb_len = ft_nb_len_imax(n, base);
-	nb = n;
-	if (n < 0)
-		nb = -n;
+	nb = (n < 0) ? -n : n;
 	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
 		return (NULL);
 	ft_memset(str, '\0', nb_len + 1);
@@ -84,19 +78,15 @@ static int	ft_nb_len_uimax(uintmax_t n, int base)
 
 char		*itoa_base_uimax(uintmax_t n, int base)
 {
-	char				*str;
-	int					nb_len;
-	uintmax_t			nb;
-	char 				hex;
+	char		*str;
+	int			nb_len;
+	uintmax_t	nb;
+	char		hex;
 
-	hex = 'a';
-	if (base == 160)
-	{
-		base = 16;
-		hex = 'A';
-	}
+	hex = (base == 160) ? 'A' : 'a';
+	base = (base == 160) ? base / 10 : base;
 	nb_len = ft_nb_len_uimax(n, base);
-	nb = n;
+	nb = (n < 0) ? -n : n;
 	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
 		return (NULL);
 	ft_memset(str, '\0', nb_len + 1);

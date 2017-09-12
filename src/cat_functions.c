@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cat_functions.c   	                                :+:      :+:    :+:   */
+/*   cat_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -39,7 +39,7 @@ int		cat_format(char *format, va_list ap)
 	return (end(buff, arg));
 }
 
-void free_ressources(t_arg *arg, t_buff *buff)
+void	free_ressources(t_arg *arg, t_buff *buff)
 {
 	if (arg != NULL)
 	{

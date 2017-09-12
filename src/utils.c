@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c  	                      	                :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -38,7 +38,7 @@ char	*str_memcat(char *mem1, char *mem2, size_t size, int del)
 	return (tmp);
 }
 
-void sfree(char *mem1, char *mem2, int del)
+void	sfree(char *mem1, char *mem2, int del)
 {
 	if (del == 1 && mem1 != NULL)
 	{

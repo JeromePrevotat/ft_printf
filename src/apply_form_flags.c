@@ -47,7 +47,7 @@ int	apply_minus(t_arg *arg)
 	if (real_width > 0)
 	{
 		if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
-		return (ERROR);
+			return (ERROR);
 		ft_memset(tmp, '\0', (arg->width + 1));
 		while (i < real_width && real_width > 0)
 		{

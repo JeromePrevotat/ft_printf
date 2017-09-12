@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   width.c	                         		        :+:      :+:    :+:   */
+/*   width.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -49,10 +49,7 @@ void	apply_width(t_arg *arg)
 	i = 0;
 	real_width = 0;
 	tmp = NULL;
-	if (arg->type == T_CHAR && arg->argv.c_arg == 0)
-		real_width = arg->width - 1;
-	else
-		real_width = arg->width - arg->conv_form->len;
+	real_width = get_str_with(arg);
 	if (real_width >= 0)
 	{
 		if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
@@ -72,34 +69,14 @@ void	apply_width(t_arg *arg)
 	}
 }
 
-void	apply_str_width(t_arg *arg)
+int		get_str_with(t_arg *arg)
 {
-	char	*tmp;
-	int		real_width;
-	int		i;
+	int	real_width;
 
-	i = 0;
 	real_width = 0;
-	tmp = NULL;
 	if (arg->type == T_CHAR && arg->argv.c_arg == 0)
 		real_width = arg->width - 1;
 	else
 		real_width = arg->width - arg->conv_form->len;
-	if (real_width >= 0)
-	{
-		if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
-			return ;
-		ft_memset(tmp, '\0', (arg->width + 1));
-		while (i < real_width)
-		{
-			tmp[i] = ' ';
-			i++;
-		}
-		tmp[i] = '\0';
-		tmp = str_memcat(tmp, arg->conv_form->str, arg->conv_form->len, 1);
-		if (arg->conv_form->str != NULL)
-			free(arg->conv_form->str);
-		arg->conv_form->len = arg->conv_form->len + real_width;
-		arg->conv_form->str = tmp;
-	}
+	return (real_width);
 }

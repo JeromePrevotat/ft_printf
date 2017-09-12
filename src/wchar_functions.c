@@ -12,11 +12,11 @@
 
 #include "../inc/ft_printf.h"
 
-
-//EXCLUSION DEMI CODETS
-//if (wchar >= 0xD800 && wchar <= 0xDFFF)
-	//return (-1);
-
+/*
+**EXCLUSION DEMI CODETS
+**if (wchar >= 0xD800 && wchar <= 0xDFFF)
+**	return (-1);
+*/
 
 size_t	ft_wstr_blen(const wchar_t *wstr)
 {
@@ -74,7 +74,17 @@ int		wchar_to_char(wchar_t wchar, char *str)
 	i = 0;
 	if (wchar <= 0x7F)
 		str[i] = (wchar);
-	else if (wchar <= 0x7FF)
+	else
+		return (convert_wchar(wchar, str));
+	return (0);
+}
+
+int		convert_wchar(wchar_t wchar, char *str)
+{
+	int	i;
+
+	i = 0;
+	if (wchar <= 0x7FF)
 	{
 		str[i] = ((wchar >> 6) + 0xC0);
 		str[i + 1] = ((wchar & 0x3F) + 0x80);

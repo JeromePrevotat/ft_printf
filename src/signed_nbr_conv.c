@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zero_flag.c                                        :+:      :+:    :+:   */
+/*   sigend_nbr_conv.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,32 @@
 
 #include "../inc/ft_printf.h"
 
-int		set_zero_flag(t_arg *arg)
+void	short_conv(t_arg *arg, va_list ap)
 {
-	if (arg->flags.zero == OVERRIDE || arg->flags.precision == TRUE)
-	{
-		arg->flags.zero = OVERRIDE;
-		return (TRUE);
-	}
-	else
-		arg->flags.zero = TRUE;
-	arg->flags.width = TRUE;
-	return (TRUE);
+	arg->argv.imax_arg = (short)va_arg(ap, int);
+	convert(arg);
+}
+
+void	int_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.imax_arg = (int)va_arg(ap, int);
+	convert(arg);
+}
+
+void	long_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.imax_arg = (long)va_arg(ap, long);
+	convert(arg);
+}
+
+void	llong_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.imax_arg = (long long)va_arg(ap, long long);
+	convert(arg);
+}
+
+void	imax_conv(t_arg *arg, va_list ap)
+{
+	arg->argv.imax_arg = (intmax_t)va_arg(ap, intmax_t);
+	convert(arg);
 }

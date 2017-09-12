@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buff.c 		  	                                :+:      :+:    :+:   */
+/*   buff.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,12 +18,12 @@ void	init_buffer(t_buff *buff)
 	buff->len = 0;
 }
 
-void write_buffer(t_buff *buff)
+void	write_buffer(t_buff *buff)
 {
 	write(1, buff->str, buff->len);
 }
 
-void cat_buffer(t_buff *buff, t_arg *arg)
+void	cat_buffer(t_buff *buff, t_arg *arg)
 {
 	char	*new_buff;
 
@@ -43,12 +43,12 @@ void cat_buffer(t_buff *buff, t_arg *arg)
 	buff->str = new_buff;
 }
 
-void cat_str_buffer(t_buff *buff, char *src, size_t size)
+void	cat_str_buffer(t_buff *buff, char *src, size_t size)
 {
 	char	*new_buff;
 
 	if (!(new_buff = (char *)malloc((size + buff->len + 1) * sizeof(char))))
-		return;
+		return ;
 	ft_memset(new_buff, '\0', size + buff->len + 1);
 	ft_memcpy(new_buff, buff->str, buff->len);
 	ft_memcpy(new_buff + buff->len, src, size);

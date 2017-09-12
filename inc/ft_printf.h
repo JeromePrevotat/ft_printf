@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef FT_PRINTF
-# define FT_PRINTF
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # define ERROR -1
 # define TRUE 1
 # define FALSE 0
@@ -49,17 +48,17 @@ typedef struct		s_flags
 	int				width;
 }					t_flags;
 
-typedef union				u_argv
+typedef union		u_argv
 {
-	void					*ptr;
-	uintmax_t				uimax_arg;
-	intmax_t				imax_arg;
-	unsigned char			uc_arg;
-	char					c_arg;
-	char					*str_arg;
-	wchar_t					wchar_arg;
-	wchar_t					*wstr_arg;
-}							t_argv;
+	void			*ptr;
+	uintmax_t		uimax_arg;
+	intmax_t		imax_arg;
+	unsigned char	uc_arg;
+	char			c_arg;
+	char			*str_arg;
+	wchar_t			wchar_arg;
+	wchar_t			*wstr_arg;
+}					t_argv;
 
 typedef struct		s_argument
 {
@@ -76,7 +75,8 @@ typedef struct		s_argument
 
 enum
 {
-	T_SIZET, T_USHORT, T_SHORT, T_UINT, T_INT, T_ULONG, T_LONG, T_ULLONG, T_LLONG, T_IMAX, T_UIMAX,
+	T_SIZET, T_USHORT, T_SHORT, T_UINT, T_INT, T_ULONG, T_LONG,
+	T_ULLONG, T_LLONG, T_IMAX, T_UIMAX,
 	T_UCHAR, T_CHAR, T_STR, T_WCHAR, T_WSTR, T_PTR
 };
 
@@ -99,6 +99,11 @@ int					new_check_flags_b(t_arg *arg, char *format, size_t i);
 int					is_conversion(char c);
 int					set_flag(t_arg *arg, char c);
 
+//Apply_flags.c
+void				apply_flags(t_arg *arg);
+void				apply_flags_next(t_arg *arg);
+void				apply_size_flag(t_arg *arg);
+
 //Undefined_behaviour.c
 char				*get_undefined_behaviour(t_arg *arg);
 int					ub_is_flag(char c, t_arg *arg);
@@ -119,8 +124,6 @@ int					convert_argv(t_arg *arg, va_list ap);
 void				nb_convert_argv(t_arg *arg, va_list ap);
 void				char_convert_argv(t_arg *arg, va_list ap);
 void				convert(t_arg *arg);
-void				apply_size_flag(t_arg *arg);
-void				apply_flags(t_arg *arg);
 
 //Special_flags.c
 int					set_j_flag(t_arg *arg);
@@ -149,7 +152,6 @@ int					apply_hh(t_arg *arg);
 
 //Apply_form_flags.c
 int					apply_alt_form(t_arg *arg);
-int					apply_zero(t_arg *arg);
 int					apply_minus(t_arg *arg);
 int					apply_plus(t_arg *arg);
 int					apply_space(t_arg *arg);
@@ -157,39 +159,50 @@ int					apply_space(t_arg *arg);
 //Width.c
 int					set_width(t_arg *arg, char *str_form);
 void				apply_width(t_arg *arg);
-void				apply_str_width(t_arg *arg);
+int					get_str_with(t_arg *arg);
 
 //Precision.c
 int					set_precision(t_arg *arg, char *str_form);
 void				apply_precision(t_arg *arg);
 void				apply_str_pre(t_arg *arg);
-void				apply_nbr_pre(t_arg *arg);
 void				apply_pre_zero(t_arg *arg);
+
+//Apply_nbr_pre.c
+void				apply_nbr_pre(t_arg *arg);
 char				*apply_negative(t_arg *arg);
 char				*apply_positive(t_arg *arg);
+
+//Apply_ptr_pre.c
 char				*apply_ptr_precision(t_arg *arg);
 char				*ptr_pre(t_arg *arg, int real_pre);
 
 //Zero_flag.c
 int					set_zero_flag(t_arg *arg);
-int					apply_zero(t_arg *arg);
-int					apply_zero_hex_altform(t_arg *arg);
-int					apply_str_zero(t_arg *arg);
-int					apply_wstr_zero(t_arg *arg);
+
+//Apply_zero.c
+void				apply_zero(t_arg *arg);
+void				apply_str_zero(t_arg *arg);
+char				*apply_nbr_zero(t_arg *arg, int real_width);
+void				apply_zero_hex_altform(t_arg *arg);
+int					get_zero_width(t_arg *arg);
 
 //Nbr_conv.c
 void				st_conv(t_arg *arg, va_list ap);
+void				ptr_conv(t_arg *arg, va_list ap);
+
+//Unsigned_nbr_conv.c
 void				ushort_conv(t_arg *arg, va_list ap);
-void				short_conv(t_arg *arg, va_list ap);
 void				uint_conv(t_arg *arg, va_list ap);
-void				int_conv(t_arg *arg, va_list ap);
 void				ulong_conv(t_arg *arg, va_list ap);
-void				long_conv(t_arg *arg, va_list ap);
 void				ullong_conv(t_arg *arg, va_list ap);
+void				uimax_conv(t_arg *arg, va_list ap);
+
+//Signed_nbr_conv.c
+void				short_conv(t_arg *arg, va_list ap);
+void				int_conv(t_arg *arg, va_list ap);
+void				long_conv(t_arg *arg, va_list ap);
 void				llong_conv(t_arg *arg, va_list ap);
 void				imax_conv(t_arg *arg, va_list ap);
-void				uimax_conv(t_arg *arg, va_list ap);
-void				ptr_conv(t_arg *arg, va_list ap);
 
 //Char_conv.c
 void				uchar_conv(t_arg *arg, va_list ap);
@@ -211,16 +224,14 @@ void				sfree(char *mem1, char *mem2, int del);
 int					get_width(char *str, t_arg *arg);
 int					argv_sign(t_arg *arg);
 
-//Wchar_functions.c
+/*
+** Wchar_functions.c
+*/
 size_t				ft_wstr_blen(const wchar_t *str);
 size_t				ft_wstr_clen(const wchar_t *wstr);
-int					ft_putwchar(wchar_t c);
-int					ft_putwstr(wchar_t *wstr);
-wchar_t				*wstr_memcat(wchar_t *mem1, wchar_t *mem2, size_t size, int del);
-wchar_t				*wcat(wchar_t *mem1, wchar_t *mem2, size_t size);
-void				wfree(wchar_t *mem1, wchar_t *mem2, int del);
 char				*wstr_to_str(t_arg *arg, wchar_t *wstr);
 int					wchar_to_char(wchar_t wchar, char *str);
+int					convert_wchar(wchar_t wchar, char *str);
 
 //Buff.c
 void				init_buffer(t_buff *buff);

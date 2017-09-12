@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_conv.c  	                                    :+:      :+:    :+:   */
+/*   char_conv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -39,7 +39,8 @@ void	char_conv(t_arg *arg, va_list ap)
 	else
 	{
 		arg->argv.c_arg = (char)va_arg(ap, int);
-		if (arg->flags.hh == TRUE && (arg->str_form[ft_strlen(arg->str_form) - 1] == 'd'
+		if (arg->flags.hh == TRUE
+			&& (arg->str_form[ft_strlen(arg->str_form) - 1] == 'd'
 			|| arg->str_form[ft_strlen(arg->str_form) - 1] == 'i'))
 		{
 			arg->conv = -10;
@@ -61,7 +62,8 @@ void	str_conv(t_arg *arg, va_list ap)
 	if (arg->argv.str_arg == NULL)
 		cat_str_buffer(arg->conv_form, null, ft_strlen(null));
 	else
-		cat_str_buffer(arg->conv_form, arg->argv.str_arg, ft_strlen(arg->argv.str_arg));
+		cat_str_buffer(arg->conv_form, arg->argv.str_arg,
+			ft_strlen(arg->argv.str_arg));
 }
 
 void	wchar_conv(t_arg *arg, va_list ap)

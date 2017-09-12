@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_arg.c  	                                    :+:      :+:    :+:   */
+/*   fill_arg.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-int	fill_arg(t_arg *arg, va_list ap)
+int		fill_arg(t_arg *arg, va_list ap)
 {
 	set_type_arg(arg);
 	set_conv_arg(arg);
