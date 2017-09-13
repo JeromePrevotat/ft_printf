@@ -86,7 +86,7 @@ char		*itoa_base_uimax(uintmax_t n, int base)
 	hex = (base == 160) ? 'A' : 'a';
 	base = (base == 160) ? base / 10 : base;
 	nb_len = ft_nb_len_uimax(n, base);
-	nb = (n < 0) ? -n : n;
+	nb = n;
 	if (!(str = (char *)malloc((nb_len + 1) * sizeof(char))))
 		return (NULL);
 	ft_memset(str, '\0', nb_len + 1);

@@ -43,7 +43,7 @@ char	*apply_nbr_zero(t_arg *arg, int real_width)
 	i = 0;
 	j = 0;
 	if (!(tmp = (char *)malloc((arg->width + 1) * sizeof(char))))
-		return (ERROR);
+		return (NULL);
 	ft_memset(tmp, '\0', (arg->width + 1));
 	if (argv_sign(arg) == -1)
 	{
