@@ -17,8 +17,16 @@ int		fill_arg(t_arg *arg, va_list ap)
 	set_type_arg(arg);
 	set_conv_arg(arg);
 	apply_size_flag(arg);
-	convert_argv(arg, ap);
-	apply_flags(arg);
+	if (arg->bonus == FALSE)
+	{
+		convert_argv(arg, ap);
+		apply_flags(arg);
+	}
+	else
+	{
+		convert_bonus(arg, ap);
+		apply_flags_bonus(arg);
+	}
 	return (1);
 }
 
@@ -47,6 +55,8 @@ void	set_type_arg(t_arg *arg)
 		arg->type = T_CHAR;
 	if (c == 'p')
 		arg->type = T_PTR;
+	if (c == 'b')
+		bonus_conv(arg);
 }
 
 void	set_conv_arg(t_arg *arg)
@@ -76,6 +86,8 @@ void	set_nb_conv_arg(t_arg *arg, char c)
 		arg->conv = 16;
 	if (c == 'X')
 		arg->conv = 160;
+	if (c == 'b')
+		arg->conv = 2;
 }
 
 void	set_char_conv_arg(t_arg *arg, char c)

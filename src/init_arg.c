@@ -19,6 +19,7 @@ void	init_arg(t_arg *arg)
 	cf = NULL;
 	if (!(cf = (t_buff *)malloc(1 * sizeof(t_buff))))
 		return ;
+	arg->bonus = FALSE;
 	arg->conv = 0;
 	arg->type = 0;
 	arg->argv.imax_arg = 0;

@@ -25,6 +25,8 @@ int		is_conversion(char c)
 			return (TRUE);
 		i++;
 	}
+	if (c == 'b')
+		return (TRUE);
 	return (FALSE);
 }
 

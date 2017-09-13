@@ -71,6 +71,7 @@ typedef struct		s_argument
 	char			*str_form;
 	t_buff			*conv_form;
 	int				wchar_form;
+	int				bonus;
 }					t_arg;
 
 enum
@@ -238,5 +239,12 @@ void				init_buffer(t_buff *buff);
 void				write_buffer(t_buff *buff);
 void				cat_buffer(t_buff *buff, t_arg *arg);
 void				cat_str_buffer(t_buff *buff, char *src, size_t size);
+
+//Bonus.c
+void				bonus_conv(t_arg *arg);
+void				convert_bonus(t_arg *arg, va_list ap);
+void				apply_flags_bonus(t_arg *arg);
+void				apply_bonus_alt_form(t_arg *arg);
+void				apply_bonus_zero(t_arg *arg);
 
 #endif

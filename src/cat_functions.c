@@ -68,6 +68,7 @@ void	reset_arg(t_arg *arg)
 	if (arg->conv_form->str != NULL)
 		ft_memset(arg->conv_form->str, '\0', arg->conv_form->len);
 	arg->conv_form->len = 0;
+	arg->bonus = FALSE;
 	arg->type = 0;
 	arg->conv = 0;
 	arg->argv.imax_arg = 0;

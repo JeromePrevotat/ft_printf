@@ -28,12 +28,12 @@ int	main(void)
 
 	real_ret = 0;
 	ret = 0;
-	//ft_putendl("My printf result :");
-	//ret = ft_printf("%lX, %lX", 0, ULONG_MAX);
-	//printf("\nRET : %d\n\n", ret);
-	//ft_putendl("Real printf result :");
-	real_ret = printf("%lX, %lX", 0, ULONG_MAX);
-	//printf("\nREAL_RET : %d\n", real_ret);
+	ft_putendl("My printf result :");
+	ret = ft_printf("Test binary : >%b<\n", 128);
+	printf("\nRET : %d\n\n", ret);
+	ft_putendl("Real printf result :");
+	real_ret = printf("Test binary : >10000000<\n");
+	printf("\nREAL_RET : %d\n", real_ret);
 
 
 	return (0);
