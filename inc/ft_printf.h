@@ -51,6 +51,9 @@ typedef struct		s_flags
 typedef union		u_argv
 {
 	void			*ptr;
+	int				i_arg;
+	long			l_arg;
+	long long		ll_arg;
 	uintmax_t		uimax_arg;
 	intmax_t		imax_arg;
 	unsigned char	uc_arg;
@@ -246,5 +249,11 @@ void				convert_bonus(t_arg *arg, va_list ap);
 void				apply_flags_bonus(t_arg *arg);
 void				apply_bonus_alt_form(t_arg *arg);
 void				apply_bonus_zero(t_arg *arg);
+
+//Binary_conv.c
+void				binary_conv(t_arg *arg);
+char				*cmp2(t_arg *arg, int base);
+int					get_len(t_arg *arg);
+char				*strrev(char *str);
 
 #endif

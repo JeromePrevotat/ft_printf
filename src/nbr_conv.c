@@ -15,6 +15,11 @@
 void	st_conv(t_arg *arg, va_list ap)
 {
 	arg->argv.imax_arg = (size_t)va_arg(ap, size_t);
+	if (arg->conv == 2 && arg->bonus == TRUE)
+	{
+		binary_conv(arg);
+		return ;
+	}
 	convert(arg);
 }
 

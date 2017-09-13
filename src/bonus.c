@@ -14,20 +14,14 @@
 
 void	bonus_conv(t_arg *arg)
 {
-	int	alt_form;
-	int	zero;
-
-	alt_form = FALSE;
-	zero = FALSE;
 	arg->type = T_INT;
 	arg->bonus = TRUE;
+	arg->flags.minus = FALSE;
+	arg->flags.plus = FALSE;
+	arg->flags.precision = FALSE;
+	arg->flags.width = FALSE;
 	if (arg->flags.alt_form == TRUE)
-		alt_form = TRUE;
-	if ((arg->flags.zero == TRUE || arg->flags.zero == OVERRIDE) && alt_form == FALSE)
-		zero = TRUE;
-	init_flags_arg(arg);
-	arg->flags.alt_form = alt_form;
-	arg->flags.zero = zero;
+		arg->flags.zero = FALSE;
 }
 
 void	convert_bonus(t_arg *arg, va_list ap)

@@ -29,10 +29,10 @@ int	main(void)
 	real_ret = 0;
 	ret = 0;
 	ft_putendl("My printf result :");
-	ret = ft_printf("Test binary : >%b<\n", 128);
+	ret = ft_printf("%b\n", -4);
 	printf("\nRET : %d\n\n", ret);
 	ft_putendl("Real printf result :");
-	real_ret = printf("Test binary : >10000000<\n");
+	real_ret = printf("LONG MAX + 1 : %jd\n", LONG_MAX + 1);
 	printf("\nREAL_RET : %d\n", real_ret);
 
 
