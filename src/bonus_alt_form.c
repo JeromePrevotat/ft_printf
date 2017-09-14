@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus.c                                            :+:      :+:    :+:   */
+/*   bonus_alt_form.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jprevota <jprevota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,38 +12,41 @@
 
 #include "../inc/ft_printf.h"
 
-void	bonus_conv(t_arg *arg)
+void bytes_form(t_arg *arg)
 {
-	arg->type = T_INT;
-	arg->bonus = TRUE;
-	arg->flags.minus = FALSE;
-	arg->flags.plus = FALSE;
-	arg->flags.precision = FALSE;
-	arg->flags.width = FALSE;
-	if (arg->flags.alt_form == TRUE)
-		arg->flags.zero = FALSE;
+	char	*tmp;
+
+	tmp = apply_bytes_form(arg);
+	if (arg->conv_form->str != NULL)
+		free(arg->conv_form->str);
+	arg->conv_form->len = ft_strlen(tmp);
+	arg->conv_form->str = tmp;
 }
 
-void	convert_bonus(t_arg *arg, va_list ap)
+char	*apply_bytes_form(t_arg *arg)
 {
-	convert_argv(arg, ap);
-}
+	char	*tmp;
+	int		i;
+	int		j;
+	int		len;
 
-void	apply_flags_bonus(t_arg *arg)
-{
-	if (arg->flags.alt_form == TRUE)
-		apply_bonus_alt_form(arg);
-	if (arg->flags.zero == TRUE)
-		apply_bonus_zero(arg);
-}
-
-void apply_bonus_alt_form(t_arg *arg)
-{
-	if (arg->conv == 2)
-		bytes_form(arg);
-}
-
-void	apply_bonus_zero(t_arg *arg)
-{
-	return ;
+	tmp = NULL;
+	i = 0;
+	j = 0;
+	len = (ft_strlen(arg->conv_form->str) / 8) + ft_strlen(arg->conv_form->str);
+	if (!(tmp = (char *)malloc(len + 1 * sizeof(char))))
+		return (NULL);
+	ft_memset(tmp, '\0', len + 1);
+	while (i < len)
+	{
+		ft_memcpy(tmp + i + j, arg->conv_form->str + i, 4);
+		i = i + 4;
+		tmp[i + j] = ' ';
+		j++;
+		ft_memcpy(tmp + i + j, arg->conv_form->str + i, 4);
+		i = i + 4;
+		tmp[i + j] = (i + j < len) ? '\t' : '\0';
+		j++;
+	}
+	return (tmp);
 }

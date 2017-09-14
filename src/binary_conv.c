@@ -19,22 +19,14 @@ void	binary_conv(t_arg *arg)
 
 	tmp = NULL;
 	base = arg->conv;
-	if (argv_sign(arg) >= 0)
-		tmp = itoa_base_imax(arg->argv.imax_arg, base);
-	else
-		tmp = cmp2(arg, base);
+	tmp = cmp2(arg, base);
 	arg->conv_form->len = ft_strlen(tmp);
 	if (arg->conv_form->str != NULL)
 	{
 		free(arg->conv_form->str);
 		arg->conv_form->str = NULL;
 	}
-	arg->conv_form->str = ft_strdup(tmp);
-	if (tmp != NULL)
-	{
-		free(tmp);
-		tmp = NULL;
-	}
+	arg->conv_form->str = tmp;
 }
 
 char	*cmp2(t_arg *arg, int base)
@@ -44,16 +36,9 @@ char	*cmp2(t_arg *arg, int base)
 
 	len = get_len(arg);
 	tmp = NULL;
-	//Conversion
-	//arg->argv.imax_arg = ((~arg->argv.imax_arg) & 1);
-	//Malloc en fonction de la taille du type de la var
-	//Total = Sizeof(var) * Sizeof(1 Bytes) + 1
 	if (!(tmp = (char *)malloc((len) * sizeof(char))))
 		return (NULL);
 	ft_memset(tmp, '\0', len);
-	//Fill tmp
-	//Test bit AND 1 shifted size - i on the left to math the actual tested bit
-	//TRUE : bit = 1 ; FALSE : bit = 0
 	tmp[len] = '\0';
 	len--;
 	while (len >= 0)
@@ -96,23 +81,22 @@ int		get_len(t_arg *arg)
 
 char	*strrev(char *str)
 {
-	char	*tmp;
 	int		i;
+	int		len;
+	char	tmp;
 
-	i = 0;
-	tmp = NULL;
-	if (!(tmp = (char *)malloc(ft_strlen(str) + 1 * sizeof(char))))
+	if (!str)
 		return (NULL);
-	ft_memset(tmp, '\0', ft_strlen(str) + 1);
-	printf("str[len] : >%c<\n", str[ft_strlen(str)]);
-	while (i < ft_strlen(str))
+	if (ft_strcmp(str, "") == 0)
+		return (str);
+	i = 0;
+	len = ft_strlen(str) - 1;
+	while (i <= len / 2)
 	{
-		printf("str len : %zu\n", ft_strlen(str));
-		tmp[i] = str[ft_strlen(str) - i - 1];
+		tmp = str[i];
+		str[i] = str[len - i];
+		str[len - i] = tmp;
 		i++;
 	}
-	tmp[i] = '\0';
-	if (str != NULL)
-		free(str);
-	return (tmp);
+	return (str);
 }

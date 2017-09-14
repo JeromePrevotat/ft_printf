@@ -256,4 +256,8 @@ char				*cmp2(t_arg *arg, int base);
 int					get_len(t_arg *arg);
 char				*strrev(char *str);
 
+//Bytes_form.c
+void				bytes_form(t_arg *arg);
+char				*apply_bytes_form(t_arg *arg);
+
 #endif

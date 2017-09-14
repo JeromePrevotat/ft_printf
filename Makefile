@@ -47,6 +47,7 @@ SRCS += ./src/ft_strdup.c
 
 SRCS += ./src/bonus.c
 SRCS += ./src/binary_conv.c
+SRCS += ./src/bonus_alt_form.c
 
 INC += ./inc/ft_printf.h
 INC += ./inc/libft.h
