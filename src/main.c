@@ -24,17 +24,24 @@ int	main(void)
 
 	int ret;
 	int	real_ret;
-
+	int i;
 
 	real_ret = 0;
 	ret = 0;
-	ft_putendl("My printf result :");
-	ret = ft_printf("%#b\n", 4);
-	printf("\nRET : %d\n\n", ret);
-	ft_putendl("Real printf result :");
-	real_ret = printf("LONG MAX + 1 : %jd\n", LONG_MAX + 1);
-	printf("\nREAL_RET : %d\n", real_ret);
-
+	i = 0;
+	//LLONG MAX : 9223372036854775807
+	//ft_putendl("My printf result :");
+	while (i < 100)
+	{
+		//ret = ft_printf("%lX, %lX", 0, ULONG_MAX);
+		real_ret = printf("%lX, %lX", 0, ULONG_MAX);
+		i++;
+	}
+	//printf("\nRET : %d\n\n", ret);
+	//ft_putendl("Real printf result :");
+	//real_ret = printf("%lX, %lX", 0, ULONG_MAX);
+	//printf("\nREAL_RET : %d\n", real_ret);
+	//"%lX, %lX", 0, ULONG_MAX
 
 	return (0);
 }

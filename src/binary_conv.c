@@ -35,6 +35,7 @@ char	*cmp2(t_arg *arg, int base)
 	int		len;
 
 	len = get_len(arg);
+	printf("len : %d\n", len);
 	tmp = NULL;
 	if (!(tmp = (char *)malloc((len) * sizeof(char))))
 		return (NULL);
@@ -66,12 +67,12 @@ int		get_len(t_arg *arg)
 	}
 	if (arg->type == T_LONG)
 	{
-		len = sizeof(long) * 8;
+		len = (sizeof(long) == 8) ? (sizeof(long) / 2) * 8 : sizeof(long) * 8;
 		arg->argv.l_arg = arg->argv.imax_arg;
 	}
 	if (arg->type == T_LLONG)
 	{
-		len = sizeof(long long) * 8;
+		len = (sizeof(long long) * 8);
 		arg->argv.ll_arg = arg->argv.imax_arg;
 	}
 	if (arg->type == T_IMAX)
