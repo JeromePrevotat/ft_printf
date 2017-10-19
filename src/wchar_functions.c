@@ -14,6 +14,7 @@
 
 /*
 **EXCLUSION DEMI CODETS
+** 0870 - 089F
 **if (wchar >= 0xD800 && wchar <= 0xDFFF)
 **	return (-1);
 */

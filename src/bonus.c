@@ -37,7 +37,7 @@ void	apply_flags_bonus(t_arg *arg)
 		apply_bonus_zero(arg);
 }
 
-void apply_bonus_alt_form(t_arg *arg)
+void	apply_bonus_alt_form(t_arg *arg)
 {
 	if (arg->conv == 2)
 		bytes_form(arg);

@@ -17,10 +17,10 @@
 int	main(void)
 {
 
-	char	*local;
+	/*char	*local;
 
 	local = NULL;
-	local = setlocale(LC_ALL, "");
+	local = setlocale(LC_ALL, "");*/
 
 	int ret;
 	int	real_ret;
@@ -30,17 +30,12 @@ int	main(void)
 	ret = 0;
 	i = 0;
 	//LLONG MAX : 9223372036854775807
-	//ft_putendl("My printf result :");
-	while (i < 100)
-	{
-		//ret = ft_printf("%lX, %lX", 0, ULONG_MAX);
-		real_ret = printf("%lX, %lX", 0, ULONG_MAX);
-		i++;
-	}
-	//printf("\nRET : %d\n\n", ret);
-	//ft_putendl("Real printf result :");
-	//real_ret = printf("%lX, %lX", 0, ULONG_MAX);
-	//printf("\nREAL_RET : %d\n", real_ret);
+	ft_putendl("My printf result :");
+	ret = ft_printf("%C\n", 0x08A0);
+	printf("\nRET : %d\n\n", ret);
+	ft_putendl("Real printf result :");
+	real_ret = printf("%C\n", 0x08A0);
+	printf("\nREAL_RET : %d\n", real_ret);
 	//"%lX, %lX", 0, ULONG_MAX
 
 	return (0);

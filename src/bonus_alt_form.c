@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-void bytes_form(t_arg *arg)
+void	bytes_form(t_arg *arg)
 {
 	char	*tmp;
 
