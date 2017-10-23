@@ -31,7 +31,7 @@ int	main(void)
 	i = 0;
 	//LLONG MAX : 9223372036854775807
 	ft_putendl("My printf result :");
-	ret = ft_printf("%C\n", 0x08A0);
+	ret = ft_printf(RED "%C\n" RESET, 0x08A0);
 	printf("\nRET : %d\n\n", ret);
 	ft_putendl("Real printf result :");
 	real_ret = printf("%C\n", 0x08A0);

@@ -12,11 +12,20 @@
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
 # define ERROR -1
 # define TRUE 1
 # define FALSE 0
 # define OVERRIDE 3
 # define DONE 4
+
+# define RED "\x1b[31m"
+# define GREEN "\x1b[32m"
+# define YELLOW "\x1b[33m"
+# define BLUE "\x1b[34m"
+# define MAGENTA "\x1b[35m"
+# define CYAN "\x1b[36m"
+# define RESET "\x1b[0m"
 
 # include "./libft.h"
 # include <stdarg.h>
