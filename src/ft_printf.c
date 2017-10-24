@@ -19,7 +19,7 @@ int	ft_printf(const char *format, ...)
 	char	*f;
 	size_t	i;
 
-	//MB_CUR_MAX = 4;
+	MB_CUR_MAX = 4;
 	i = 0;
 	f = ft_strdup(format);
 	va_start(ap, format);

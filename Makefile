@@ -66,7 +66,7 @@ $(TEST): $(OBJ) $(OBJ_T) $(INC)
 
 .PHONY: clean
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) $(OBJ_T)
 
 fclean: clean
 	rm -rf $(NAME)
