@@ -1,10 +1,4 @@
-CC = gcc
-#CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
-
-TEST = print
-
-SRCS_T +=./src/main.c
 
 SRCS += ./src/ft_putendl.c
 SRCS += ./src/ft_putchar.c
@@ -53,20 +47,16 @@ INC += ./inc/ft_printf.h
 INC += ./inc/libft.h
 
 OBJ = $(SRCS:.c=.o)
-OBJ_T = $(SRCS_T:.c=.o)
 
-all: $(NAME) $(TEST)
+all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
 	ar -rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-$(TEST): $(OBJ) $(OBJ_T) $(INC)
-	$(CC) -g $(CFLAGS) $(SRCS) $(SRCS_T) -o $@
-
 .PHONY: clean
 clean:
-	rm -rf $(OBJ) $(OBJ_T)
+	rm -rf $(OBJ)
 
 fclean: clean
 	rm -rf $(NAME)
