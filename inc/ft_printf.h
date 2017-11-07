@@ -135,7 +135,7 @@ void				set_char_conv_arg(t_arg *arg, char c);
 //Convert.c
 int					convert_argv(t_arg *arg, va_list ap);
 void				nb_convert_argv(t_arg *arg, va_list ap);
-void				char_convert_argv(t_arg *arg, va_list ap);
+int					char_convert_argv(t_arg *arg, va_list ap);
 void				convert(t_arg *arg);
 
 //Special_flags.c
@@ -221,8 +221,8 @@ void				imax_conv(t_arg *arg, va_list ap);
 void				uchar_conv(t_arg *arg, va_list ap);
 void				char_conv(t_arg *arg, va_list ap);
 void				str_conv(t_arg *arg, va_list ap);
-void				wchar_conv(t_arg *arg, va_list ap);
-void				wstr_conv(t_arg *arg, va_list ap);
+int					wchar_conv(t_arg *arg, va_list ap);
+int					wstr_conv(t_arg *arg, va_list ap);
 
 //R_value.c
 int					check_ret(t_arg *arg);

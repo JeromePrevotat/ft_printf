@@ -13,9 +13,8 @@
 #include "../inc/ft_printf.h"
 
 /*
-**EXCLUSION DEMI CODETS
-** 0870 - 089F
-**if (wchar >= 0xD800 && wchar <= 0xDFFF)
+** EXCLUSION DEMI CODETS
+** if (wchar >= 0xD800 && wchar <= 0xDFFF)
 **	return (-1);
 */
 
@@ -55,6 +54,8 @@ char	*wstr_to_str(t_arg *arg, wchar_t *wstr)
 	while (*wstr)
 	{
 		c_len = wchar_to_char(*wstr, str + i);
+		if (c_len == -1)
+			return (NULL);
 		i = i + c_len;
 		if (arg->flags.precision == TRUE && i >= arg->precision)
 		{
@@ -73,6 +74,8 @@ int		wchar_to_char(wchar_t wchar, char *str)
 	int	i;
 
 	i = 0;
+	if (wchar >= 0xD800 && wchar <= 0xDFFF)
+		return (-1);
 	if (wchar <= 0x7F)
 		str[i] = (wchar);
 	else

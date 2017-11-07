@@ -66,14 +66,15 @@ void	str_conv(t_arg *arg, va_list ap)
 			ft_strlen(arg->argv.str_arg));
 }
 
-void	wchar_conv(t_arg *arg, va_list ap)
+int		wchar_conv(t_arg *arg, va_list ap)
 {
 	char	*tmp;
 
 	tmp = NULL;
 	arg->argv.wchar_arg = (wchar_t)va_arg(ap, wchar_t);
 	arg->wchar_form = TRUE;
-	tmp = wstr_to_str(arg, &arg->argv.wchar_arg);
+	if ((tmp = wstr_to_str(arg, &arg->argv.wchar_arg)) == NULL)
+		return (-1);
 	cat_str_buffer(arg->conv_form, tmp, ft_strlen(tmp));
 	if (tmp != NULL)
 	{
@@ -82,9 +83,10 @@ void	wchar_conv(t_arg *arg, va_list ap)
 	}
 	if (arg->argv.wchar_arg == 0)
 		arg->conv_form->len = 1;
+	return (1);
 }
 
-void	wstr_conv(t_arg *arg, va_list ap)
+int		wstr_conv(t_arg *arg, va_list ap)
 {
 	char	*null;
 	char	*tmp;
@@ -97,7 +99,8 @@ void	wstr_conv(t_arg *arg, va_list ap)
 		cat_str_buffer(arg->conv_form, null, ft_strlen(null));
 	else
 	{
-		tmp = wstr_to_str(arg, arg->argv.wstr_arg);
+		if ((tmp = wstr_to_str(arg, arg->argv.wstr_arg)) == NULL)
+			return (-1);
 		cat_str_buffer(arg->conv_form, tmp, ft_strlen(tmp));
 		if (tmp != NULL)
 		{
@@ -105,4 +108,5 @@ void	wstr_conv(t_arg *arg, va_list ap)
 			tmp = NULL;
 		}
 	}
+	return (1);
 }

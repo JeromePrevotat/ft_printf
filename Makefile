@@ -1,13 +1,6 @@
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 
-TEST = print
-
-SRCS_T +=./src/main.c
-
-SRCS += ./src/ft_putendl.c
-SRCS += ./src/ft_putchar.c
 SRCS += ./src/ft_printf.c
 SRCS += ./src/cat_functions.c
 SRCS += ./src/parsing_utils.c
@@ -36,33 +29,20 @@ SRCS += ./src/itoa.c
 SRCS += ./src/utils.c
 SRCS += ./src/wchar_functions.c
 SRCS += ./src/buff.c
-SRCS += ./src/ft_atoi.c
-SRCS += ./src/ft_isdigit.c
-SRCS += ./src/ft_memset.c
-SRCS += ./src/ft_strlen.c
-SRCS += ./src/ft_memcpy.c
-SRCS += ./src/ft_putstr.c
-SRCS += ./src/ft_strcmp.c
-SRCS += ./src/ft_strdup.c
 
 SRCS += ./src/bonus.c
 SRCS += ./src/binary_conv.c
 SRCS += ./src/bonus_alt_form.c
 
 INC += ./inc/ft_printf.h
-INC += ./inc/libft.h
 
 OBJ = $(SRCS:.c=.o)
-OBJ_T = $(SRCS_T:.c=.o)
 
-all: $(NAME) $(TEST)
+all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
 	ar -rc $(NAME) $(OBJ)
 	ranlib $(NAME)
-
-$(TEST): $(OBJ) $(OBJ_T) $(INC)
-	$(CC) -g $(CFLAGS) $(SRCS) $(SRCS_T) -o $@
 
 .PHONY: clean
 clean:

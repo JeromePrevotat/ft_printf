@@ -19,7 +19,7 @@ int	ft_printf(const char *format, ...)
 	char	*f;
 	size_t	i;
 
-	//MB_CUR_MAX = 4;
+	MB_CUR_MAX = 4;
 	i = 0;
 	f = ft_strdup(format);
 	va_start(ap, format);
@@ -45,7 +45,8 @@ int	get_arg_str_form(char *format, t_arg *arg, va_list ap)
 	if (i < ft_strlen(format) && is_conversion(format[i]) == TRUE)
 	{
 		arg->str_form = str_memcat(arg->str_form, format, i + 1, 1);
-		fill_arg(arg, ap);
+		if (fill_arg(arg, ap) == -1)
+			return (-1);
 		return (i + 1);
 	}
 	else if (i < ft_strlen(format) && is_conversion(format[i]) == FALSE)

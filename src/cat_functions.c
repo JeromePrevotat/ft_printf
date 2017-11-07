@@ -17,6 +17,7 @@ int		cat_format(char *format, va_list ap)
 	t_buff	*buff;
 	t_arg	*arg;
 	size_t	i;
+	int		j;
 
 	i = 0;
 	if (!(arg = (t_arg *)malloc(1 * sizeof(t_arg)))
@@ -28,7 +29,9 @@ int		cat_format(char *format, va_list ap)
 	{
 		if (format[i] == '%' && (i + 1) < ft_strlen(format))
 		{
-			i = i + get_arg_str_form((format + i + 1), arg, ap);
+			if ((j = get_arg_str_form((format + i + 1), arg, ap)) == -1)
+				return (-1);
+			i = i + j;
 			cat_buffer(buff, arg);
 			reset_arg(arg);
 		}

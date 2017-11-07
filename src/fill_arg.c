@@ -19,7 +19,8 @@ int		fill_arg(t_arg *arg, va_list ap)
 	apply_size_flag(arg);
 	if (arg->bonus == FALSE)
 	{
-		convert_argv(arg, ap);
+		if (convert_argv(arg, ap) == -1)
+			return (-1);
 		apply_flags(arg);
 	}
 	else

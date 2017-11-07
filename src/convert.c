@@ -15,7 +15,8 @@
 int		convert_argv(t_arg *arg, va_list ap)
 {
 	nb_convert_argv(arg, ap);
-	char_convert_argv(arg, ap);
+	if (char_convert_argv(arg, ap) == -1)
+		return (-1);
 	return (1);
 }
 
@@ -45,7 +46,7 @@ void	nb_convert_argv(t_arg *arg, va_list ap)
 		uimax_conv(arg, ap);
 }
 
-void	char_convert_argv(t_arg *arg, va_list ap)
+int		char_convert_argv(t_arg *arg, va_list ap)
 {
 	if (arg->type == T_UCHAR)
 		uchar_conv(arg, ap);
@@ -54,11 +55,14 @@ void	char_convert_argv(t_arg *arg, va_list ap)
 	if (arg->type == T_STR)
 		str_conv(arg, ap);
 	if (arg->type == T_WCHAR)
-		wchar_conv(arg, ap);
+		if (wchar_conv(arg, ap) == -1)
+			return (-1);
 	if (arg->type == T_WSTR)
-		wstr_conv(arg, ap);
+		if (wstr_conv(arg, ap) == -1)
+			return (-1);
 	if (arg->type == T_PTR)
 		ptr_conv(arg, ap);
+	return (1);
 }
 
 void	convert(t_arg *arg)
